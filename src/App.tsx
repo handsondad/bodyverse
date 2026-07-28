@@ -259,6 +259,7 @@ function App() {
           setSelectedTrack={setSelectedTrack}
           partLabelMap={partLabelMap}
           age={age}
+          setAge={setAge}
         />
       </main>
 

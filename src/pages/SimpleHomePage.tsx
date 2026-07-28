@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { type PartId, type TrackId } from "../types/content";
+import { type AgeTier, type PartId, type TrackId } from "../types/content";
 import { HumanBodyMap } from "../components/HumanBodyMap";
 import { mystery } from "../lib/content-adapter";
 
@@ -30,11 +30,12 @@ type SimpleHomePageProps = {
   selectedTrack: TrackId;
   setSelectedTrack: (track: TrackId) => void;
   partLabelMap: Record<PartId, string>;
-  age: string;
+  age: AgeTier;
+  setAge: (age: AgeTier) => void;
 };
 
 export function SimpleHomePage(props: SimpleHomePageProps) {
-  const { selectedPart, setSelectedPart, selectedTrack, setSelectedTrack, partLabelMap, age } = props;
+  const { selectedPart, setSelectedPart, selectedTrack, setSelectedTrack, partLabelMap, age, setAge } = props;
 
   const currentMystery = mystery[selectedPart];
   const essence = currentMystery.essenceByTrack?.[selectedTrack] || currentMystery.perspectives[selectedTrack];
@@ -43,6 +44,12 @@ export function SimpleHomePage(props: SimpleHomePageProps) {
   const agePack = currentMystery.ageFocus[age as keyof typeof currentMystery.ageFocus];
 
   const [expandedCard, setExpandedCard] = useState<string | null>(null);
+  const ageTiers: Array<{ value: AgeTier; label: string; hint: string }> = [
+    { value: "4-6", label: "4–6岁", hint: "听故事" },
+    { value: "7-9", label: "7–9岁", hint: "找规律" },
+    { value: "10-12", label: "10–12岁", hint: "做实验" },
+    { value: "13+", label: "13岁以上", hint: "深度探索" },
+  ];
 
   const toggleCard = (cardId: string) => {
     setExpandedCard(expandedCard === cardId ? null : cardId);
@@ -57,6 +64,26 @@ export function SimpleHomePage(props: SimpleHomePageProps) {
           </h2>
           <p className="section-subtitle">选择一个身体部位开始探索吧！</p>
         </div>
+        <div className="age-guide-card">
+          <div>
+            <div className="age-guide-kicker">为你调好探索难度</div>
+            <strong>{age}岁年龄层 · {ageTiers.find((tier) => tier.value === age)?.hint}</strong>
+            <p>同一个奥秘，会用适合你年龄的方式讲清楚。</p>
+          </div>
+          <div className="age-tier-list" aria-label="选择年龄层">
+            {ageTiers.map((tier) => (
+              <button
+                key={tier.value}
+                className={`age-tier-btn ${age === tier.value ? "is-active" : ""}`}
+                onClick={() => setAge(tier.value)}
+                aria-pressed={age === tier.value}
+              >
+                <span>{tier.label}</span>
+                <small>{tier.hint}</small>
+              </button>
+            ))}
+          </div>
+        </div>
         <HumanBodyMap
           selectedPart={selectedPart}
           onPartSelect={setSelectedPart}
@@ -65,6 +92,23 @@ export function SimpleHomePage(props: SimpleHomePageProps) {
       </div>
 
       <div className="home-section content-section">
+        <div className="learning-path-card">
+          <div className="learning-path-heading">
+            <div>
+              <div className="age-guide-kicker">今天的探索路径</div>
+              <strong>从好奇出发，带着一个答案回家</strong>
+            </div>
+            <span className="learning-path-count">1 / 4</span>
+          </div>
+          <div className="learning-path-steps">
+            {["选部位", "听奥秘", "做探索", "说给家人听"].map((step, index) => (
+              <div className={`learning-path-step ${index === 0 ? "is-current" : ""}`} key={step}>
+                <span>{index + 1}</span>
+                <small>{step}</small>
+              </div>
+            ))}
+          </div>
+        </div>
         <div className="mystery-card">
           <div className="mystery-decoration">✨</div>
           <div className="mystery-title">
@@ -182,6 +226,10 @@ export function SimpleHomePage(props: SimpleHomePageProps) {
               <p className="no-facts">点击不同的身体部位发现更多有趣知识！</p>
             )}
           </div>
+          <div className="safety-note">
+            <span aria-hidden="true">🛡️</span>
+            <div><strong>给小探险家的提醒</strong><p>这里的内容是认识身体的科普，不用来判断自己是否生病。身体不舒服时，要及时告诉家长并听医生的建议。</p></div>
+          </div>
         </div>
       </div>
       
@@ -207,6 +255,154 @@ export function SimpleHomePage(props: SimpleHomePageProps) {
           font-size: 0.95rem;
           color: #8b7a5c;
           margin: 0;
+        }
+
+        .age-guide-card, .learning-path-card, .safety-note {
+          border-radius: 20px;
+          padding: 16px;
+          border: 2px solid #ffe0cc;
+          background: rgba(255, 255, 255, 0.78);
+        }
+
+        .age-guide-card {
+          display: grid;
+          gap: 14px;
+          margin-bottom: 16px;
+        }
+
+        .age-guide-kicker {
+          color: #ff7d36;
+          font-size: 0.78rem;
+          font-weight: 700;
+          letter-spacing: 0.08em;
+          margin-bottom: 3px;
+        }
+
+        .age-guide-card strong, .learning-path-heading strong {
+          color: #5d4e37;
+          font-size: 1rem;
+        }
+
+        .age-guide-card p {
+          color: #8b7a5c;
+          font-size: 0.85rem;
+          margin: 4px 0 0;
+        }
+
+        .age-tier-list {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 8px;
+        }
+
+        .age-tier-btn {
+          border: 1px solid #ffd4b8;
+          border-radius: 12px;
+          padding: 8px 4px;
+          background: #fff9f3;
+          color: #8b7a5c;
+          cursor: pointer;
+          font-family: inherit;
+        }
+
+        .age-tier-btn span, .age-tier-btn small {
+          display: block;
+        }
+
+        .age-tier-btn small {
+          font-size: 0.7rem;
+          margin-top: 2px;
+          color: #b8a88a;
+        }
+
+        .age-tier-btn.is-active {
+          color: #fff;
+          background: linear-gradient(135deg, #ff9f43, #ff6b6b);
+          border-color: transparent;
+          box-shadow: 0 4px 10px rgba(255, 111, 107, 0.2);
+        }
+
+        .age-tier-btn.is-active small {
+          color: rgba(255, 255, 255, 0.88);
+        }
+
+        .learning-path-card {
+          margin-bottom: 16px;
+          background: linear-gradient(145deg, #fff9e8, #fff5f0);
+        }
+
+        .learning-path-heading {
+          display: flex;
+          align-items: flex-start;
+          justify-content: space-between;
+          gap: 8px;
+        }
+
+        .learning-path-count {
+          border-radius: 999px;
+          padding: 4px 9px;
+          background: #fff;
+          color: #ff7d36;
+          font-size: 0.75rem;
+          font-weight: 700;
+        }
+
+        .learning-path-steps {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 6px;
+          margin-top: 14px;
+        }
+
+        .learning-path-step {
+          text-align: center;
+          color: #b8a88a;
+          font-size: 0.75rem;
+        }
+
+        .learning-path-step span {
+          display: grid;
+          place-items: center;
+          width: 28px;
+          height: 28px;
+          margin: 0 auto 4px;
+          border-radius: 50%;
+          background: #f4e8d8;
+          color: #8b7a5c;
+          font-weight: 700;
+        }
+
+        .learning-path-step.is-current {
+          color: #ff7d36;
+          font-weight: 700;
+        }
+
+        .learning-path-step.is-current span {
+          color: #fff;
+          background: #ff9f43;
+        }
+
+        .safety-note {
+          display: flex;
+          gap: 10px;
+          margin-top: 12px;
+          color: #6c604e;
+          background: rgba(240, 248, 255, 0.9);
+          border-color: #d6eaff;
+        }
+
+        .safety-note > span {
+          font-size: 1.3rem;
+        }
+
+        .safety-note strong {
+          font-size: 0.9rem;
+        }
+
+        .safety-note p {
+          margin: 3px 0 0;
+          font-size: 0.78rem;
+          line-height: 1.55;
         }
         
         .mystery-card {
@@ -421,6 +617,12 @@ export function SimpleHomePage(props: SimpleHomePageProps) {
         @keyframes float-up {
           0%, 100% { transform: translateY(0); opacity: 0.7; }
           50% { transform: translateY(-8px); opacity: 1; }
+        }
+
+        @media (max-width: 480px) {
+          .age-tier-list {
+            grid-template-columns: repeat(2, 1fr);
+          }
         }
       `}</style>
     </div>
