@@ -33,6 +33,7 @@ export type MysteryPack = {
   perspectives: Record<TrackId, string>;
   essenceByTrack?: Partial<Record<TrackId, string>>;
   ageFocus: Record<AgeTier, AgeFocusPack>;
+  funFacts?: string[];
 };
 
 export type AgeLens = {

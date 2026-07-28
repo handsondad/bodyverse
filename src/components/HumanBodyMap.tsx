@@ -1,13 +1,5 @@
 import { type PartId } from "../types/content";
 
-const bodyParts: Array<{ id: PartId; label: string; x: number; y: number }> = [
-  { id: "head", label: "头部与感知", x: 50, y: 8 },
-  { id: "heart", label: "心脏与循环", x: 50, y: 35 },
-  { id: "lungs", label: "肺部与呼吸", x: 50, y: 28 },
-  { id: "stomach", label: "胃部与消化", x: 50, y: 52 },
-  { id: "hand", label: "手部动作", x: 25, y: 38 },
-];
-
 type HumanBodyMapProps = {
   selectedPart: PartId;
   onPartSelect: (part: PartId) => void;
@@ -19,106 +11,112 @@ export function HumanBodyMap(props: HumanBodyMapProps) {
 
   return (
     <div className="body-map-container">
-      <div className="body-map">
-        <svg viewBox="0 0 100 120" className="body-svg">
-          <defs>
-            <linearGradient id="bodyGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#60a5fa" />
-              <stop offset="100%" stopColor="#3b82f6" />
-            </linearGradient>
-            <filter id="glow">
-              <feGaussianBlur stdDeviation="1" result="coloredBlur" />
-              <feMerge>
-                <feMergeNode in="coloredBlur" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
-          </defs>
-          
-          <ellipse cx="50" cy="12" rx="10" ry="12" fill="#fbbf24" />
-          
-          <path
-            d="M40 24 Q50 20 60 24 L65 35 L68 50 L65 65 Q60 80 50 85 Q40 80 35 65 L32 50 L35 35 Z"
-            fill="url(#bodyGradient)"
-            stroke="#1e40af"
-            strokeWidth="0.5"
-          />
-          
-          <path
-            d="M35 35 Q20 40 15 55"
-            fill="none"
-            stroke="#3b82f6"
-            strokeWidth="3"
-            strokeLinecap="round"
-          />
-          
-          <path
-            d="M65 35 Q80 40 85 55"
-            fill="none"
-            stroke="#3b82f6"
-            strokeWidth="3"
-            strokeLinecap="round"
-          />
-          
-          <path
-            d="M35 65 Q25 80 30 95"
-            fill="none"
-            stroke="#3b82f6"
-            strokeWidth="3"
-            strokeLinecap="round"
-          />
-          
-          <path
-            d="M65 65 Q75 80 70 95"
-            fill="none"
-            stroke="#3b82f6"
-            strokeWidth="3"
-            strokeLinecap="round"
-          />
-          
-          {bodyParts.map((part) => (
-            <g key={part.id}>
-              <circle
-                cx={part.x}
-                cy={part.y}
-                r="6"
-                fill={selectedPart === part.id ? "#10b981" : "#ffffff"}
-                stroke={selectedPart === part.id ? "#059669" : "#60a5fa"}
-                strokeWidth="2"
-                filter={selectedPart === part.id ? "url(#glow)" : ""}
-                className="part-node"
-                onClick={() => onPartSelect(part.id)}
-              />
-              <text
-                x={part.x}
-                y={part.y + 12}
-                textAnchor="middle"
-                fontSize="4"
-                fill={selectedPart === part.id ? "#10b981" : "#374151"}
-                fontWeight="600"
-                className="part-label"
-              >
-                {partLabelMap[part.id]}
-              </text>
-            </g>
-          ))}
-        </svg>
-      </div>
-      
       <div className="body-map-legend">
-        <div className="legend-title">点击身体部位开始探索</div>
+        <div className="legend-title">🎯 选择身体部位</div>
         <div className="legend-items">
-          {bodyParts.map((part) => (
-            <button
-              key={part.id}
-              className={`legend-item ${selectedPart === part.id ? "is-active" : ""}`}
-              onClick={() => onPartSelect(part.id)}
-            >
-              <span className="legend-dot" style={{ backgroundColor: selectedPart === part.id ? "#10b981" : "#60a5fa" }} />
-              <span>{partLabelMap[part.id]}</span>
-            </button>
-          ))}
+          <button
+            onClick={() => onPartSelect("head")}
+            className={`legend-item ${selectedPart === "head" ? "is-active" : ""}`}
+          >
+            <span className="legend-emoji">🧠</span>
+            <span className="legend-label">{partLabelMap["head"]}</span>
+          </button>
+          <button
+            onClick={() => onPartSelect("heart")}
+            className={`legend-item ${selectedPart === "heart" ? "is-active" : ""}`}
+          >
+            <span className="legend-emoji">❤️</span>
+            <span className="legend-label">{partLabelMap["heart"]}</span>
+          </button>
+          <button
+            onClick={() => onPartSelect("lungs")}
+            className={`legend-item ${selectedPart === "lungs" ? "is-active" : ""}`}
+          >
+            <span className="legend-emoji">🌬️</span>
+            <span className="legend-label">{partLabelMap["lungs"]}</span>
+          </button>
+          <button
+            onClick={() => onPartSelect("stomach")}
+            className={`legend-item ${selectedPart === "stomach" ? "is-active" : ""}`}
+          >
+            <span className="legend-emoji">🍽️</span>
+            <span className="legend-label">{partLabelMap["stomach"]}</span>
+          </button>
+          <button
+            onClick={() => onPartSelect("hand")}
+            className={`legend-item ${selectedPart === "hand" ? "is-active" : ""}`}
+          >
+            <span className="legend-emoji">🖐️</span>
+            <span className="legend-label">{partLabelMap["hand"]}</span>
+          </button>
         </div>
+      </div>
+
+      <div className="body-map">
+        <svg viewBox="0 0 100 140" className="body-svg">
+          <ellipse cx="50" cy="8" rx="16" ry="4" fill="#4a3728" />
+          
+          <circle cx="38" cy="6" rx="7" ry="6" fill="#4a3728" />
+          <circle cx="62" cy="6" rx="7" ry="6" fill="#4a3728" />
+          
+          <circle cx="50" cy="22" r="16" fill="#ffd6b3" stroke="#f0c5a0" strokeWidth="2" />
+          
+          <circle cx="43" cy="18" r="4" fill="#333" />
+          <circle cx="57" cy="18" r="4" fill="#333" />
+          <circle cx="44" cy="17" r="1.5" fill="#fff" />
+          <circle cx="58" cy="17" r="1.5" fill="#fff" />
+          
+          <path d="M44 26 Q50 32 56 26" fill="none" stroke="#d16b6b" strokeWidth="2" strokeLinecap="round" />
+          
+          <circle cx="38" cy="24" r="3" fill="#ffb6c1" opacity="0.6" />
+          <circle cx="62" cy="24" r="3" fill="#ffb6c1" opacity="0.6" />
+          
+          <path d="M40 38 L32 68 L42 72 L58 72 L68 68 L60 38 Q50 44 40 38" fill="#4a90d9" stroke="#3d7ac0" strokeWidth="1.5" />
+          
+          <line x1="50" y1="38" x2="50" y2="72" stroke="#3d7ac0" strokeWidth="1" strokeDasharray="3 2" />
+          
+          <ellipse cx="30" cy="55" rx="7" ry="8" fill="#ffd6b3" stroke="#f0c5a0" strokeWidth="1.5" />
+          <circle cx="25" cy="52" r="3" fill="#ffd6b3" stroke="#f0c5a0" strokeWidth="1" />
+          <circle cx="30" cy="50" r="3" fill="#ffd6b3" stroke="#f0c5a0" strokeWidth="1" />
+          <circle cx="35" cy="52" r="3" fill="#ffd6b3" stroke="#f0c5a0" strokeWidth="1" />
+          
+          <ellipse cx="70" cy="55" rx="7" ry="8" fill="#ffd6b3" stroke="#f0c5a0" strokeWidth="1.5" />
+          <circle cx="65" cy="52" r="3" fill="#ffd6b3" stroke="#f0c5a0" strokeWidth="1" />
+          <circle cx="70" cy="50" r="3" fill="#ffd6b3" stroke="#f0c5a0" strokeWidth="1" />
+          <circle cx="75" cy="52" r="3" fill="#ffd6b3" stroke="#f0c5a0" strokeWidth="1" />
+          
+          <ellipse cx="45" cy="92" rx="8" ry="15" fill="#ff6b6b" stroke="#e65c5c" strokeWidth="1.5" />
+          <ellipse cx="55" cy="92" rx="8" ry="15" fill="#ff6b6b" stroke="#e65c5c" strokeWidth="1.5" />
+          
+          <ellipse cx="43" cy="108" rx="5" ry="4" fill="#5a5a5a" />
+          <ellipse cx="57" cy="108" rx="5" ry="4" fill="#5a5a5a" />
+
+          {selectedPart === "head" && (
+            <circle cx="50" cy="22" r="18" fill="none" stroke="#ff9f43" strokeWidth="3" strokeDasharray="4 2" />
+          )}
+          
+          {selectedPart === "heart" && (
+            <path d="M47 45 C43 41 40 44 43 49 L47 52 L51 49 C54 44 51 41 47 45" fill="#ff6b6b" stroke="#ff9f43" strokeWidth="2" />
+          )}
+          
+          {selectedPart === "lungs" && (
+            <g>
+              <ellipse cx="42" cy="45" rx="8" ry="7" fill="#8ecae6" stroke="#ff9f43" strokeWidth="2" />
+              <ellipse cx="58" cy="45" rx="8" ry="7" fill="#8ecae6" stroke="#ff9f43" strokeWidth="2" />
+            </g>
+          )}
+          
+          {selectedPart === "stomach" && (
+            <ellipse cx="50" cy="58" rx="9" ry="7" fill="#ffe4b5" stroke="#ff9f43" strokeWidth="2" />
+          )}
+          
+          {selectedPart === "hand" && (
+            <g>
+              <circle cx="30" cy="55" r="10" fill="none" stroke="#ff9f43" strokeWidth="3" />
+              <circle cx="70" cy="55" r="10" fill="none" stroke="#ff9f43" strokeWidth="3" />
+            </g>
+          )}
+        </svg>
       </div>
     </div>
   );
