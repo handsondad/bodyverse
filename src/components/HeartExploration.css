@@ -1,0 +1,61 @@
+.heart-exploration {
+  border: 2px solid var(--border-color);
+  border-radius: 24px;
+  background: #fffdf8;
+  padding: 20px;
+  color: var(--text-primary);
+}
+
+.heart-exploration h2 { font-size: 1.35rem; margin: 4px 0; }
+.heart-exploration h3 { font-size: 1.1rem; margin: 24px 0 10px; }
+.heart-exploration h4 { margin: 6px 0; font-size: 1rem; }
+.heart-exploration p { margin: 8px 0; }
+.heart-kicker { color: #a64b18; font-size: 0.85rem; font-weight: 700; }
+.heart-progress, .heart-scale-nav, .heart-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.heart-progress { list-style: none; padding: 0; font-size: 0.85rem; }
+.heart-progress li { padding: 5px 8px; background: #fff0e6; border-radius: 10px; }
+.heart-progress [aria-current] { outline: 2px solid #a64b18; font-weight: 700; }
+.heart-exploration button {
+  font: inherit;
+  color: var(--text-primary);
+  background: white;
+  border: 1px solid #cb9877;
+  border-radius: 12px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+.heart-exploration button[aria-pressed="true"] { background: #ffe4d0; border-color: #a64b18; font-weight: 700; }
+.heart-exploration button:disabled { opacity: 0.45; cursor: default; }
+.heart-exploration :focus-visible { outline: 3px solid #225dac; outline-offset: 3px; }
+.heart-scale-detail { margin: 12px 0; padding: 16px; background: #fff3e5; border-radius: 16px; }
+.heart-scale-figure { margin: 12px 0; }
+.heart-scale-figure svg { display: block; width: 100%; max-width: 400px; margin: auto; }
+.heart-scale-figure figcaption { font-size: 0.85rem; }
+.heart-exploration summary { cursor: pointer; font-weight: 700; }
+.heart-exploration label { display: block; font-weight: 700; margin: 12px 0 6px; }
+.heart-exploration input:not([type="range"]), .heart-exploration textarea, .heart-exploration select {
+  width: 100%;
+  min-width: 0;
+  font: inherit;
+  color: var(--text-primary);
+  background: white;
+  border: 1px solid #cb9877;
+  border-radius: 10px;
+  padding: 10px;
+}
+.heart-exploration textarea { resize: vertical; }
+.heart-exploration input[type="range"] { width: 100%; accent-color: #a64b18; }
+.heart-model { max-width: 380px; margin: 12px auto; text-align: center; }
+.heart-model p, .heart-note { font-size: 0.85rem; }
+.heart-pump { transform-origin: 150px 65px; }
+.heart-pump.is-playing { animation: heart-beat var(--beat-duration) ease-in-out infinite; }
+.heart-result { display: block; background: #edf6ff; border-radius: 10px; padding: 12px; }
+.heart-result span { display: block; }
+.heart-scene { min-width: 0; margin: 16px 0; padding: 12px; border: 1px solid var(--border-light); border-radius: 14px; }
+.heart-scene legend { padding: 0 4px; font-weight: 700; }
+.heart-preview { padding: 12px; margin: 12px 0; background: #edf6ff; border-radius: 10px; overflow-wrap: anywhere; }
+.heart-preview p { white-space: pre-wrap; }
+.heart-note { padding: 12px; border-left: 3px solid #4d96ff; background: #f0f8ff; }
+@keyframes heart-beat { 0%, 100% { transform: scale(1); } 25% { transform: scale(0.9); } 50% { transform: scale(1.03); } }
+@media (prefers-reduced-motion: reduce) { .heart-pump.is-playing { animation: none; } }
+@media (max-width: 480px) { .heart-exploration { padding: 14px; } .heart-exploration h2 { font-size: 1.15rem; } }

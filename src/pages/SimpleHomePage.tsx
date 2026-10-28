@@ -2,6 +2,7 @@ import { useState } from "react";
 import { type AgeTier, type PartId, type TrackId } from "../types/content";
 import { HumanBodyMap } from "../components/HumanBodyMap";
 import { mystery } from "../lib/content-adapter";
+import { HeartExploration } from "../components/HeartExploration";
 
 const trackIcons: Record<TrackId, string> = {
   anatomy: "🧬",
@@ -62,8 +63,11 @@ export function SimpleHomePage(props: SimpleHomePageProps) {
           <h2 className="section-title">
             👋 你好，小探险家！
           </h2>
-          <p className="section-subtitle">选择一个身体部位开始探索吧！</p>
+          <p className="section-subtitle">选择一个身体部位开始探索吧！也可以先从一个问题出发。</p>
         </div>
+        <button type="button" className="heart-entry" onClick={() => setSelectedPart("heart")}>
+          心脏探索样板：为什么跑步后心跳更快？ → {selectedPart === "heart" ? "已进入，下方开始探索" : "开始探索"}
+        </button>
         <div className="age-guide-card">
           <div>
             <div className="age-guide-kicker">为你调好探索难度</div>
@@ -92,7 +96,8 @@ export function SimpleHomePage(props: SimpleHomePageProps) {
       </div>
 
       <div className="home-section content-section">
-        <div className="learning-path-card">
+        {selectedPart === "heart" && <HeartExploration age={age} />}
+        {selectedPart !== "heart" && <div className="learning-path-card">
           <div className="learning-path-heading">
             <div>
               <div className="age-guide-kicker">今天的探索路径</div>
@@ -108,7 +113,7 @@ export function SimpleHomePage(props: SimpleHomePageProps) {
               </div>
             ))}
           </div>
-        </div>
+        </div>}
         <div className="mystery-card">
           <div className="mystery-decoration">✨</div>
           <div className="mystery-title">
@@ -234,6 +239,20 @@ export function SimpleHomePage(props: SimpleHomePageProps) {
       </div>
       
       <style>{`
+        .heart-entry {
+          display: block;
+          width: 100%;
+          padding: 14px;
+          margin-bottom: 16px;
+          border: 2px solid #cb9877;
+          border-radius: 16px;
+          background: #fff3e5;
+          color: #5d4e37;
+          font: inherit;
+          text-align: left;
+          cursor: pointer;
+        }
+
         .section-header {
           text-align: center;
           margin-bottom: 16px;
