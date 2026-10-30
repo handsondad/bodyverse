@@ -1130,6 +1130,70 @@ body::before {
   height: 100%;
 }
 
+.body-map--3d {
+  flex-direction: column;
+  padding: 0;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 35%, #fffaf0 0%, #fff0d6 65%, #ffe3c2 100%);
+}
+
+.body-map--3d:hover {
+  transform: none;
+}
+
+.body-3d-canvas {
+  position: relative;
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+  touch-action: none;
+}
+
+.body-3d-tip {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: var(--shadow-md);
+  font-weight: 700;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.body-3d-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px;
+}
+
+.body-3d-actions button {
+  font: inherit;
+  font-weight: 700;
+  color: var(--text-primary);
+  background: white;
+  border: 2px solid rgba(255, 159, 67, 0.45);
+  border-radius: 999px;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.body-3d-actions button:hover {
+  background: #fff4e6;
+}
+
+.body-map-note {
+  margin: 10px 0 0;
+  font-size: 0.85rem;
+  color: var(--text-secondary, #666);
+  text-align: center;
+}
+
 .part-node {
   cursor: pointer;
   transition: all var(--transition-fast);

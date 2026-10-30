@@ -1,4 +1,11 @@
+import { lazy, Suspense, useState } from "react";
 import { type PartId } from "../types/content";
+import { canUseWebGL } from "../lib/heart-3d";
+import { useInView } from "../hooks/useInView";
+import { useReducedMotion } from "../hooks/useReducedMotion";
+import { WebGLBoundary } from "./WebGLBoundary";
+
+const Body3D = lazy(() => import("./Body3D"));
 
 type HumanBodyMapProps = {
   selectedPart: PartId;
@@ -8,6 +15,12 @@ type HumanBodyMapProps = {
 
 export function HumanBodyMap(props: HumanBodyMapProps) {
   const { selectedPart, onPartSelect, partLabelMap } = props;
+  const [supported] = useState(canUseWebGL);
+  const [mode, setMode] = useState<"3d" | "2d">("3d");
+  const reducedMotion = useReducedMotion();
+  const [mapRef, inView] = useInView<HTMLDivElement>();
+  const flat = <BodySvg selectedPart={selectedPart} />;
+  const show3d = supported && mode === "3d";
 
   return (
     <div className="body-map-container">
@@ -52,8 +65,38 @@ export function HumanBodyMap(props: HumanBodyMapProps) {
         </div>
       </div>
 
-      <div className="body-map">
-        <svg viewBox="0 0 100 140" className="body-svg">
+      <div ref={mapRef} className={`body-map ${show3d ? "body-map--3d" : ""}`}>
+        {show3d ? (
+          <WebGLBoundary name="3D 人体模型" fallback={flat}>
+            <Suspense fallback={flat}>
+              <Body3D
+                selectedPart={selectedPart}
+                onPartSelect={onPartSelect}
+                partLabelMap={partLabelMap}
+                animate={inView && !reducedMotion}
+                label={`3D 卡通小朋友，衣服是半透明的，能看到肺、心脏和胃；也可以点头和手。当前选中：${partLabelMap[selectedPart]}。也可以用上方按钮选择部位。`}
+              >
+                <button type="button" onClick={() => setMode("2d")}>看平面图</button>
+              </Body3D>
+            </Suspense>
+          </WebGLBoundary>
+        ) : flat}
+      </div>
+      {supported && mode === "2d" && (
+        <div className="body-3d-actions">
+          <button type="button" onClick={() => setMode("3d")}>看 3D 小人</button>
+        </div>
+      )}
+      <p className="body-map-note">
+        {show3d ? "点身体部位可以选择，拖动可以转一转；卡通示意，器官位置大致对应，不按真实形状或比例绘制。" : "卡通示意，不按真实形状或比例绘制。"}
+      </p>
+    </div>
+  );
+}
+
+function BodySvg({ selectedPart }: { selectedPart: PartId }) {
+  return (
+        <svg viewBox="0 0 100 140" className="body-svg" role="img" aria-label="卡通人体平面示意图">
           <ellipse cx="50" cy="8" rx="16" ry="4" fill="#4a3728" />
           
           <circle cx="38" cy="6" rx="7" ry="6" fill="#4a3728" />
@@ -117,7 +160,5 @@ export function HumanBodyMap(props: HumanBodyMapProps) {
             </g>
           )}
         </svg>
-      </div>
-    </div>
   );
 }

@@ -4,6 +4,8 @@ import { bloodFlowPerMinute, createHeartDraft, heartDraftKey, parseHeartDraft, s
 import type { AgeTier } from "../types/content";
 import type { HeartStoryboard, ScaleId, StoryboardScene } from "../types/exploration";
 import { HeartScaleDiagram } from "./HeartScaleDiagram";
+import { Heart3DView } from "./Heart3DView";
+import { RunLab } from "./RunLab";
 import "./HeartExploration.css";
 
 function loadDraft(age: AgeTier): { draft: HeartStoryboard; message: string; error: boolean } {
@@ -91,6 +93,7 @@ export function HeartExploration({ age }: { age: AgeTier }) {
         <h2 id="heart-exploration-title">{heartQuestion}</h2>
         <p>先猜一猜，再放大看看，最后用自己的话讲一段身体故事。</p>
       </header>
+      <RunLab age={age} />
       <ol className="heart-progress" aria-label="探索路径">
         {["提出问题", "放大寻找原因", "模型中观察", "创作讲解"].map((label, index) => (
           <li key={label} aria-current={step === index + 1 ? "step" : undefined}>
@@ -110,7 +113,9 @@ export function HeartExploration({ age }: { age: AgeTier }) {
       <div className="heart-scale-detail" aria-live="polite">
         <span className="heart-kicker">{node.discipline}</span>
         <h4>{node.title}</h4>
-        <HeartScaleDiagram scale={scale} />
+        {scale === "organ"
+          ? <Heart3DView rate={rate} playing={playing} onTogglePlay={() => setPlaying(!playing)} />
+          : <HeartScaleDiagram scale={scale} />}
         <p>{node.text[age]}</p>
         <p><strong>想一想：</strong>{node.question}</p>
         <details><summary>这个比喻在哪里不成立？</summary><p>{node.analogyLimit}</p></details>

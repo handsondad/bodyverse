@@ -56,6 +56,17 @@
 .heart-preview { padding: 12px; margin: 12px 0; background: #edf6ff; border-radius: 10px; overflow-wrap: anywhere; }
 .heart-preview p { white-space: pre-wrap; }
 .heart-note { padding: 12px; border-left: 3px solid #4d96ff; background: #f0f8ff; }
+.heart-3d .heart-scale-figure { max-width: 420px; margin: 12px auto; }
+.heart-3d-canvas {
+  height: 280px;
+  margin-bottom: 8px;
+  border-radius: 20px;
+  background: radial-gradient(circle at 50% 40%, #fff8f0 0%, #ffe3d3 70%, #ffd2c2 100%);
+  cursor: grab;
+  overflow: hidden;
+}
+.heart-3d-canvas:active { cursor: grabbing; }
+.heart-3d-loading { display: grid; place-items: center; height: 280px; border-radius: 20px; background: #fff0e6; }
 @keyframes heart-beat { 0%, 100% { transform: scale(1); } 25% { transform: scale(0.9); } 50% { transform: scale(1.03); } }
 @media (prefers-reduced-motion: reduce) { .heart-pump.is-playing { animation: none; } }
-@media (max-width: 480px) { .heart-exploration { padding: 14px; } .heart-exploration h2 { font-size: 1.15rem; } }
+@media (max-width: 480px) { .heart-exploration { padding: 14px; } .heart-exploration h2 { font-size: 1.15rem; } .heart-3d-canvas, .heart-3d-loading { height: 240px; } }
