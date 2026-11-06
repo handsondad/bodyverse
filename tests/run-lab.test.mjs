@@ -1,7 +1,7 @@
-import assert from "node:assert/strict";
+﻿import assert from "node:assert/strict";
 import { test } from "node:test";
 import {
-  breathFill, createBodyState, crossedBeat, exertionOf, guessFeedback, heartSqueeze, maxRunBpm, motionFor,
+  adultVitals, breathFill, createBodyState, crossedBeat, exertionOf, guessFeedback, heartSqueeze, maxRunBpm, motionFor,
   phaseOf, pushHistory, restBpm, rhythmFeedback, speechFor, stepBody, tapBpm
 } from "../src/lib/run-lab.ts";
 
@@ -22,6 +22,19 @@ test("running raises heart rate and breathing toward the teaching maximum", () =
   assert.equal(motionFor(ran.effort).clip, "Run");
 });
 
+test("dad rests slower than the child and the phases follow his own vitals", () => {
+  const rested = createBodyState(adultVitals);
+  assert.ok(rested.bpm < restBpm);
+  assert.equal(phaseOf(rested, false), "ready");
+  const ran = simulate(rested, 15, true);
+  assert.ok(ran.bpm > 150 && ran.bpm <= adultVitals.maxRunBpm, `bpm ${ran.bpm}`);
+  assert.ok(exertionOf(ran) > 0.95);
+  assert.match(speechFor(ran, true, "爸爸"), /好快/);
+  const later = simulate(ran, 60, false);
+  assert.ok(Math.abs(later.bpm - adultVitals.restBpm) < 2);
+  assert.equal(phaseOf(later, false), "rested");
+});
+
 test("recovery is slower than the climb, so a recovery curve is visible", () => {
   const ran = simulate(createBodyState(), 15, true);
   const climbAfter3 = simulate(createBodyState(), 3, true).bpm - restBpm;
@@ -35,10 +48,10 @@ test("recovery is slower than the climb, so a recovery curve is visible", () => 
 test("phase and speech follow ready → running → recovering → rested", () => {
   const rested = createBodyState();
   assert.equal(phaseOf(rested, false), "ready");
-  assert.match(speechFor(rested, false, "小豆"), /小豆/);
+  assert.match(speechFor(rested, false, "小念"), /小念/);
   const ran = simulate(rested, 10, true);
   assert.equal(phaseOf(ran, true), "running");
-  assert.match(speechFor(ran, true, "小豆"), /好快/);
+  assert.match(speechFor(ran, true, "小念"), /好快/);
   const recovering = simulate(ran, 2, false);
   assert.equal(phaseOf(recovering, false), "recovering");
   assert.equal(phaseOf(simulate(ran, 60, false), false), "rested");

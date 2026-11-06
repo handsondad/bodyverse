@@ -98,9 +98,7 @@ export function usePersistedViewState(): PersistedViewState {
   const [age, setAge] = useState<AgeTier>(initialState?.age ?? "7-9");
   const [selectedTrack, setSelectedTrack] = useState<TrackId>(initialState?.selectedTrack ?? "anatomy");
   const [selectedPart, setSelectedPart] = useState<PartId>(initialState?.selectedPart ?? "hand");
-  const [visitedParts, setVisitedParts] = useState<PartId[]>(
-    initialState?.visitedParts.length ? initialState.visitedParts : [initialState?.selectedPart ?? "hand"]
-  );
+  const [visitedParts, setVisitedParts] = useState<PartId[]>(initialState?.visitedParts ?? []);
   const [answeredParts, setAnsweredParts] = useState<PartId[]>(initialState?.answeredParts ?? []);
   const [learningStats, setLearningStats] = useState<LearningStats>(initialState?.stats ?? defaultStats);
 

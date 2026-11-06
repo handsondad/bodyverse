@@ -2,8 +2,9 @@
 
 | 文件 | 原始资源 | 作者 | 许可 |
 | --- | --- | --- | --- |
-| `xiaodou.glb` | Ultimate Animated Character Pack · `Casual_Male` | Quaternius（quaternius.com） | CC0 1.0 |
-| `xiaomi.glb` | Ultimate Animated Character Pack · `Casual_Female` | Quaternius（quaternius.com） | CC0 1.0 |
+| `character.glb` | Ultimate Animated Character Pack · `Casual_Male` | Quaternius（quaternius.com） | CC0 1.0 |
+
+- 小念和爸爸共用这一个模型：运行时各自克隆一份，用不同的身高、头身比例和配色区分，爸爸另外加了一副眼镜。
 
 - 获取镜像：`github.com/wellmota/tutory-personagens`（`quaternius-uac/`，仓库内附 CC0 许可说明）。
 - 本项目处理：只保留 Idle、Walk、Run、Jump、Victory、RecieveHit、SitDown、StandUp、Roll 动作；用 glTF-Transform 做了 resample、prune、dedup、quantize（`KHR_mesh_quantization`）。

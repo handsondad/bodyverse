@@ -2,7 +2,7 @@ import { Suspense, useEffect, useMemo, useRef, type MutableRefObject } from "rea
 import { Canvas, useFrame, useLoader, useThree, type ThreeEvent } from "@react-three/fiber";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
-import { breathFill, exertionOf, heartSqueeze, motionFor, type BodyState } from "../lib/run-lab";
+import { breathFill, createBodyState, exertionOf, heartSqueeze, motionFor, type BodyState } from "../lib/run-lab";
 import { getRig, type CharacterId, type Rig } from "./run-lab/rig";
 import { runFacing, World } from "./run-lab/world";
 
@@ -12,6 +12,8 @@ export type RunLabCue = { id: number; clip: "Jump" | "Victory" };
 
 type RunLab3DProps = {
   character: CharacterId;
+  /** A second character standing beside the first, idling and looking at them. */
+  partner?: CharacterId;
   bodyRef: MutableRefObject<BodyState>;
   lensRef: MutableRefObject<LensState>;
   cueRef: MutableRefObject<RunLabCue>;
@@ -27,7 +29,7 @@ const lookTarget = new THREE.Vector3(0, 0.95, 0);
 const flush = new THREE.Color("#ff9a8a");
 const damp = (from: number, to: number, rate: number, dt: number) => to + (from - to) * Math.exp(-rate * dt);
 
-export const modelUrl = (character: CharacterId) => `${import.meta.env.BASE_URL}models/${character === "xiaomi" ? "xiaomi" : "xiaodou"}.glb`;
+export const modelUrl = `${import.meta.env.BASE_URL}models/character.glb`;
 
 function playOnce(rig: Rig, clip: string) {
   const action = rig.actions[clip];
@@ -39,8 +41,10 @@ function playOnce(rig: Rig, clip: string) {
   rig.oneShot = action;
 }
 
-function Kid({ character, bodyRef, lensRef, cueRef, reducedMotion, onCharacterTap, onReady }: Omit<RunLab3DProps, "active" | "label">) {
-  const gltf = useLoader(GLTFLoader, modelUrl(character));
+type CharacterProps = Omit<RunLab3DProps, "active" | "label" | "partner"> & { x: number; facing: number; tracksLens: boolean };
+
+function Character({ character, bodyRef, lensRef, cueRef, reducedMotion, onCharacterTap, onReady, x, facing, tracksLens }: CharacterProps) {
+  const gltf = useLoader(GLTFLoader, modelUrl);
   const rig = useMemo(() => getRig(gltf, character), [gltf, character]);
   const camera = useThree((state) => state.camera);
   const size = useThree((state) => state.size);
@@ -84,10 +88,11 @@ function Kid({ character, bodyRef, lensRef, cueRef, reducedMotion, onCharacterTa
     rig.head.quaternion.copy(rig.headPose);
     rig.neck.quaternion.copy(rig.neckPose);
     rig.mixer.update(dt);
+    rig.head.scale.setScalar(rig.headScale);
     rig.headPose.copy(rig.head.quaternion);
     rig.neckPose.copy(rig.neck.quaternion);
 
-    rig.root.rotation.y = damp(rig.root.rotation.y, body.effort > 0.12 ? runFacing : idleFacing, 5, dt);
+    rig.root.rotation.y = damp(rig.root.rotation.y, body.effort > 0.12 ? runFacing : facing, 5, dt);
 
     // Look toward the child (and their finger) while resting; mostly ahead while running.
     const weight = 1 - 0.8 * body.effort;
@@ -133,6 +138,7 @@ function Kid({ character, bodyRef, lensRef, cueRef, reducedMotion, onCharacterTa
       flow.mesh.position.y = (flow.direction > 0 ? t : 1 - t) * flow.length;
     }
 
+    if (!tracksLens) return;
     rig.heart.getWorldPosition(scratch.v).project(camera);
     lens.r = Math.min(size.width, size.height) * (size.width < 480 ? 0.26 : 0.2);
     if (lens.follow) {
@@ -148,21 +154,23 @@ function Kid({ character, bodyRef, lensRef, cueRef, reducedMotion, onCharacterTa
   };
 
   return (
-    <primitive object={rig.root} position={[0, 0.05, 0]} onClick={onClick}
+    <primitive object={rig.root} position={[x, 0.05, 0]} onClick={onClick}
       onPointerOver={() => { document.body.style.cursor = "pointer"; }}
       onPointerOut={() => { document.body.style.cursor = ""; }} />
   );
 }
 
-function CameraRig({ reducedMotion }: { reducedMotion: boolean }) {
+/** `lift` raises the framing so the characters sit lower, leaving room for speech bubbles above their heads. */
+function CameraRig({ reducedMotion, lift }: { reducedMotion: boolean; lift: number }) {
+  const target = useMemo(() => lookTarget.clone().setY(lookTarget.y + lift), [lift]);
   useFrame((state, rawDelta) => {
     const dt = Math.min(rawDelta, 0.1);
     const portrait = state.size.width < state.size.height * 0.95;
     const distance = portrait ? 7.3 : 6.2;
     const x = 0.6 + (reducedMotion ? 0 : state.pointer.x * 0.3);
-    const y = 1.5 + (reducedMotion ? 0 : state.pointer.y * 0.15) + (portrait ? 0.25 : 0);
+    const y = 1.5 + lift + (reducedMotion ? 0 : state.pointer.y * 0.15) + (portrait ? 0.25 : 0);
     state.camera.position.set(damp(state.camera.position.x, x, 3, dt), damp(state.camera.position.y, y, 3, dt), distance);
-    state.camera.lookAt(lookTarget);
+    state.camera.lookAt(target);
   });
   return null;
 }
@@ -212,18 +220,25 @@ function Lights() {
   );
 }
 
-export default function RunLab3D({ active, label, ...props }: RunLab3DProps) {
+const restingBody = { current: createBodyState() };
+const idleLens = { current: { on: false, follow: false, x: 0, y: 0, r: 0 } };
+
+export default function RunLab3D({ active, label, partner, ...props }: RunLab3DProps) {
   const ref = useRef<HTMLDivElement>(null);
   return (
     <div ref={ref} className="run-lab-canvas" role="img" aria-label={label}>
-      <Canvas flat dpr={[1, 2]} frameloop={active ? "always" : "never"}
+      <Canvas flat dpr={[1, 2]} frameloop={active ? "always" : "never"} resize={{ offsetSize: true }}
         gl={{ antialias: true, alpha: true, stencil: true }}
         camera={{ fov: 30, near: 0.1, far: 60, position: [0.6, 1.5, 6.2] }}>
         <Lights />
-        <CameraRig reducedMotion={props.reducedMotion} />
+        <CameraRig reducedMotion={props.reducedMotion} lift={partner ? 0.35 : 0} />
         <World bodyRef={props.bodyRef} reducedMotion={props.reducedMotion} />
         <Suspense fallback={null}>
-          <Kid {...props} />
+          <Character {...props} x={partner ? 0.5 : 0} facing={partner ? -0.25 : idleFacing} tracksLens />
+          {partner && (
+            <Character {...props} character={partner} bodyRef={restingBody} lensRef={idleLens}
+              x={-0.6} facing={0.55} tracksLens={false} />
+          )}
         </Suspense>
         <XrayCompositor lensRef={props.lensRef} />
       </Canvas>

@@ -1,15 +1,11 @@
 import * as THREE from "three";
 import type { GLTF } from "three/examples/jsm/loaders/GLTFLoader.js";
+import { clone as cloneSkinned } from "three/examples/jsm/utils/SkeletonUtils.js";
+import { looks, type CharacterId } from "../../data/characters";
 import { createHeartGeometry, createToonGradient } from "../three-shared";
 
-export type CharacterId = "xiaodou" | "xiaomi";
+export type { CharacterId };
 
-const palettes: Record<CharacterId, Record<string, string>> = {
-  xiaodou: { Skin: "#f5c9a6", Shirt: "#ff8a5c", Pants: "#3d6fd6", Belt: "#2b3f80", Face: "#3a2418", Hair: "#5a3a22" },
-  xiaomi: { Skin: "#f2c29c", Shirt: "#ffd34d", Pants: "#ef6f9c", Belt: "#c94f7a", Face: "#3a2418", Hair: "#3b2416" }
-};
-
-export const characterHeight = 1.7;
 const up = new THREE.Vector3(0, 1, 0);
 let gradient: THREE.DataTexture | null = null;
 export const toon = (color: string) => new THREE.MeshToonMaterial({ color, gradientMap: (gradient ??= createToonGradient()) });
@@ -68,23 +64,49 @@ export type Rig = {
   /** Last animated head/neck pose. three's mixer skips bones whose value didn't change, so offsets must be undone manually. */
   headPose: THREE.Quaternion;
   neckPose: THREE.Quaternion;
+  /** The clips key Head.scale to 1, so this is re-applied after every mixer update. */
+  headScale: number;
 };
 
-const cache = new WeakMap<GLTF, Rig>();
+// Both characters share one model file, so each gets its own skinned clone.
+const cache = new WeakMap<GLTF, Map<CharacterId, Rig>>();
 
 export function getRig(gltf: GLTF, character: CharacterId): Rig {
-  const cached = cache.get(gltf);
+  const rigs = cache.get(gltf) ?? new Map<CharacterId, Rig>();
+  cache.set(gltf, rigs);
+  const cached = rigs.get(character);
   if (cached) return cached;
   const rig = buildRig(gltf, character);
-  cache.set(gltf, rig);
+  rigs.set(character, rig);
   return rig;
 }
 
+// The Face mesh holds the eyes (lower part) and eyebrows (top), so its box frames where the lenses go.
+function addGlasses(head: THREE.Bone, face: THREE.Box3) {
+  const width = face.max.x - face.min.x;
+  const ring = width * 0.18;
+  const y = face.min.y + (face.max.y - face.min.y) * 0.35;
+  const z = face.max.z + ring * 0.2;
+  const frame = toon("#24242c");
+  const glasses = new THREE.Group();
+  for (const side of [1, -1]) {
+    const lens = new THREE.Mesh(new THREE.TorusGeometry(ring, ring * 0.16, 8, 28), frame);
+    lens.position.set(side * width * 0.3, y, z);
+    glasses.add(lens);
+  }
+  const bridge = new THREE.Mesh(new THREE.CylinderGeometry(ring * 0.12, ring * 0.12, width * 0.6 - ring * 2, 6), frame);
+  bridge.rotation.z = Math.PI / 2;
+  bridge.position.set(0, y + ring * 0.2, z);
+  glasses.add(bridge);
+  head.attach(glasses);
+}
+
 function buildRig(gltf: GLTF, character: CharacterId): Rig {
-  const model = gltf.scene;
+  const model = cloneSkinned(gltf.scene);
   const root = new THREE.Group();
   root.add(model);
-  const palette = palettes[character];
+  const look = looks[character];
+  const palette: Record<string, string> = look.palette;
   const meshes: THREE.SkinnedMesh[] = [];
   model.traverse((object) => {
     if ((object as THREE.SkinnedMesh).isSkinnedMesh) meshes.push(object as THREE.SkinnedMesh);
@@ -95,6 +117,7 @@ function buildRig(gltf: GLTF, character: CharacterId): Rig {
   const skinMats: THREE.MeshToonMaterial[] = [];
   let faceMat: THREE.MeshToonMaterial | null = null;
   let skinMesh: THREE.SkinnedMesh | null = null;
+  let faceMesh: THREE.SkinnedMesh | null = null;
   for (const mesh of meshes) {
     const name = (mesh.material as THREE.Material).name;
     const material = toon(palette[name] ?? "#cccccc");
@@ -104,7 +127,10 @@ function buildRig(gltf: GLTF, character: CharacterId): Rig {
       skinMats.push(material);
       skinMesh = mesh;
     }
-    if (name === "Face") faceMat = material;
+    if (name === "Face") {
+      faceMat = material;
+      faceMesh = mesh;
+    }
     const hull = mesh.clone();
     hull.material = outline;
     mesh.parent?.add(hull);
@@ -119,9 +145,11 @@ function buildRig(gltf: GLTF, character: CharacterId): Rig {
   for (const clip of gltf.animations) actions[clip.name] = mixer.clipAction(clip);
   actions.Idle.play();
   mixer.update(0);
+  model.getObjectByName("Head")?.scale.setScalar(look.headScale);
   model.updateMatrixWorld(true);
+  for (const mesh of meshes) mesh.skeleton.update();
   const rawBox = new THREE.Box3().setFromObject(model);
-  const scale = characterHeight / (rawBox.max.y - rawBox.min.y);
+  const scale = look.height / (rawBox.max.y - rawBox.min.y);
   model.scale.setScalar(scale);
   model.position.y = -rawBox.min.y * scale;
   root.updateMatrixWorld(true);
@@ -162,6 +190,8 @@ function buildRig(gltf: GLTF, character: CharacterId): Rig {
     cheek.renderOrder = 2;
     head.attach(cheek);
   }
+
+  if (look.glasses && faceMesh) addGlasses(head, new THREE.Box3().setFromObject(faceMesh));
 
   // Sweat drops that slide down the temples when warm.
   const dropMat = toon("#8fdcff");
@@ -247,6 +277,6 @@ function buildRig(gltf: GLTF, character: CharacterId): Rig {
     root, mixer, actions, base: "Idle", oneShot: null, cueSeen: 0, head, neck, torso,
     skinMats, skinBase: skinMats[0]?.color.clone() ?? new THREE.Color(), faceMat, faceBase: faceMat?.color.clone() ?? new THREE.Color(),
     cheekMat, drops, heart, lungs, muscleMat, flows, flowClock: 0, nextBlink: 2, gaze: new THREE.Vector2(),
-    headPose: head.quaternion.clone(), neckPose: neck.quaternion.clone()
+    headPose: head.quaternion.clone(), neckPose: neck.quaternion.clone(), headScale: look.headScale
   };
 }

@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 
-export function useInView<T extends Element>() {
+export function useInView<T extends Element>(initial = true) {
   const ref = useRef<T>(null);
-  const [inView, setInView] = useState(true);
+  const [inView, setInView] = useState(initial);
 
   useEffect(() => {
     const node = ref.current;

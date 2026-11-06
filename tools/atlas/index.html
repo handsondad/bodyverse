@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <title>解剖图集渲染</title>
+    <style>
+      body { margin: 0; font: 14px system-ui; background: #eef3f7; }
+      #log { position: fixed; top: 0; left: 0; right: 0; padding: 8px 12px; background: #fff8; white-space: pre-wrap; }
+      canvas { display: block; margin: 40px auto 0; background: repeating-conic-gradient(#ddd 0 25%, #fff 0 50%) 0 0 / 20px 20px; max-width: 96vw; }
+    </style>
+    <script type="importmap">
+      { "imports": { "three": "/three/build/three.module.js", "three/addons/": "/three/examples/jsm/" } }
+    </script>
+  </head>
+  <body>
+    <div id="log">加载模型中……</div>
+    <script type="module" src="/render.js"></script>
+  </body>
+</html>

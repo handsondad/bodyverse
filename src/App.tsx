@@ -1,318 +1,106 @@
-import { useState, useEffect, useMemo } from "react";
-import {
-  buildAgeLens,
-  buildCueSheet,
-  buildNextStep,
-  buildReviewConclusion,
-  buildTakeaways,
-  getDoctorQuiz,
-  getDoctorQuizGuide,
-  getIllnessStages,
-  getPartQuiz,
-  getPartQuizGuide,
-  getStoryDeepDive,
-  getStoryMiniLab,
-  getStoryStages,
-  getTrack,
-  mystery,
-  parts,
-  tracks
-} from "./lib/content-adapter";
-import { SimpleHomePage } from "./pages/SimpleHomePage";
-import { OverviewPage } from "./pages/OverviewPage";
-import { StoryPage } from "./pages/StoryPage";
-import { SciencePage } from "./pages/SciencePage";
-import { IllnessPage } from "./pages/IllnessPage";
-import { AuditPage, type IssueTag } from "./pages/AuditPage";
-import { useLearningOverview } from "./hooks/useLearningOverview";
+import { useEffect, useRef, useState } from "react";
+import { JourneyPage } from "./components/journey/JourneyPage";
+import { isJourneyId, journeys, type JourneyId } from "./data/journey-registry";
+import { questionById, systemById, type BodySystemId } from "./data/questions";
+import { useHeardQuestions } from "./hooks/useHeardQuestions";
 import { usePersistedViewState } from "./hooks/usePersistedViewState";
-import { useQuizInteractions } from "./hooks/useQuizInteractions";
-import { useScienceExperiment } from "./hooks/useScienceExperiment";
-import { useTimedStagePlayback } from "./hooks/useTimedStagePlayback";
-import { useVoiceNarration } from "./hooks/useVoiceNarration";
-import { type AgeTier, type IllnessStageSummary, type PartId, type StoryStageSummary, type TrackId } from "./types/content";
+import { HomePage } from "./pages/HomePage";
+import { PartPage } from "./pages/PartPage";
+import { QuestionListPage } from "./pages/QuestionListPage";
+import { QuestionPage } from "./pages/QuestionPage";
+import type { PartId } from "./types/content";
+import type { ScaleId } from "./types/exploration";
 
-const ageTiers: AgeTier[] = ["4-6", "7-9", "10-12", "13+"];
-const partIds: PartId[] = ["head", "heart", "lungs", "stomach", "hand"];
-const issueTags: IssueTag[] = ["口径冲突", "年龄跳级", "流程断裂", "证据不足"];
-const issueTagClassMap: Record<IssueTag, string> = {
-  口径冲突: "chip-danger",
-  年龄跳级: "chip-warning",
-  流程断裂: "chip-primary",
-  证据不足: "chip-success"
-};
+type Route =
+  | { page: "home" }
+  | { page: "list"; system: BodySystemId }
+  | { page: "question"; id: string }
+  | { page: "journey"; id: JourneyId; stop?: ScaleId }
+  | { page: "part"; part: PartId };
 
-type AuditEntry = {
-  entryId: string;
-  week: string;
-  part: PartId;
-  age: AgeTier;
-  track: TrackId;
-  tag: IssueTag;
-  issue: string;
-  fixId: string | null;
-  closed: boolean;
-  deleted: boolean;
-  createdAt: string;
-  deletedAt?: string;
-};
+const partIds: readonly PartId[] = ["head", "heart", "lungs", "stomach", "hand"];
+const stopIds: readonly ScaleId[] = ["body", "organ", "tissue", "cell", "molecule"];
 
-const auditStorageKey = "body-mystery-audit-entries";
-const reportTemplateStorageKey = "body-mystery-report-template";
-
-function getIsoWeekId(date: Date): string {
-  const utc = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
-  const day = utc.getUTCDay() || 7;
-  utc.setUTCDate(utc.getUTCDate() + 4 - day);
-  const yearStart = new Date(Date.UTC(utc.getUTCFullYear(), 0, 1));
-  const weekNo = Math.ceil(((utc.getTime() - yearStart.getTime()) / 86400000 + 1) / 7);
-  return `${utc.getUTCFullYear()}-W${String(weekNo).padStart(2, "0")}`;
+function parseRoute(hash: string): Route {
+  const [, page, rawParam, rawExtra] = hash.replace(/^#/, "").split("/");
+  const param = rawParam ? decodeURIComponent(rawParam) : undefined;
+  if (page === "topic" && param && systemById(param)) return { page: "list", system: param as BodySystemId };
+  if (page === "q" && param && questionById(param)) return { page: "question", id: param };
+  if (page === "heart") return { page: "journey", id: "heart" };
+  if (page === "journey" && isJourneyId(param)) {
+    const stop = stopIds.find((id) => id === rawExtra);
+    return { page: "journey", id: param, stop };
+  }
+  if (page === "part" && partIds.includes(param as PartId)) return { page: "part", part: param as PartId };
+  return { page: "home" };
 }
 
-function makeEntryId(): string {
-  return `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
-}
+const listHash = (system: BodySystemId) => `#/topic/${system}`;
 
 function App() {
-  const {
-    age,
-    setAge,
-    selectedTrack,
-    setSelectedTrack,
-    selectedPart,
-    setSelectedPart,
-    visitedParts,
-    answeredParts,
-    setAnsweredParts,
-    learningStats,
-    setLearningStats,
-    markPartVisited
-  } = usePersistedViewState();
-  
-  const { voiceStatus, speak, stop } = useVoiceNarration(age);
-  
-  const {
-    selectedDoctorOption,
-    doctorFeedback,
-    selectedPartOption,
-    partFeedback,
-    resetDoctorInteraction,
-    resetPartInteraction,
-    answerDoctorQuiz,
-    answerPartQuiz
-  } = useQuizInteractions({
-    selectedPart,
-    setLearningStats,
-    setAnsweredParts
-  });
-  
-  const { scienceInput, scienceMetrics, updateScienceInput } = useScienceExperiment({ age, setLearningStats });
-  
-  const [currentPage, setCurrentPage] = useState("overview");
-  const [auditEntries, setAuditEntries] = useState<AuditEntry[]>(() => {
-    try {
-      const raw = window.localStorage.getItem(auditStorageKey);
-      if (!raw) return [];
-      const parsed = JSON.parse(raw) as Partial<AuditEntry>[];
-      if (!Array.isArray(parsed)) return [];
-      return parsed.map((entry) => ({
-        entryId: entry.entryId ?? makeEntryId(),
-        week: entry.week ?? getIsoWeekId(new Date()),
-        part: entry.part ?? "head",
-        age: entry.age ?? "10-12",
-        track: entry.track ?? "science",
-        tag: entry.tag ?? "口径冲突",
-        issue: entry.issue ?? "无",
-        fixId: entry.fixId ?? null,
-        closed: entry.closed ?? true,
-        deleted: entry.deleted ?? false,
-        createdAt: entry.createdAt ?? new Date().toISOString(),
-        deletedAt: entry.deletedAt
-      }));
-    } catch {
-      return [];
+  const { age, setAge, markPartVisited } = usePersistedViewState();
+  const { heard, markHeard } = useHeardQuestions();
+  const [route, setRoute] = useState(() => parseRoute(window.location.hash));
+  /** Where the child came from, so journeys and questions lead back instead of always jumping home. */
+  const lastList = useRef<BodySystemId | null>(null);
+  const lastQuestion = useRef<string | null>(null);
+
+  useEffect(() => {
+    const onHash = () => setRoute(parseRoute(window.location.hash));
+    window.addEventListener("hashchange", onHash);
+    return () => window.removeEventListener("hashchange", onHash);
+  }, []);
+
+  useEffect(() => {
+    if (route.page === "home") {
+      lastList.current = null;
+      lastQuestion.current = null;
     }
-  });
-  const [reportTemplate, setReportTemplate] = useState<"leader" | "research">(() => {
-    const saved = window.localStorage.getItem(reportTemplateStorageKey);
-    return saved === "research" ? "research" : "leader";
-  });
-
-  const track = useMemo(() => getTrack(selectedTrack), [selectedTrack]);
-  const partOverview = parts[selectedPart];
-  const mysteryPack = mystery[selectedPart];
-  const agePack = mysteryPack.ageFocus[age] as unknown as { question: string; experimentTitle: string; experimentSteps: string[]; observe: string };
-  const ageLens = buildAgeLens(age, track, agePack);
-  const cueSheet = buildCueSheet(age, track, mysteryPack, agePack);
-  const oneLineEssence = mysteryPack.essenceByTrack?.[selectedTrack] ?? mysteryPack.perspectives[selectedTrack];
-  
-  const storyStages = getStoryStages(age);
-  const storyPlayback = useTimedStagePlayback<StoryStageSummary["key"], StoryStageSummary>({
-    enabled: selectedTrack === "story",
-    steps: storyStages,
-    defaultKey: "mouth",
-    intervalMs: 900,
-    idleStatus: "待播放",
-    inactiveStatus: "请先切换到场景故事",
-    playingStatus: "播放中...",
-    jumpedStatus: "已切换到站点",
-    completedStatus: "播放完成",
-    idleDetail: "等待播放，展示每一站的过程说明。",
-    getDetail: (stage) => stage.sceneText,
-    onComplete: () => {
-      setLearningStats((prev) => ({ ...prev, storyCompleted: true }));
+    if (route.page === "list") {
+      lastList.current = route.system;
+      lastQuestion.current = null;
     }
-  });
-  const storyMiniLab = getStoryMiniLab(storyPlayback.activeKey, age);
-  const storyDeepDive = getStoryDeepDive(storyPlayback.activeKey, age);
-  
-  const illnessStages = getIllnessStages(age);
-  const illnessPlayback = useTimedStagePlayback<IllnessStageSummary["key"], IllnessStageSummary>({
-    enabled: selectedTrack === "illness",
-    steps: illnessStages,
-    defaultKey: "infection",
-    intervalMs: 1050,
-    idleStatus: "待播放",
-    inactiveStatus: "请先切换到生病就医",
-    playingStatus: "播放中...",
-    jumpedStatus: "已切换到阶段",
-    completedStatus: "播放完成",
-    idleDetail: "等待播放或点击阶段节点查看说明。",
-    getDetail: (stage) => stage.detail,
-    onComplete: () => {
-      setLearningStats((prev) => ({ ...prev, illnessCompleted: true }));
+    if (route.page === "question") lastQuestion.current = route.id;
+    if (route.page === "journey") markPartVisited(journeys[route.id].part);
+    if (route.page === "part") markPartVisited(route.part);
+    window.scrollTo(0, 0);
+  }, [route, markPartVisited]);
+
+  const go = (hash: string) => { window.location.hash = hash; };
+  const goHome = () => go("#/");
+  const openQuestion = (id: string) => go(`#/q/${id}`);
+  const openJourney = (id: JourneyId, stop?: ScaleId) => go(stop && stop !== "body" ? `#/journey/${id}/${stop}` : `#/journey/${id}`);
+
+  if (route.page === "question") {
+    const question = questionById(route.id);
+    if (question) {
+      const back = lastList.current ?? question.system;
+      return (
+        <QuestionPage key={question.id} question={question} heard={heard} onHeard={markHeard}
+          onBack={() => go(listHash(back))} onOpen={openQuestion} onJourney={openJourney} />
+      );
     }
-  });
-  
-  const doctorQuiz = getDoctorQuiz(age, illnessPlayback.activeKey);
-  const doctorGuide = getDoctorQuizGuide(age, illnessPlayback.activeKey);
-  const partQuiz = getPartQuiz(age, selectedPart);
-  const partGuide = getPartQuizGuide(age, selectedTrack, selectedPart);
-  
-  const { partLabelMap, totalParts, progressRatio, partAccuracy, doctorAccuracy } = useLearningOverview({
-    partIds,
-    visitedParts,
-    answeredParts,
-    learningStats
-  });
-
-  useEffect(() => {
-    resetDoctorInteraction();
-  }, [age, illnessPlayback.activeKey, resetDoctorInteraction]);
-
-  useEffect(() => {
-    markPartVisited(selectedPart);
-  }, [markPartVisited, selectedPart]);
-
-  useEffect(() => {
-    resetPartInteraction();
-  }, [age, selectedPart, selectedTrack, resetPartInteraction]);
-
-  useEffect(() => {
-    window.localStorage.setItem(auditStorageKey, JSON.stringify(auditEntries));
-  }, [auditEntries]);
-
-  useEffect(() => {
-    window.localStorage.setItem(reportTemplateStorageKey, reportTemplate);
-  }, [reportTemplate]);
-
-  const pageTitleMap: Record<string, { title: string; subtitle: string }> = {
-    overview: { title: "学习概览", subtitle: "掌握学习进度与核心知识点" },
-    story: { title: "场景故事", subtitle: "体验食物在体内的奇妙旅程" },
-    science: { title: "科学实验", subtitle: "探索身体的力学与生理奥秘" },
-    illness: { title: "就医模拟", subtitle: "了解生病与康复的全过程" },
-    audit: { title: "抽查工作台", subtitle: "管理抽查记录与生成周报" },
-  };
-
-  const currentPageInfo = pageTitleMap[currentPage] || pageTitleMap.overview;
-
-  const handleSpeak = () => {
-    speak(`${mysteryPack.title}。${oneLineEssence}。${agePack.question}`);
-  };
-
-  const [showSettings, setShowSettings] = useState(false);
-
-  const bottomNavItems = [
-    { id: "anatomy" as TrackId, label: "分层解剖", icon: "🧬" },
-    { id: "story" as TrackId, label: "场景故事", icon: "📖" },
-    { id: "science" as TrackId, label: "科学原理", icon: "🔬" },
-    { id: "illness" as TrackId, label: "生病就医", icon: "🏥" },
-  ];
-
-  return (
-    <div className="app-container">
-      <main className="main-content">
-        <header className="page-header">
-          <div className="page-header-title-group">
-            <h2>身体奥秘探索舱</h2>
-            <p className="page-header-subtitle">交互式学习系统</p>
-          </div>
-          <div className="user-avatar" onClick={() => setShowSettings(true)}>
-            <span className="user-avatar-icon">👤</span>
-          </div>
-        </header>
-
-        <SimpleHomePage
-          selectedPart={selectedPart}
-          setSelectedPart={setSelectedPart}
-          selectedTrack={selectedTrack}
-          setSelectedTrack={setSelectedTrack}
-          partLabelMap={partLabelMap}
-          age={age}
-          setAge={setAge}
-        />
-      </main>
-
-      <nav className="bottom-nav">
-        {bottomNavItems.map((item) => (
-          <button
-            key={item.id}
-            className={`bottom-nav-item ${selectedTrack === item.id ? "is-active" : ""}`}
-            onClick={() => setSelectedTrack(item.id)}
-          >
-            <span className="bottom-nav-item-icon">{item.icon}</span>
-            <span className="bottom-nav-item-label">{item.label}</span>
-          </button>
-        ))}
-      </nav>
-
-      {showSettings && (
-        <div className="modal-overlay" onClick={() => setShowSettings(false)}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <div className="modal-header">
-              <h3>设置</h3>
-              <button className="modal-close" onClick={() => setShowSettings(false)}>
-                ✕
-              </button>
-            </div>
-            <div className="modal-body">
-              <div className="input-group">
-                <label>选择年龄层</label>
-                <select value={age} onChange={(e) => setAge(e.target.value as AgeTier)}>
-                  {ageTiers.map((tier) => (
-                    <option key={tier} value={tier}>{tier} 岁</option>
-                  ))}
-                </select>
-              </div>
-              <div className="input-group">
-                <label>选择身体部位</label>
-                <select value={selectedPart} onChange={(e) => setSelectedPart(e.target.value as PartId)}>
-                  {partIds.map((part) => (
-                    <option key={part} value={part}>{partLabelMap[part]}</option>
-                  ))}
-                </select>
-              </div>
-            </div>
-            <div className="modal-footer">
-              <button className="btn btn-primary" onClick={() => setShowSettings(false)}>
-                确定
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
-  );
+  }
+  if (route.page === "list") {
+    return (
+      <QuestionListPage key={route.system} system={route.system} heard={heard}
+        onBack={goHome} onOpen={openQuestion} onSystem={(id) => go(listHash(id))} />
+    );
+  }
+  if (route.page === "journey") {
+    const journey = journeys[route.id];
+    const fromQuestion = lastQuestion.current ? questionById(lastQuestion.current) : undefined;
+    return (
+      <JourneyPage key={`${journey.id}-${route.stop ?? "body"}`} journey={journey} age={age} setAge={setAge} initialStop={route.stop}
+        onBack={fromQuestion ? () => openQuestion(fromQuestion.id) : goHome}
+        backLabel={fromQuestion ? "回到小念的问题" : "回到身体部位"}
+        onMore={() => go(`#/part/${journey.part}`)} />
+    );
+  }
+  if (route.page === "part") {
+    return <PartPage part={route.part} age={age} setAge={setAge} onBack={goHome} onJourney={(id) => openJourney(id)} />;
+  }
+  return <HomePage heard={heard} onSystem={(id) => go(listHash(id))} />;
 }
 
 export default App;

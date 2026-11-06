@@ -3,30 +3,31 @@ import type { AgeTier } from "../types/content";
 import { canUseWebGL } from "../lib/heart-3d";
 import { HeartbeatAudio } from "../lib/heartbeat-audio";
 import {
-  createBodyState, crossedBeat, exertionOf, guessFeedback, guessOptions, heartSqueeze, maxRunBpm, phaseOf, pushHistory,
-  restBpm, rhythmFeedback, rhythmMessages, runLabExplain, speechFor, stepBody, tapBpm, type Guess, type Phase, type RhythmResult
+  adultVitals, childVitals, createBodyState, crossedBeat, exertionOf, guessFeedback, guessOptions, heartSqueeze, phaseOf, pushHistory,
+  rhythmFeedback, rhythmMessages, runLabExplain, speechFor, stepBody, tapBpm, type Guess, type Phase, type RhythmResult, type Vitals
 } from "../lib/run-lab";
 import { useInView } from "../hooks/useInView";
 import { useReducedMotion } from "../hooks/useReducedMotion";
 import { WebGLBoundary } from "./WebGLBoundary";
-import type { CharacterId, LensState, RunLabCue } from "./RunLab3D";
+import { characterNames as names, type CharacterId } from "../data/characters";
+import type { LensState, RunLabCue } from "./RunLab3D";
+import "./HeartExploration.css";
 import "./RunLab.css";
 
 const RunLab3D = lazy(() => import("./RunLab3D"));
-const names: Record<CharacterId, string> = { xiaodou: "小豆", xiaomi: "小米" };
+const vitalsOf: Record<CharacterId, Vitals> = { nian: childVitals, dad: adultVitals };
 const quips = ["哈哈，好痒！", "嘿！我在这儿！", "再戳我一下试试？"];
-const observedBpm = restBpm + 30;
 
 type Hud = { bpm: number; breaths: number; phase: Phase; speech: string };
 
-function Sparkline({ values }: { values: number[] }) {
-  const low = restBpm - 10;
-  const high = maxRunBpm + 5;
+function Sparkline({ values, vitals }: { values: number[]; vitals: Vitals }) {
+  const low = Math.min(childVitals.restBpm, adultVitals.restBpm) - 10;
+  const high = Math.max(childVitals.maxRunBpm, adultVitals.maxRunBpm) + 5;
   const y = (value: number) => 40 - ((value - low) / (high - low)) * 36;
   const points = values.map((value, index) => `${(index / 59) * 150},${y(value).toFixed(1)}`).join(" ");
   return (
     <svg className="run-lab-spark" viewBox="0 0 150 44" preserveAspectRatio="none" aria-hidden="true">
-      <line x1="0" x2="150" y1={y(restBpm)} y2={y(restBpm)} />
+      <line x1="0" x2="150" y1={y(vitals.restBpm)} y2={y(vitals.restBpm)} />
       {values.length > 1 && <polyline points={points} />}
     </svg>
   );
@@ -36,7 +37,7 @@ export function RunLab({ age }: { age: AgeTier }) {
   const [supported] = useState(canUseWebGL);
   const reducedMotion = useReducedMotion();
   const [rootRef, inView] = useInView<HTMLDivElement>();
-  const [character, setCharacter] = useState<CharacterId>("xiaodou");
+  const [character, setCharacter] = useState<CharacterId>("nian");
   const [ready, setReady] = useState(false);
   const [guess, setGuess] = useState<Guess | null>(null);
   const [running, setRunning] = useState(false);
@@ -44,9 +45,9 @@ export function RunLab({ age }: { age: AgeTier }) {
   const [lensOn, setLensOn] = useState(false);
   const [lensFollow, setLensFollow] = useState(true);
   const [lensUsed, setLensUsed] = useState(false);
-  const [hud, setHud] = useState<Hud>({ bpm: restBpm, breaths: 20, phase: "ready", speech: "" });
+  const [hud, setHud] = useState<Hud>({ bpm: childVitals.restBpm, breaths: childVitals.restBreaths, phase: "ready", speech: "" });
   const [history, setHistory] = useState<number[]>([]);
-  const [peak, setPeak] = useState(restBpm);
+  const [peak, setPeak] = useState(childVitals.restBpm);
   const [quip, setQuip] = useState<string | null>(null);
   const [rhythm, setRhythm] = useState<{ tapped: number; bpm: number; result: RhythmResult } | null>(null);
 
@@ -62,6 +63,7 @@ export function RunLab({ age }: { age: AgeTier }) {
   const tapsRef = useRef<number[]>([]);
   const lastVictoryRef = useRef(0);
   const name = names[character];
+  const vitals = vitalsOf[character];
 
   const stopRun = useCallback(() => {
     runningRef.current = false;
@@ -183,7 +185,7 @@ export function RunLab({ age }: { age: AgeTier }) {
   const onCharacterTap = useCallback(() => setQuip(quips[Math.floor(Math.random() * quips.length)]), []);
   const onReady = useCallback(() => setReady(true), []);
 
-  const observed = peak >= observedBpm;
+  const observed = peak >= vitals.restBpm + 30;
   const explain = runLabExplain[age];
   const missions = [
     { label: "猜一猜", done: guess !== null },
@@ -194,7 +196,7 @@ export function RunLab({ age }: { age: AgeTier }) {
   const speech = quip ?? hud.speech;
   const flatStage = (
     <div className="run-lab-flat" aria-hidden="true">
-      <span style={{ fontSize: `${4 + exertionOf({ bpm: hud.bpm }) * 2}rem` }}>{hud.phase === "running" ? "🏃" : "🧒"}</span>
+      <span style={{ fontSize: `${4 + exertionOf({ bpm: hud.bpm, vitals }) * 2}rem` }}>{hud.phase === "running" ? "🏃" : "🧒"}</span>
     </div>
   );
 
@@ -209,6 +211,11 @@ export function RunLab({ age }: { age: AgeTier }) {
           {(Object.keys(names) as CharacterId[]).map((id) => (
             <button key={id} type="button" aria-pressed={character === id} onClick={() => {
               if (id === character) return;
+              stopRun();
+              bodyRef.current = createBodyState(vitalsOf[id]);
+              setHistory([]);
+              setPeak(vitalsOf[id].restBpm);
+              setRhythm(null);
               setReady(false);
               setCharacter(id);
             }}>{names[id]}</button>
@@ -241,7 +248,7 @@ export function RunLab({ age }: { age: AgeTier }) {
         <div className="run-lab-hud" aria-label="身体仪表">
           <div><span ref={heartIconRef} className="run-lab-heart" aria-hidden="true">❤️</span><strong>{hud.bpm}</strong><small>次心跳/分</small></div>
           <div><span aria-hidden="true">🫁</span><strong>{hud.breaths}</strong><small>次呼吸/分</small></div>
-          <Sparkline values={history} />
+          <Sparkline values={history} vitals={vitals} />
           <small className="run-lab-spark-label">心跳曲线 · 最近 30 秒</small>
         </div>
 
@@ -311,7 +318,8 @@ export function RunLab({ age }: { age: AgeTier }) {
         )}
       </div>
       <p className="heart-note">
-        动画角色和数字都是教学示意值（安静约 {restBpm}、奔跑最高 {maxRunBpm} 次/分），不是你的测量结果，也不是儿童健康标准。
+        动画角色和数字都是教学示意值（{name}安静约 {vitals.restBpm}、奔跑最高 {vitals.maxRunBpm} 次/分），不是你的测量结果，也不是健康标准。
+        {character === "dad" && " 大人安静时的心跳通常比小朋友慢一些，可以换成小念比一比。"}
         想自己感受心跳，请在大人陪伴下进行；身体不舒服时请马上告诉大人。
         {reducedMotion && " 已按系统“减少动态效果”设置放慢场景运动。"}
       </p>

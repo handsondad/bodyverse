@@ -6,7 +6,12 @@ export const maxRunBpm = 150;
 export const restBreaths = 20;
 export const maxRunBreaths = 40;
 
+export type Vitals = { restBpm: number; maxRunBpm: number; restBreaths: number; maxRunBreaths: number };
+export const childVitals: Vitals = { restBpm, maxRunBpm, restBreaths, maxRunBreaths };
+export const adultVitals: Vitals = { restBpm: 70, maxRunBpm: 160, restBreaths: 14, maxRunBreaths: 40 };
+
 export type BodyState = {
+  vitals: Vitals;
   effort: number;
   bpm: number;
   breaths: number;
@@ -16,8 +21,8 @@ export type BodyState = {
   peakBpm: number;
 };
 
-export function createBodyState(): BodyState {
-  return { effort: 0, bpm: restBpm, breaths: restBreaths, beatPhase: 0, breathPhase: 0, warmth: 0, peakBpm: restBpm };
+export function createBodyState(vitals: Vitals = childVitals): BodyState {
+  return { vitals, effort: 0, bpm: vitals.restBpm, breaths: vitals.restBreaths, beatPhase: 0, breathPhase: 0, warmth: 0, peakBpm: vitals.restBpm };
 }
 
 function ease(current: number, target: number, dt: number, tau: number): number {
@@ -29,13 +34,15 @@ const clamp01 = (value: number) => Math.min(1, Math.max(0, value));
 // Heart rate climbs within a few seconds of running but recovers more slowly after stopping.
 export function stepBody(state: BodyState, dtSeconds: number, running: boolean): BodyState {
   const dt = Math.min(Math.max(dtSeconds, 0), 0.25);
+  const v = state.vitals;
   const effort = clamp01(ease(state.effort, running ? 1 : 0, dt, running ? 0.6 : 0.5));
-  const targetBpm = restBpm + effort * (maxRunBpm - restBpm);
+  const targetBpm = v.restBpm + effort * (v.maxRunBpm - v.restBpm);
   const bpm = ease(state.bpm, targetBpm, dt, targetBpm > state.bpm ? 3.5 : 8);
-  const exertion = (bpm - restBpm) / (maxRunBpm - restBpm);
-  const breaths = restBreaths + clamp01(exertion) * (maxRunBreaths - restBreaths);
+  const exertion = (bpm - v.restBpm) / (v.maxRunBpm - v.restBpm);
+  const breaths = v.restBreaths + clamp01(exertion) * (v.maxRunBreaths - v.restBreaths);
   const warmth = clamp01(state.warmth + dt * (effort > 0.5 ? 0.09 : -0.05));
   return {
+    vitals: v,
     effort,
     bpm,
     breaths,
@@ -46,8 +53,8 @@ export function stepBody(state: BodyState, dtSeconds: number, running: boolean):
   };
 }
 
-export function exertionOf(state: Pick<BodyState, "bpm">): number {
-  return clamp01((state.bpm - restBpm) / (maxRunBpm - restBpm));
+export function exertionOf({ bpm, vitals = childVitals }: { bpm: number; vitals?: Vitals }): number {
+  return clamp01((bpm - vitals.restBpm) / (vitals.maxRunBpm - vitals.restBpm));
 }
 
 export function crossedBeat(previousPhase: number, nextPhase: number): boolean {
@@ -79,15 +86,16 @@ export type Phase = "ready" | "running" | "recovering" | "rested";
 
 export function phaseOf(state: BodyState, running: boolean): Phase {
   if (running) return "running";
-  if (state.peakBpm < restBpm + 20) return "ready";
-  return state.bpm > restBpm + 6 ? "recovering" : "rested";
+  if (state.peakBpm < state.vitals.restBpm + 20) return "ready";
+  return state.bpm > state.vitals.restBpm + 6 ? "recovering" : "rested";
 }
 
 export function speechFor(state: BodyState, running: boolean, name: string): string {
   const phase = phaseOf(state, running);
   if (phase === "running") {
-    if (state.bpm > 130) return "呼……呼……我的心怦怦跳得好快！";
-    if (state.bpm > 105) return "腿越跑越有劲，心也跳快啦！";
+    const exertion = exertionOf(state);
+    if (exertion > 2 / 3) return "呼……呼……我的心怦怦跳得好快！";
+    if (exertion > 1 / 4) return "腿越跑越有劲，心也跳快啦！";
     return "出发！我们绕着小星球跑一圈！";
   }
   if (phase === "recovering") return "停下来休息一下……心跳正在慢慢变回来。";
