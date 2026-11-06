@@ -6,7 +6,7 @@
 
 技术栈：React 18 + TypeScript（strict）+ Vite 5，3D 部分用 three + @react-three/fiber。Hash 路由，没有后端，所有内容都是 `src/data/` 里的 TypeScript 数据。
 
-**写内容、写动画、调页面样式之前，先读 `.cursor/skills/bodyverse-explainer/SKILL.md`**。那里写的是这个项目的讲法、画法和页面风格，照着做出来的东西才和现有内容是一个样子。
+**写内容、写动画、调页面样式之前，先读 `skills/bodyverse-explainer/SKILL.md`**。那里写的是这个项目的讲法、画法和页面风格，照着做出来的东西才和现有内容是一个样子。
 
 ## 命令
 
