@@ -602,5 +602,231 @@ export const films: readonly Film[] = [
         ]
       }
     ]
+  },
+  {
+    question: "choke-cough",
+    scenes: [
+      {
+        turn: 0,
+        title: "喉咙底下分岔路",
+        view: "headSide",
+        layers: [{ layer: "skin", opacity: 0.35 }, "airway", "esophagus"],
+        camera: [{ t: 0, at: [470, 740], zoom: 1.5 }],
+        duration: 8.5,
+        cues: [
+          { kind: "highlight", at: "larynx", color: "#4fb6ff", from: 0.4 },
+          { kind: "label", at: "larynx", text: "前：气管走空气", side: "left", color: "#2b7bbf", from: 1 },
+          { kind: "label", at: [535, 860], text: "后：食管走食物", side: "right", color: "#c97a2b", from: 2.4 },
+          { kind: "text", at: [600, 130], text: "喝汤一笑，水走错路", color: "#ff5a5f", from: 4.6 }
+        ]
+      },
+      {
+        turn: 1,
+        title: "会厌小翻板守门",
+        view: "headSide",
+        layers: [{ layer: "skin", opacity: 0.3 }, "mouth", "airway", "esophagus"],
+        camera: [{ t: 0, at: "epiglottis", zoom: 2.1 }],
+        duration: 9,
+        cues: [
+          { kind: "highlight", at: "epiglottis", color: "#ff9f43", from: 0.4 },
+          { kind: "label", at: "epiglottis", text: "会厌：自动守门员", side: "right", from: 0.9 },
+          { kind: "flow", path: [[360, 720], "epiglottis", [530, 880]], color: "#4fb6ff", count: 6, speed: 180, from: 2.4 },
+          { kind: "text", at: [600, 810], text: "吞咽时啪地盖住气管口", color: "#2f7d32", from: 4.4 }
+        ]
+      },
+      {
+        turn: 2,
+        title: "边笑边吞漏了缝",
+        view: "blank",
+        duration: 8.5,
+        cues: [
+          { kind: "shape", shape: "pill", at: [320, 280], size: [280, 96], color: "#ffe08a", text: "吞汤：快盖上", from: 0.4 },
+          { kind: "shape", shape: "pill", at: [880, 280], size: [280, 96], color: "#bfe3ff", text: "大笑：快打开", from: 1.2 },
+          { kind: "shape", shape: "rect", at: [600, 500], size: [220, 36], color: "#ff9f43", text: "会厌", motion: "wiggle", from: 2.2 },
+          { kind: "sprite", icon: "💧", path: [[600, 360], [600, 660]], travel: 1.4, size: 64, from: 3.2 },
+          { kind: "text", at: [600, 790], text: "来不及盖严，水溜进气管", color: "#ff5a5f", from: 4.8 }
+        ]
+      },
+      {
+        turn: 3,
+        title: "警报触发咳嗽反射",
+        view: "chest",
+        layers: [{ layer: "skin", opacity: 0.3 }, "diaphragm", { layer: "lungs", motion: "breathe", rate: 0.45 }, "airway"],
+        duration: 8.5,
+        cues: [
+          { kind: "pulse", at: "trachea", color: "#ff5a5f", radius: 65, from: 0.4 },
+          { kind: "label", at: "trachea", text: "气管报警神经", side: "right", color: "#ff5a5f", from: 1 },
+          { kind: "flow", path: ["trachea", [600, 20]], color: "#ffcf3f", count: 5, speed: 240, from: 2, to: 5 },
+          { kind: "highlight", at: "lungs", color: "#4fb6ff", from: 3.6 },
+          { kind: "text", at: [600, 810], text: "先深吸气，关紧喉门憋足劲", color: "#7a4fd6", from: 4.8 }
+        ]
+      },
+      {
+        turn: 4,
+        title: "狂风把水轰出去",
+        view: "chest",
+        layers: [{ layer: "skin", opacity: 0.3 }, "diaphragm", "lungs", "airway"],
+        duration: 8,
+        cues: [
+          { kind: "arrow", path: [[600, 700], [600, 530]], color: "#ff9f43", text: "肌肉猛挤", from: 0.4, to: 4 },
+          { kind: "flow", path: ["bronchi", "trachea", [600, 20]], color: "#4fb6ff", count: 12, speed: 480, size: 13, from: 1.4 },
+          { kind: "sprite", icon: "💦", path: ["trachea", [600, 30]], travel: 0.9, size: 58, from: 2.2 },
+          { kind: "text", at: [600, 810], text: "像一阵狂风把水吹出去！", color: "#2f7d32", from: 4 }
+        ]
+      },
+      {
+        turn: 5,
+        title: "真卡住千万别喂水",
+        view: "blank",
+        duration: 9.5,
+        cues: [
+          { kind: "shape", shape: "rect", at: [320, 360], size: [400, 240], color: "#e8f5e9", from: 0.3, to: 5.2 },
+          { kind: "text", at: [320, 360], text: "能大声咳：让它自己咳出", size: "s", color: "#2f7d32", from: 0.8, to: 5.2 },
+          { kind: "shape", shape: "rect", at: [880, 360], size: [400, 240], color: "#ffd6d6", from: 2, to: 5.2 },
+          { kind: "text", at: [880, 360], text: "咳不出声：立刻推腹急救", size: "s", color: "#e5484d", from: 2.5, to: 5.2 },
+          { kind: "myth", wrong: "卡住喉咙快喂水顺下去", right: "真窒息不能喂水，要立刻急救", from: 5.4 }
+        ]
+      }
+    ]
+  },
+  {
+    question: "winter-breath",
+    scenes: [
+      {
+        turn: 0,
+        title: "不是白烟是小云朵",
+        view: "blank",
+        duration: 8,
+        cues: [
+          { kind: "sprite", icon: "🧒", path: [[280, 460]], size: 150, from: 0.3 },
+          { kind: "flow", path: [[370, 440], [680, 420]], color: "#bfe3ff", count: 8, speed: 160, size: 14, from: 0.9 },
+          { kind: "sprite", icon: "☁️", path: [[780, 410]], size: 150, from: 1.8 },
+          { kind: "text", at: [600, 770], text: "不是着火冒烟，是迷你小云朵！", color: "#2b7bbf", from: 3.8 }
+        ]
+      },
+      {
+        turn: 1,
+        title: "呼吸道加温到37度",
+        view: "chest",
+        layers: [{ layer: "skin", opacity: 0.3 }, "diaphragm", { layer: "lungs", motion: "breathe", rate: 0.4 }, "airway"],
+        duration: 8.5,
+        cues: [
+          { kind: "flow", path: [[600, 20], "trachea", "bronchi", "lungs"], color: "#4fb6ff", count: 7, speed: 200, from: 0.4, to: 4.4 },
+          { kind: "highlight", at: "lungs", color: "#ff9f43", from: 2 },
+          { kind: "count", at: [950, 220], label: "肺里暖到近", start: 10, end: 37, unit: "℃", over: 2, from: 2.4 },
+          { kind: "text", at: [600, 810], text: "吸饱满满的隐身水蒸气", color: "#2b7bbf", from: 4.8 }
+        ]
+      },
+      {
+        turn: 2,
+        title: "撞上冷空气抱成水滴",
+        view: "blank",
+        duration: 8.5,
+        cues: [
+          { kind: "shape", shape: "rect", at: [320, 420], size: [400, 280], color: "#fff3df", text: "☀️ 夏天暖", from: 0.3 },
+          { kind: "text", at: [320, 610], text: "水蒸气继续隐身", size: "s", color: "#7a6a55", from: 1 },
+          { kind: "shape", shape: "rect", at: [880, 420], size: [400, 280], color: "#e3f1fb", outline: true, text: "❄️ 冬天冷", from: 2.2 },
+          { kind: "flow", path: [[730, 490], [1030, 490]], color: "#4fb6ff", count: 12, speed: 90, size: 9, from: 3 },
+          { kind: "text", at: [880, 610], text: "抱团凝成小水滴！", size: "s", color: "#2b7bbf", from: 3.8 },
+          { kind: "text", at: [600, 790], text: "冷空气肚量小，藏不住水蒸气", color: "#2b7bbf", from: 5 }
+        ]
+      },
+      {
+        turn: 3,
+        title: "哈在冷镜片上看水珠",
+        view: "blank",
+        duration: 8,
+        cues: [
+          { kind: "sprite", icon: "👓", path: [[600, 380]], size: 170, from: 0.4 },
+          { kind: "flow", path: [[250, 380], [500, 380]], color: "#ff9f43", count: 6, speed: 180, from: 1.2, to: 4.4 },
+          { kind: "sprite", icon: "💧", path: [[540, 380]], size: 46, from: 2.4 },
+          { kind: "sprite", icon: "💧", path: [[660, 380]], size: 46, from: 2.8 },
+          { kind: "text", at: [600, 740], text: "一摸全是真真实实的小水珠！", color: "#2f7d32", from: 4.2 }
+        ]
+      },
+      {
+        turn: 4,
+        title: "冬天尽量用鼻子吸气",
+        view: "headSide",
+        layers: [{ layer: "skin", opacity: 0.35 }, "airway"],
+        camera: [{ t: 0, at: "nose", zoom: 1.75 }],
+        duration: 8,
+        cues: [
+          { kind: "flow", path: [[150, 550], "nose", "nasopharynx", "throat"], color: "#4fb6ff", count: 7, speed: 180, from: 0.4 },
+          { kind: "highlight", at: "nose", color: "#2f7d32", from: 1.2 },
+          { kind: "label", at: "nose", text: "随身暖风加湿器", side: "top", color: "#2f7d32", from: 1.8 },
+          { kind: "text", at: [600, 810], text: "暖好滤净再进肺，不呛嗓子", color: "#2f7d32", from: 4.2 }
+        ]
+      }
+    ]
+  },
+  {
+    question: "hold-breath",
+    scenes: [
+      {
+        turn: 0,
+        title: "脑干强行收回控制权",
+        view: "headSide",
+        layers: [{ layer: "skin", opacity: 0.35 }, { layer: "brain", opacity: 0.8 }, "airway"],
+        camera: [{ t: 0, at: "brainstem", zoom: 1.55 }],
+        duration: 8,
+        cues: [
+          { kind: "highlight", at: "brainstem", color: "#ff5a5f", from: 0.4 },
+          { kind: "label", at: "brainstem", text: "脑干：呼吸指挥部", side: "right", color: "#e5484d", from: 1 },
+          { kind: "pulse", at: "brainstem", color: "#ffcf3f", radius: 75, from: 2.6 },
+          { kind: "text", at: [600, 810], text: "一到安全线就逼你张嘴吸气！", color: "#e5484d", from: 4.2 }
+        ]
+      },
+      {
+        turn: 1,
+        title: "头号警报是二氧化碳",
+        view: "blank",
+        duration: 8.5,
+        cues: [
+          { kind: "meter", at: [340, 320], label: "氧气略减", start: 0.9, end: 0.7, color: "#4fb6ff", over: 3, from: 0.4 },
+          { kind: "meter", at: [860, 320], label: "二氧化碳猛涨", start: 0.2, end: 0.95, color: "#e5484d", over: 3, from: 0.8 },
+          { kind: "pulse", at: [860, 320], color: "#ff5a5f", radius: 95, from: 3.2 },
+          { kind: "sprite", icon: "🚨", path: [[600, 540]], size: 96, wobble: true, from: 3.8 },
+          { kind: "text", at: [600, 760], text: "二氧化碳让血微酸，拉响警报！", color: "#e5484d", from: 4.6 }
+        ]
+      },
+      {
+        turn: 2,
+        title: "下水前绝不猛喘憋气",
+        view: "blank",
+        duration: 9,
+        cues: [
+          { kind: "sprite", icon: "🏊", path: [[600, 290]], size: 120, from: 0.4, to: 4.8 },
+          { kind: "text", at: [600, 450], text: "猛喘排空废气会关掉警报器！", size: "s", color: "#e5484d", from: 1.2, to: 4.8 },
+          { kind: "myth", wrong: "潜水前猛喘十几口能安全憋更久", right: "警报失灵会在水下缺氧昏迷，极危险", from: 5 }
+        ]
+      },
+      {
+        turn: 3,
+        title: "肺是死胡同吸不动水",
+        view: "chest",
+        layers: [{ layer: "skin", opacity: 0.3 }, "lungs", "airway"],
+        duration: 8.5,
+        cues: [
+          { kind: "highlight", at: "lungs", color: "#4fb6ff", from: 0.4 },
+          { kind: "label", at: "lungRight", text: "肺泡是死胡同小囊", side: "left", from: 1 },
+          { kind: "sprite", icon: "🐟", path: [[930, 320]], size: 92, from: 2.4 },
+          { kind: "label", at: [930, 320], text: "鱼鳃单向顺水流", side: "bottom", color: "#2b7bbf", from: 3 },
+          { kind: "text", at: [600, 810], text: "水里氧太少，肺也排不动重水", color: "#7a6a55", from: 4.6 }
+        ]
+      },
+      {
+        turn: 4,
+        title: "鲸鱼全身背着储氧瓶",
+        view: "blank",
+        duration: 8,
+        cues: [
+          { kind: "sprite", icon: "🐋", path: [[380, 380]], size: 155, from: 0.4 },
+          { kind: "shape", shape: "pill", at: [820, 320], size: [340, 90], color: "#ffd6d6", text: "超高储氧蛋白", from: 1.2 },
+          { kind: "shape", shape: "pill", at: [820, 460], size: [340, 90], color: "#bfe3ff", text: "下潜心跳变慢", from: 2.2 },
+          { kind: "text", at: [600, 760], text: "泳池绝不比憋气久，安全第一", color: "#2f7d32", from: 4.4 }
+        ]
+      }
+    ]
   }
 ];

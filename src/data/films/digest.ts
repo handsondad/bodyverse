@@ -689,5 +689,311 @@ export const films: readonly Film[] = [
         ]
       }
     ]
+  },
+  {
+    question: "poop-brown",
+    scenes: [
+      {
+        turn: 0,
+        title: "身体自家的天然颜料",
+        view: "blank",
+        duration: 8.5,
+        cues: [
+          { kind: "sprite", icon: "🍅", path: [[280, 260]], size: 90, from: 0.3, to: 4.4 },
+          { kind: "sprite", icon: "🥬", path: [[600, 260]], size: 90, from: 0.7, to: 4.4 },
+          { kind: "sprite", icon: "🍚", path: [[920, 260]], size: 90, from: 1.1, to: 4.4 },
+          { kind: "arrow", path: [[600, 350], [600, 500]], text: "揉碎拆散", from: 2, to: 4.6 },
+          { kind: "shape", shape: "pill", at: [600, 560], size: [260, 110], color: "#9c6634", text: "💩 棕色", from: 4.6 },
+          { kind: "text", at: [600, 760], text: "颜色是身体自己染的！", color: "#7a6a55", from: 5.4 }
+        ]
+      },
+      {
+        turn: 1,
+        title: "旧红细胞做成胆汁",
+        view: "belly",
+        layers: [{ layer: "skin", opacity: 0.35 }, "liver", "stomach", "smallIntestine"],
+        camera: [{ t: 0, at: [580, 320], zoom: 1.5 }],
+        duration: 9,
+        cues: [
+          { kind: "sprite", icon: "🔴", path: [[390, 130], "liver"], travel: 1.4, size: 46, from: 0.4, to: 3.4 },
+          { kind: "highlight", at: "liver", color: "#9ac43c", from: 1.6 },
+          { kind: "label", at: "liver", text: "肝脏做成黄绿胆汁", side: "left", from: 2, to: 5.4 },
+          { kind: "highlight", at: "gallbladder", color: "#7cb342", from: 3.4 },
+          { kind: "flow", path: ["gallbladder", "smallIntestine"], color: "#8bc34a", count: 7, speed: 160, from: 4 },
+          { kind: "text", at: [600, 810], text: "流进小肠帮着消化油脂", color: "#2f7d32", from: 5.6 }
+        ]
+      },
+      {
+        turn: 2,
+        title: "肠道细菌改成棕色",
+        view: "belly",
+        layers: [{ layer: "skin", opacity: 0.35 }, "smallIntestine", "largeIntestine"],
+        camera: [{ t: 0, at: "largeIntestine", zoom: 1.45 }],
+        duration: 8.5,
+        cues: [
+          { kind: "flow", path: ["smallIntestine", [450, 620], [450, 380]], color: "#8bc34a", count: 6, speed: 170, from: 0.4, to: 4.6 },
+          { kind: "sprite", icon: "🦠", path: [[460, 460]], size: 54, wobble: true, from: 1.6 },
+          { kind: "label", at: "largeIntestine", text: "大肠细菌再改造", side: "left", from: 2.2 },
+          { kind: "flow", path: [[450, 380], [740, 380], [740, 620], "colonEnd"], color: "#8d5a2b", count: 8, speed: 170, from: 3.6 },
+          { kind: "text", at: [600, 820], text: "黄绿色变成了黄棕色！", color: "#8d5a2b", from: 5.2 }
+        ]
+      },
+      {
+        turn: 3,
+        title: "便便里装的啥",
+        view: "blank",
+        duration: 8.5,
+        cues: [
+          { kind: "meter", at: [600, 220], label: "一大半是水", start: 0, end: 0.7, color: "#4fb6ff", over: 1.5, from: 0.4 },
+          { kind: "shape", shape: "pill", at: [280, 470], size: [250, 96], color: "#efe6ff", text: "🦠 细菌", from: 1.8 },
+          { kind: "shape", shape: "pill", at: [600, 470], size: [250, 96], color: "#ffd6bf", text: "旧细胞皮", from: 2.4 },
+          { kind: "shape", shape: "pill", at: [920, 470], size: [250, 96], color: "#e8f5e9", text: "🥬 纤维", from: 3 },
+          { kind: "text", at: [600, 730], text: "大肠收走多余水，捏成条状", color: "#7a6a55", from: 4.8 }
+        ]
+      },
+      {
+        turn: 4,
+        title: "蔬菜纤维像小海绵",
+        view: "blank",
+        duration: 8.5,
+        cues: [
+          { kind: "shape", shape: "rect", at: [320, 430], size: [400, 280], color: "#e8f5e9", from: 0.3 },
+          { kind: "sprite", icon: "🧽", path: [[320, 360]], size: 96, from: 0.8 },
+          { kind: "text", at: [320, 500], text: "吸住水：松软好拉", size: "s", color: "#2f7d32", from: 1.5 },
+          { kind: "shape", shape: "rect", at: [880, 430], size: [400, 280], color: "#fff3df", outline: true, from: 3 },
+          { kind: "sprite", icon: "🪨", path: [[880, 360]], size: 90, from: 3.5 },
+          { kind: "text", at: [880, 500], text: "少菜少水：干邦邦", size: "s", color: "#ff5a5f", from: 4.2 },
+          { kind: "text", at: [600, 770], text: "多吃青菜多喝水", color: "#2f7d32", from: 5.6 }
+        ]
+      },
+      {
+        turn: 5,
+        title: "身体的健康小纸条",
+        view: "blank",
+        duration: 9,
+        cues: [
+          { kind: "shape", shape: "pill", at: [350, 310], size: [360, 100], color: "#ffd6e7", text: "火龙果→红", from: 0.4 },
+          { kind: "shape", shape: "pill", at: [850, 310], size: [360, 100], color: "#dcedc8", text: "菠菜→偏绿", from: 1.1 },
+          { kind: "text", at: [600, 470], text: "食物染色：一两天就恢复", size: "s", color: "#2f7d32", from: 2 },
+          { kind: "shape", shape: "rect", at: [600, 650], size: [660, 100], color: "#ffe4e6", outline: true, text: "异常颜色", from: 4.2 },
+          { kind: "text", at: [600, 800], text: "黑柏油、带血或灰白：看医生", size: "s", color: "#e5484d", from: 5.2 }
+        ]
+      }
+    ]
+  },
+  {
+    question: "tooth-cavity",
+    scenes: [
+      {
+        turn: 0,
+        title: "没有小虫是细菌搞鬼",
+        view: "head",
+        layers: [{ layer: "skin", opacity: 0.35 }, "teeth"],
+        camera: [{ t: 0, at: "teeth", zoom: 2.1 }],
+        duration: 8.5,
+        cues: [
+          { kind: "highlight", at: "teeth", color: "#ff9f43", from: 0.4, to: 4.8 },
+          { kind: "sprite", icon: "🦠", path: [{ a: "teeth", dx: 45, dy: -10 }], size: 48, wobble: true, from: 1.2, to: 4.8 },
+          { kind: "myth", wrong: "虫牙是有小虫子在嘴里啃牙", right: "没有虫子，是看不见的细菌搞鬼", from: 5 }
+        ]
+      },
+      {
+        turn: 1,
+        title: "吃糖排酸泡软牙釉质",
+        view: "blank",
+        duration: 8.5,
+        cues: [
+          { kind: "shape", shape: "rect", at: [600, 580], size: [680, 220], color: "#fffaf0", outline: true, text: "硬牙釉质", from: 0.3 },
+          { kind: "sprite", icon: "🍬", path: [[360, 320]], size: 84, from: 0.8 },
+          { kind: "sprite", icon: "🦠", path: [[540, 320]], size: 84, wobble: true, from: 1.4 },
+          { kind: "flow", path: [[540, 370], [600, 470]], color: "#ff9f43", count: 7, speed: 160, from: 2.2 },
+          { kind: "shape", shape: "circle", at: [600, 490], size: [95, 70], color: "#5c4a38", text: "小洞", from: 3.6 },
+          { kind: "text", at: [600, 790], text: "细菌吃糖排出酸，泡走钙蚀出洞", color: "#e5484d", from: 4.6 }
+        ]
+      },
+      {
+        turn: 2,
+        title: "蚀穿三层碰到牙神经",
+        view: "blank",
+        duration: 8.5,
+        cues: [
+          { kind: "shape", shape: "rect", at: [600, 300], size: [660, 90], color: "#fffdf7", outline: true, text: "牙釉质", from: 0.3 },
+          { kind: "shape", shape: "rect", at: [600, 420], size: [660, 110], color: "#ffe8b3", text: "牙本质", from: 0.9 },
+          { kind: "shape", shape: "rect", at: [600, 560], size: [660, 130], color: "#ffb3ba", text: "牙髓神经", from: 1.5 },
+          { kind: "arrow", path: [[780, 230], [780, 540]], color: "#e5484d", text: "洞越蚀越深", from: 2.4 },
+          { kind: "pulse", at: [780, 560], color: "#ff5a5f", radius: 80, from: 3.6 },
+          { kind: "text", at: [600, 780], text: "碰到牙髓神经就钻心地疼！", color: "#e5484d", from: 4.6 }
+        ]
+      },
+      {
+        turn: 3,
+        title: "总含着糖口水没空修",
+        view: "blank",
+        duration: 8.5,
+        cues: [
+          { kind: "shape", shape: "rect", at: [320, 420], size: [410, 280], color: "#e8f5e9", from: 0.3 },
+          { kind: "sprite", icon: "💧", path: [[320, 340]], size: 86, from: 0.8 },
+          { kind: "text", at: [320, 490], text: "一次吃完：口水帮修补", size: "s", color: "#2f7d32", from: 1.4 },
+          { kind: "shape", shape: "rect", at: [880, 420], size: [410, 280], color: "#ffe4e6", outline: true, from: 2.8 },
+          { kind: "sprite", icon: "🍭", path: [[880, 340]], size: 86, from: 3.2 },
+          { kind: "text", at: [880, 490], text: "分十次含：整天泡在酸里", size: "s", color: "#e5484d", from: 3.8 },
+          { kind: "text", at: [600, 770], text: "少吃高频率甜食和甜饮料！", color: "#e5484d", from: 5 }
+        ]
+      },
+      {
+        turn: 4,
+        title: "涂氟和窝沟封闭护甲",
+        view: "blank",
+        duration: 8,
+        cues: [
+          { kind: "sprite", icon: "🛡️", path: [[280, 360]], size: 100, from: 0.4 },
+          { kind: "text", at: [280, 510], text: "含氟牙膏更耐酸", size: "s", color: "#2f7d32", from: 1 },
+          { kind: "sprite", icon: "🦷", path: [[600, 360]], size: 100, from: 2 },
+          { kind: "text", at: [600, 510], text: "窝沟封闭填深沟", size: "s", color: "#2b7bbf", from: 2.6 },
+          { kind: "sprite", icon: "🪥", path: [[920, 360]], size: 100, from: 3.4 },
+          { kind: "text", at: [920, 510], text: "睡前刷净加牙线", size: "s", color: "#ff9f43", from: 4 },
+          { kind: "text", at: [600, 760], text: "让细菌一整晚都饿肚子", color: "#2f7d32", from: 5 }
+        ]
+      }
+    ]
+  },
+  {
+    question: "spicy-hot",
+    scenes: [
+      {
+        turn: 0,
+        title: "辣不是味道是热痛觉",
+        view: "headSide",
+        layers: [{ layer: "skin", opacity: 0.35 }, "mouth", "nerves", { layer: "brain", opacity: 0.65 }],
+        camera: [{ t: 0, at: "tongue", zoom: 1.85 }],
+        duration: 8,
+        cues: [
+          { kind: "sprite", icon: "🌶️", path: [[200, 720], "tongue"], travel: 1.1, size: 58, from: 0.3 },
+          { kind: "pulse", at: "tongue", color: "#e5484d", radius: 60, from: 1.5 },
+          { kind: "label", at: "tongue", text: "痛觉热觉神经报警", side: "right", color: "#e5484d", from: 2 },
+          { kind: "text", at: [600, 810], text: "辣不是味觉，是神经被骗了！", color: "#e5484d", from: 4.2 }
+        ]
+      },
+      {
+        turn: 1,
+        title: "辣椒素拧开高温锁孔",
+        view: "blank",
+        duration: 8.5,
+        cues: [
+          { kind: "shape", shape: "rect", at: [600, 480], size: [360, 180], color: "#ffd6d6", outline: true, text: "高温报警器", from: 0.3 },
+          { kind: "sprite", icon: "🔑", path: [[260, 320], [520, 410]], travel: 1.2, size: 84, from: 1 },
+          { kind: "label", at: [520, 390], text: "辣椒素刚好插进锁孔", pos: [600, 210], color: "#e5484d", from: 2.2 },
+          { kind: "sprite", icon: "🔥", path: [[880, 460]], size: 115, wobble: true, from: 3.4 },
+          { kind: "text", at: [600, 770], text: "没真升温，大脑却以为着火啦", color: "#e5484d", from: 4.6 }
+        ]
+      },
+      {
+        turn: 2,
+        title: "防老鼠却专请小鸟吃",
+        view: "blank",
+        duration: 8.5,
+        cues: [
+          { kind: "sprite", icon: "🐭", path: [[320, 360]], size: 115, wobble: true, from: 0.4 },
+          { kind: "text", at: [320, 520], text: "哺乳动物：辣得跑开", size: "s", color: "#e5484d", from: 1 },
+          { kind: "sprite", icon: "🐦", path: [[880, 360]], size: 115, from: 2.4 },
+          { kind: "text", at: [880, 520], text: "小鸟锁孔不同：不怕辣", size: "s", color: "#2f7d32", from: 3 },
+          { kind: "text", at: [600, 760], text: "小鸟吞籽飞远，帮辣椒播种！", color: "#2f7d32", from: 4.6 }
+        ]
+      },
+      {
+        turn: 3,
+        title: "辣椒素怕油不怕水",
+        view: "blank",
+        duration: 8.5,
+        cues: [
+          { kind: "shape", shape: "pill", at: [600, 380], size: [520, 120], color: "#ff9eae", text: "舌头挂满辣", from: 0.3, to: 4.8 },
+          { kind: "flow", path: [[220, 340], [980, 340]], color: "#4fb6ff", count: 8, speed: 260, from: 1.2, to: 4.8 },
+          { kind: "myth", wrong: "辣到了猛灌冰水就能冲掉", right: "辣椒素不溶于水，冰水冲不走它", from: 5 }
+        ]
+      },
+      {
+        turn: 4,
+        title: "冰牛奶包裹带走它",
+        view: "blank",
+        duration: 8,
+        cues: [
+          { kind: "sprite", icon: "🥛", path: [[340, 380]], size: 135, from: 0.4 },
+          { kind: "flow", path: [[430, 380], [880, 380]], color: "#fffdf7", count: 8, speed: 180, size: 14, from: 1.4 },
+          { kind: "shape", shape: "circle", at: [760, 380], size: [170, 170], color: "#ffe08a", text: "包裹带走", from: 2.2 },
+          { kind: "text", at: [600, 750], text: "牛奶里的脂肪和蛋白最解辣！", color: "#2f7d32", from: 4.2 }
+        ]
+      }
+    ]
+  },
+  {
+    question: "stomach-acid",
+    scenes: [
+      {
+        turn: 0,
+        title: "胃里强酸能化牛肉",
+        view: "belly",
+        layers: [{ layer: "skin", opacity: 0.35 }, { layer: "liver", opacity: 0.35 }, "esophagus", { layer: "stomach", motion: "churn", rate: 0.5 }],
+        camera: [{ t: 0, at: "stomach", zoom: 1.85 }],
+        duration: 8,
+        cues: [
+          { kind: "highlight", at: "stomach", color: "#ff9f43", from: 0.4 },
+          { kind: "sprite", icon: "🥩", path: ["stomach"], size: 54, wobble: true, from: 1 },
+          { kind: "label", at: "stomach", text: "强胃酸＋消化剪刀", side: "left", from: 1.8 },
+          { kind: "text", at: [600, 810], text: "泡松大块肉，还杀灭大多数细菌", color: "#2f7d32", from: 4.2 }
+        ]
+      },
+      {
+        turn: 1,
+        title: "碱性黏液防酸雨衣",
+        view: "blank",
+        duration: 8.5,
+        cues: [
+          { kind: "shape", shape: "rect", at: [600, 620], size: [860, 160], color: "#ffb3ba", text: "娇嫩胃壁", from: 0.3 },
+          { kind: "shape", shape: "rect", at: [600, 480], size: [860, 110], color: "#bfe3ff", text: "碱性黏液雨衣", from: 1 },
+          { kind: "flow", path: [[600, 180], [600, 420]], color: "#ff9f43", count: 8, speed: 200, from: 2 },
+          { kind: "label", at: [600, 425], text: "酸一碰就被中和掉", side: "right", color: "#2b7bbf", from: 2.8 },
+          { kind: "text", at: [600, 800], text: "强胃酸根本挨不到底下的胃肉！", color: "#2f7d32", from: 4.8 }
+        ]
+      },
+      {
+        turn: 2,
+        title: "三四天整层闪电换新",
+        view: "blank",
+        duration: 8,
+        cues: [
+          { kind: "shape", shape: "rect", at: [600, 460], size: [760, 140], color: "#ffd9c2", outline: true, text: "严丝合缝", from: 0.4 },
+          { kind: "count", at: [600, 230], label: "整层换新只需", start: 0, end: 4, unit: "天左右", over: 2.2, from: 1.2 },
+          { kind: "text", at: [600, 740], text: "蹭出小伤还没扩开就换新修好了", color: "#2f7d32", from: 4.2 }
+        ]
+      },
+      {
+        turn: 3,
+        title: "消化剪刀自带保护套",
+        view: "blank",
+        duration: 8.5,
+        cues: [
+          { kind: "shape", shape: "pill", at: [320, 420], size: [300, 110], color: "#e8f5e9", text: "套着安全套", from: 0.4 },
+          { kind: "arrow", path: [[490, 420], [700, 420]], text: "进胃腔遇酸", from: 1.8 },
+          { kind: "sprite", icon: "✂️", path: [[860, 420]], size: 110, wobble: true, from: 2.8 },
+          { kind: "text", at: [860, 560], text: "脱套专剪食物肉", size: "s", color: "#ff9f43", from: 3.4 },
+          { kind: "text", at: [600, 770], text: "回头钻不过稠黏液，伤不到车间", color: "#2f7d32", from: 4.8 }
+        ]
+      },
+      {
+        turn: 4,
+        title: "公筷分餐护好防酸衣",
+        view: "belly",
+        layers: [{ layer: "skin", opacity: 0.35 }, "esophagus", "stomach"],
+        camera: [{ t: 0, at: "stomach", zoom: 1.7 }],
+        duration: 8.5,
+        cues: [
+          { kind: "sprite", icon: "🦠", path: ["stomach"], size: 48, wobble: true, from: 0.4, to: 4.4 },
+          { kind: "label", at: "stomach", text: "幽门螺杆菌钻破雨衣", side: "left", color: "#e5484d", from: 1, to: 4.4 },
+          { kind: "highlight", at: "stomach", color: "#2f7d32", from: 4.6 },
+          { kind: "label", at: [612, 130], text: "食管没厚雨衣别反流", pos: [790, 140], from: 5 },
+          { kind: "text", at: [600, 810], text: "用公筷＋不乱吃药，护好防酸衣", color: "#2f7d32", from: 5.4 }
+        ]
+      }
+    ]
   }
 ];

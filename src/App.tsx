@@ -107,7 +107,7 @@ function App() {
       </Suspense>
     );
   }
-  return <HomePage heard={heard} onSystem={(id) => go(listHash(id))} />;
+  return <HomePage heard={heard} onSystem={(id) => go(listHash(id))} onOpen={openQuestion} />;
 }
 
 export default App;

@@ -1,7 +1,10 @@
-import { lazy, Suspense, useRef, useState, type CSSProperties } from "react";
+import { lazy, Suspense, useMemo, useRef, useState, type CSSProperties } from "react";
 import type { LensState, RunLabCue } from "../components/RunLab3D";
 import { WebGLBoundary } from "../components/WebGLBoundary";
-import { bodySystems, questionsIn, type BodySystemId } from "../data/questions";
+import {
+  bodyQuestions, bodySystems, difficultyLabel, pickRandomQuestion, questionsIn, searchQuestions, systemById,
+  type BodySystemId
+} from "../data/questions";
 import { useInView } from "../hooks/useInView";
 import { useReducedMotion } from "../hooks/useReducedMotion";
 import { canUseWebGL } from "../lib/heart-3d";
@@ -21,13 +24,15 @@ const chats: readonly (readonly [string, string])[] = [
 type Props = {
   heard: readonly string[];
   onSystem: (id: BodySystemId) => void;
+  onOpen: (id: string) => void;
 };
 
-export function HomePage({ heard, onSystem }: Props) {
+export function HomePage({ heard, onSystem, onOpen }: Props) {
   const [webgl] = useState(canUseWebGL);
   const reducedMotion = useReducedMotion();
   const [stageRef, inView] = useInView<HTMLDivElement>();
   const [chat, setChat] = useState(0);
+  const [query, setQuery] = useState("");
   const bodyRef = useRef(createBodyState());
   const lensRef = useRef<LensState>({ on: false, follow: true, x: 0, y: 0, r: 80 });
   const cueRef = useRef<RunLabCue>({ id: 0, clip: "Jump" });
@@ -36,6 +41,10 @@ export function HomePage({ heard, onSystem }: Props) {
     cueRef.current = { id: cueRef.current.id + 1, clip: cueRef.current.id % 2 ? "Victory" : "Jump" };
     setChat((chat + 1) % chats.length);
   }
+
+  const trimmed = query.trim();
+  const matches = useMemo(() => (trimmed ? searchQuestions(trimmed) : []), [trimmed]);
+  const totalHeard = useMemo(() => bodyQuestions.filter((item) => heard.includes(item.id)).length, [heard]);
 
   const [nianLine, dadLine] = chats[chat];
   const flat = <div className="home-planet-flat" aria-hidden="true">👨🧒</div>;
@@ -64,8 +73,65 @@ export function HomePage({ heard, onSystem }: Props) {
         </div>
       </section>
 
+      <section className="home-finder" aria-label="找一个身体问题">
+        <div className="home-finder-bar">
+          <label className="home-search">
+            <span aria-hidden="true">🔍</span>
+            <input
+              type="search"
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              placeholder="搜一搜小念的问题：比如 辣椒、近视、蛀牙、蚊子、冰激凌……"
+              aria-label="搜索身体问题"
+            />
+            {query && (
+              <button type="button" className="home-search-clear" onClick={() => setQuery("")} aria-label="清空搜索">✕</button>
+            )}
+          </label>
+          <button type="button" className="home-random" onClick={() => onOpen(pickRandomQuestion(heard).id)}>
+            🎲 随便问一题
+          </button>
+        </div>
+
+        {trimmed && (
+          <div className="home-results" aria-live="polite">
+            <p className="home-results-meta">
+              {matches.length > 0 ? `找到 ${matches.length} 个相关问题：` : "小念还没问过这个词呢，换个词（比如 眼睛、肚子、睡觉、血）试试？"}
+            </p>
+            {matches.length > 0 && (
+              <div className="qlist-grid">
+                {matches.map((question) => {
+                  const sys = systemById(question.system);
+                  const isDone = heard.includes(question.id);
+                  return (
+                    <button
+                      key={question.id}
+                      type="button"
+                      className={`qlist-card ${isDone ? "is-heard" : ""}`}
+                      style={{ "--bubble": sys?.color ?? "#ff9f43" } as CSSProperties}
+                      onClick={() => onOpen(question.id)}
+                    >
+                      <strong>{question.parentGate && <span aria-label="需要大人一起看">🔒 </span>}{question.title}</strong>
+                      <small className="qlist-trigger">{question.trigger}</small>
+                      <span className="qlist-badges">
+                        {sys && <em>{sys.emoji} {sys.title}</em>}
+                        <em>{difficultyLabel[question.difficulty]}</em>
+                        {isDone && <em className="is-star">⭐ 看过</em>}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        )}
+      </section>
+
       <section aria-labelledby="home-parts-title">
-        <h2 id="home-parts-title" className="home-section-title">身体部位</h2>
+        <div className="home-section-head">
+          <h2 id="home-parts-title" className="home-section-title">身体部位</h2>
+          <span className="home-total">共 {bodyQuestions.length} 个问题{totalHeard > 0 && ` · ⭐ 已看过 ${totalHeard}`}</span>
+        </div>
         <div className="home-systems">
           {bodySystems.map((system) => {
             const list = questionsIn(system.id);

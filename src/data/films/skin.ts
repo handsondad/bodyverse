@@ -640,5 +640,237 @@ export const films: readonly Film[] = [
         ]
       }
     ]
+  },
+  {
+    question: "sunburn-tan",
+    scenes: [
+      {
+        turn: 0,
+        title: "看不见的紫外线",
+        view: "arm",
+        layers: ["skin"],
+        camera: [{ t: 0, at: "forearm", zoom: 1.5 }],
+        duration: 8,
+        cues: [
+          { kind: "sprite", icon: "☀️", path: [[180, 320]], size: 105, from: 0.3 },
+          { kind: "flow", path: [[250, 360], "forearm"], color: "#b48cff", count: 7, speed: 220, from: 0.9 },
+          { kind: "label", at: "forearm", text: "看不见的紫外线", side: "left", color: "#7a4fd6", from: 1.8 },
+          { kind: "sprite", icon: "☂️", path: [{ a: "forearm", dx: 45, dy: -40 }], size: 68, from: 3.4 },
+          { kind: "text", at: [600, 810], text: "皮肤主动撑起小黑伞", color: "#7a6a55", from: 4.4 }
+        ]
+      },
+      {
+        turn: 1,
+        title: "黑色素护住DNA",
+        view: "blank",
+        duration: 9,
+        cues: [
+          { kind: "shape", shape: "rect", at: [600, 560], size: [920, 320], color: "#ffe4d0", from: 0.3 },
+          { kind: "shape", shape: "circle", at: [600, 650], size: [180, 90], color: "#8d5a2b", text: "黑色素", from: 0.9 },
+          { kind: "flow", path: [[600, 120], [600, 390]], color: "#b48cff", count: 6, speed: 200, from: 1.6 },
+          { kind: "shape", shape: "circle", at: [600, 480], size: [150, 110], color: "#bfe3ff", text: "DNA", from: 2.2 },
+          { kind: "shape", shape: "pill", at: [600, 410], size: [210, 46], color: "#6d4527", text: "小黑伞", from: 3.2 },
+          { kind: "label", at: [600, 410], text: "挡在头顶吸掉紫外线", side: "right", from: 3.8 },
+          { kind: "text", at: [600, 810], text: "小黑伞多了，皮肤就变深", color: "#6d4527", from: 5.4 }
+        ]
+      },
+      {
+        turn: 2,
+        title: "来不及挡就晒伤",
+        view: "arm",
+        layers: [{ layer: "skin", opacity: 0.45 }, "arteries"],
+        camera: [{ t: 0, at: "humerus", zoom: 1.55 }],
+        duration: 8.5,
+        cues: [
+          { kind: "flow", path: [[220, 180], "humerus"], color: "#b48cff", count: 8, speed: 280, from: 0.3, to: 4.6 },
+          { kind: "pulse", at: "humerus", color: "#ff5a5f", radius: 85, from: 1.2 },
+          { kind: "label", at: "humerus", text: "表皮细胞受伤了", side: "left", color: "#e5484d", from: 1.8 },
+          { kind: "flow", path: ["heart", "humerus"], color: "#e5484d", count: 7, speed: 220, from: 3 },
+          { kind: "text", at: [600, 810], text: "血管张大修补：又红又烫", color: "#e5484d", from: 4.8 }
+        ]
+      },
+      {
+        turn: 3,
+        title: "受伤细胞主动退场",
+        view: "blank",
+        duration: 8.5,
+        cues: [
+          { kind: "shape", shape: "rect", at: [600, 560], size: [860, 180], color: "#ffd9c2", text: "新健康皮", from: 0.3 },
+          { kind: "shape", shape: "rect", at: [600, 410], size: [860, 80], color: "#f5e6dc", outline: true, text: "受伤旧皮", motion: "wiggle", from: 0.8, to: 4.8 },
+          { kind: "arrow", path: [[600, 390], [660, 230]], color: "#ff9f43", text: "成片脱落", from: 2.6, to: 5.2 },
+          { kind: "text", at: [600, 220], text: "带着坏DNA不硬留", size: "s", color: "#7a4fd6", from: 3.4 },
+          { kind: "text", at: [600, 780], text: "让它自己掉，别用手硬撕", color: "#2f7d32", from: 5.2 }
+        ]
+      },
+      {
+        turn: 4,
+        title: "阴天也有紫外线",
+        view: "blank",
+        duration: 9,
+        cues: [
+          { kind: "sprite", icon: "☁️", path: [[600, 210]], size: 130, from: 0.3 },
+          { kind: "flow", path: [[600, 260], [600, 520]], color: "#b48cff", count: 7, speed: 220, from: 1, to: 5 },
+          { kind: "sprite", icon: "🌊", path: [[340, 480]], size: 90, from: 2, to: 5 },
+          { kind: "sprite", icon: "🏖️", path: [[860, 480]], size: 90, from: 2.4, to: 5 },
+          { kind: "myth", wrong: "阴天凉快不用防晒", right: "紫外线能穿云，水和沙还会反射", from: 5 }
+        ]
+      },
+      {
+        turn: 5,
+        title: "聪明防晒健康玩",
+        view: "blank",
+        duration: 8.5,
+        cues: [
+          { kind: "sprite", icon: "🦴", path: [[260, 330]], size: 90, from: 0.4 },
+          { kind: "text", at: [260, 470], text: "温和阳光造维D", size: "s", color: "#2f7d32", from: 0.9 },
+          { kind: "sprite", icon: "👒", path: [[620, 330]], size: 96, from: 2 },
+          { kind: "sprite", icon: "🧴", path: [[880, 330]], size: 92, from: 2.6 },
+          { kind: "text", at: [750, 470], text: "戴帽＋穿衣＋防晒霜", size: "s", color: "#2f7d32", from: 3.2 },
+          { kind: "text", at: [600, 760], text: "避开十点到四点最毒太阳", color: "#ff9f43", from: 4.8 }
+        ]
+      }
+    ]
+  },
+  {
+    question: "shiver-cold",
+    scenes: [
+      {
+        turn: 0,
+        title: "启动自带紧急小暖炉",
+        view: "body",
+        layers: [{ layer: "skin", opacity: 0.4 }, "muscles", "brain"],
+        duration: 8,
+        cues: [
+          { kind: "highlight", at: "hypothalamus", color: "#ff9f43", from: 0.4 },
+          { kind: "count", at: [950, 200], label: "核心体温守住", start: 35, end: 37, unit: "℃", over: 1.8, from: 1 },
+          { kind: "flow", path: ["hypothalamus", "spinalCord", "quads"], color: "#ffcf3f", count: 7, speed: 240, from: 2.2 },
+          { kind: "text", at: [600, 810], text: "冷得掉温快，大脑接管肌肉生热", color: "#ff9f43", from: 4.2 }
+        ]
+      },
+      {
+        turn: 1,
+        title: "肌肉飞快小抽动产热",
+        view: "leg",
+        layers: [{ layer: "skin", opacity: 0.3 }, "skeleton", "muscles", "nerves"],
+        camera: [{ t: 0, at: "quads", zoom: 1.55 }],
+        duration: 8.5,
+        cues: [
+          { kind: "flow", path: ["sciatic", "quads"], color: "#ffcf3f", count: 8, speed: 280, from: 0.4 },
+          { kind: "highlight", at: "quads", color: "#ff5a5f", from: 1.2 },
+          { kind: "pulse", at: "quads", color: "#ff9f43", radius: 85, rate: 2.2, from: 1.6 },
+          { kind: "label", at: "quads", text: "每秒小抽动十来次", side: "left", color: "#e5484d", from: 2.2 },
+          { kind: "text", at: [600, 810], text: "原地燃烧能量，变成热放出来！", color: "#e5484d", from: 4.6 }
+        ]
+      },
+      {
+        turn: 2,
+        title: "咀嚼肌拉着牙齿打架",
+        view: "head",
+        layers: [{ layer: "skin", opacity: 0.35 }, "muscles", "teeth"],
+        camera: [{ t: 0, at: "teeth", zoom: 1.7 }],
+        duration: 8,
+        cues: [
+          { kind: "pulse", at: [460, 650], color: "#ff9f43", radius: 55, rate: 2.4, from: 0.4 },
+          { kind: "pulse", at: [740, 650], color: "#ff9f43", radius: 55, rate: 2.4, from: 0.4 },
+          { kind: "label", at: [460, 650], text: "咀嚼肌也跟着抖", side: "left", from: 1.2 },
+          { kind: "highlight", at: "teeth", color: "#4fb6ff", from: 2.6 },
+          { kind: "text", at: [600, 820], text: "上下牙齿碰得咯咯响！", color: "#2b7bbf", from: 4 }
+        ]
+      },
+      {
+        turn: 3,
+        title: "手脚血管收紧保内脏",
+        view: "body",
+        layers: [{ layer: "skin", opacity: 0.35 }, "heart", "arteries"],
+        duration: 8.5,
+        cues: [
+          { kind: "highlight", at: "heart", color: "#e5484d", from: 0.4 },
+          { kind: "label", at: "chestSkin", text: "热血优先保心肺肚子", side: "right", color: "#e5484d", from: 1 },
+          { kind: "pulse", at: "palm", color: "#4fb6ff", radius: 45, from: 2.6 },
+          { kind: "label", at: "palm", text: "手脚血管收紧少散热", side: "left", color: "#2b7bbf", from: 3.2 },
+          { kind: "text", at: [600, 810], text: "手脚先变凉，是在舍小家保大家", color: "#2f7d32", from: 4.8 }
+        ]
+      },
+      {
+        turn: 4,
+        title: "手冻僵要用温水慢暖",
+        view: "blank",
+        duration: 8.5,
+        cues: [
+          { kind: "sprite", icon: "🧤", path: [[360, 320]], size: 110, from: 0.4, to: 4.8 },
+          { kind: "sprite", icon: "💧", path: [[840, 320]], size: 100, from: 1.2, to: 4.8 },
+          { kind: "text", at: [600, 460], text: "进屋用接近体温的温水慢慢捂", size: "s", color: "#2f7d32", from: 2, to: 4.8 },
+          { kind: "myth", wrong: "手冻僵了马上伸进滚水烫或烤火", right: "麻木易烫伤，血管猛涨还易生冻疮", from: 5 }
+        ]
+      }
+    ]
+  },
+  {
+    question: "red-lips",
+    scenes: [
+      {
+        turn: 0,
+        title: "半透明天窗透出血色",
+        view: "head",
+        layers: [{ layer: "skin", opacity: 0.5 }, "mouth", "arteries"],
+        camera: [{ t: 0, at: "teeth", zoom: 1.9 }],
+        duration: 8,
+        cues: [
+          { kind: "highlight", at: "teeth", color: "#e5484d", from: 0.4 },
+          { kind: "label", at: [600, 720], text: "透出底下血液的红色", side: "right", color: "#e5484d", from: 1.2 },
+          { kind: "text", at: [600, 820], text: "不是涂了颜料，是半透明小天窗", color: "#e5484d", from: 4.2 }
+        ]
+      },
+      {
+        turn: 1,
+        title: "角质极薄又没黑色素",
+        view: "blank",
+        duration: 8.5,
+        cues: [
+          { kind: "shape", shape: "rect", at: [320, 420], size: [400, 260], color: "#f3cfb3", text: "普通皮：厚实", from: 0.3 },
+          { kind: "text", at: [320, 600], text: "十几层角质＋黑色素", size: "s", color: "#7a6a55", from: 1 },
+          { kind: "shape", shape: "rect", at: [880, 470], size: [400, 160], color: "#ff7a8a", text: "密密毛细血管", from: 2.2 },
+          { kind: "shape", shape: "rect", at: [880, 365], size: [400, 44], color: "rgba(255,245,240,0.65)", outline: true, text: "薄唇皮", from: 2.8 },
+          { kind: "text", at: [880, 600], text: "只三四层，一望到底", size: "s", color: "#e5484d", from: 3.4 },
+          { kind: "text", at: [600, 780], text: "红扑扑的血色直接透出来啦！", color: "#e5484d", from: 4.8 }
+        ]
+      },
+      {
+        turn: 2,
+        title: "天冷缺氧嘴唇会发紫",
+        view: "blank",
+        duration: 8,
+        cues: [
+          { kind: "shape", shape: "pill", at: [330, 420], size: [340, 120], color: "#ff5a6e", text: "暖和：鲜红血", from: 0.4 },
+          { kind: "shape", shape: "pill", at: [870, 420], size: [340, 120], color: "#8e6bbf", text: "天冷：血变慢", from: 1.8 },
+          { kind: "sprite", icon: "❄️", path: [[870, 250]], size: 84, from: 2.4 },
+          { kind: "text", at: [600, 750], text: "血管收紧鲜红血少，看着发紫", color: "#7a4fd6", from: 4 }
+        ]
+      },
+      {
+        turn: 3,
+        title: "没有汗腺和油膜保护",
+        view: "blank",
+        duration: 8,
+        cues: [
+          { kind: "shape", shape: "rect", at: [320, 440], size: [400, 220], color: "#ffe4d0", text: "脸蛋皮肤", from: 0.3 },
+          { kind: "shape", shape: "pill", at: [320, 310], size: [380, 44], color: "#ffe08a", text: "天然油脂锁水", from: 0.9 },
+          { kind: "shape", shape: "rect", at: [880, 440], size: [400, 220], color: "#ffb3c1", outline: true, text: "嘴唇没油膜", from: 2.2 },
+          { kind: "flow", path: [[880, 330], [880, 150]], color: "#4fb6ff", count: 6, speed: 180, from: 2.8 },
+          { kind: "text", at: [600, 760], text: "没汗腺也没油，风一吹水就跑", color: "#e5484d", from: 4.4 }
+        ]
+      },
+      {
+        turn: 4,
+        title: "越舔越干涂润唇膏",
+        view: "blank",
+        duration: 8.5,
+        cues: [
+          { kind: "sprite", icon: "💄", path: [[600, 300]], size: 115, from: 0.4, to: 4.8 },
+          { kind: "text", at: [600, 450], text: "涂儿童润唇膏替嘴唇盖层油膜", size: "s", color: "#2f7d32", from: 1.2, to: 4.8 },
+          { kind: "myth", wrong: "嘴唇干了多舔几口口水能保湿", right: "口水蒸发抽走更多水，消化酶还伤皮", from: 5 }
+        ]
+      }
+    ]
   }
 ];

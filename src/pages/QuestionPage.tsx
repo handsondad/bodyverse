@@ -4,7 +4,7 @@ import { FilmPlayer, type FilmPlayerHandle } from "../components/film/FilmPlayer
 import { characterNames as names, type CharacterId } from "../data/characters";
 import { filmFor } from "../data/films";
 import { journeys, type JourneyId } from "../data/journey-registry";
-import { difficultyLabel, nextQuestions, systemById, type BeatShow, type BodyQuestion } from "../data/questions";
+import { difficultyLabel, linkedQuestions, nextQuestions, systemById, type BeatShow, type BodyQuestion } from "../data/questions";
 import { voiceFor } from "../data/voice";
 import { useInView } from "../hooks/useInView";
 import type { Speaker } from "../lib/narration";
@@ -164,6 +164,20 @@ export function QuestionPage({ question, heard, onHeard, onBack, onOpen, onJourn
                 </button>
               ))}
             </div>
+            {linkedQuestions(question).length > 0 && (
+              <div className="qa-related is-cross">
+                <h3>🔗 串到别的身体部位看看</h3>
+                {linkedQuestions(question).map((item) => {
+                  const otherSystem = systemById(item.system);
+                  return (
+                    <button key={item.id} type="button" onClick={() => onOpen(item.id)}>
+                      {otherSystem && <span className="qa-cross-tag">{otherSystem.emoji} {otherSystem.title}</span>}
+                      <span>{item.parentGate ? "🔒 " : ""}{item.title}{heard.includes(item.id) ? " ⭐" : ""}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            )}
             <details className="parent-tip">
               <summary>👨‍👩‍👧 给大人</summary>
               <p>{question.parentTip}</p>

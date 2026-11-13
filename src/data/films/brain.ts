@@ -683,5 +683,254 @@ export const films: readonly Film[] = [
         ]
       }
     ]
+  },
+  {
+    question: "tickle",
+    scenes: [
+      {
+        turn: 0,
+        title: "大脑早就剧透了",
+        view: "body",
+        layers: [{ layer: "skin", opacity: 0.4 }, "nerves", "brain"],
+        camera: [{ t: 0, at: [560, 280], zoom: 1.4 }],
+        duration: 8.5,
+        cues: [
+          { kind: "highlight", at: "brain", color: "#b48cff", from: 0.3 },
+          { kind: "flow", path: ["brain", "spinalCord", "medianNerve", "palm"], color: "#ffcf3f", count: 7, speed: 240, from: 0.9, to: 4.8 },
+          { kind: "label", at: "palm", text: "自己伸手去挠", side: "left", from: 1.6, to: 4.8 },
+          { kind: "pulse", at: "belly", color: "#4fb6ff", radius: 55, from: 3.4 },
+          { kind: "label", at: "belly", text: "早就提前算好了", side: "right", from: 4, color: "#2f7d32" },
+          { kind: "text", at: [600, 810], text: "一点意外都没有", color: "#2f7d32", from: 5.4 }
+        ]
+      },
+      {
+        turn: 1,
+        title: "小脑发动作预报",
+        view: "headSide",
+        layers: [{ layer: "skin", opacity: 0.3 }, { layer: "skeleton", opacity: 0.35 }, { layer: "brain", opacity: 0.85 }],
+        camera: [{ t: 0, at: "cerebellum", zoom: 1.55 }],
+        duration: 9,
+        cues: [
+          { kind: "highlight", at: "cerebellum", color: "#ff9f43", from: 0.3 },
+          { kind: "label", at: "cerebellum", text: "小脑：发动作预报", side: "bottom", from: 0.8 },
+          { kind: "flow", path: ["cerebellum", "thalamus", "brain"], color: "#4fb6ff", count: 6, speed: 200, from: 2, to: 5.8 },
+          { kind: "flow", path: ["brainstem", "thalamus"], color: "#ffcf3f", count: 5, speed: 200, from: 3, to: 5.8 },
+          { kind: "sprite", icon: "🔇", path: ["thalamus"], size: 58, from: 4.4 },
+          { kind: "text", at: [600, 810], text: "和预报一样：调得很轻", color: "#2f7d32", from: 5.6 }
+        ]
+      },
+      {
+        turn: 2,
+        title: "别人来挠猜不准",
+        view: "blank",
+        duration: 8.5,
+        cues: [
+          { kind: "sprite", icon: "🖐️", path: [[180, 260], [520, 440]], travel: 1.4, wobble: true, size: 110, from: 0.3 },
+          { kind: "sprite", icon: "❓", path: [[350, 230]], size: 80, from: 1 },
+          { kind: "text", at: [600, 150], text: "什么时候碰？猜不准", size: "m", color: "#7a4fd6", from: 1.5, to: 4.4 },
+          { kind: "pulse", at: [600, 460], color: "#ff5a5f", radius: 140, rate: 1.8, from: 2.8 },
+          { kind: "shape", shape: "circle", at: [600, 460], size: [220, 220], color: "#ffe08a", text: "突然碰到", motion: "wiggle", from: 3.2 },
+          { kind: "sprite", icon: "😆", path: [[900, 460]], size: 130, wobble: true, from: 4.6 },
+          { kind: "text", at: [600, 790], text: "信号全冲进大脑：好痒！", color: "#ff5a5f", from: 5.2 }
+        ]
+      },
+      {
+        turn: 3,
+        title: "晚半秒就能骗过",
+        view: "blank",
+        duration: 9.5,
+        cues: [
+          { kind: "shape", shape: "rect", at: [310, 420], size: [420, 320], color: "#e8f5e9", from: 0.3 },
+          { kind: "arrow", path: [[210, 360], [410, 360]], text: "按完马上动", from: 0.8, to: 3.6 },
+          { kind: "text", at: [310, 480], text: "小脑算准：不痒", size: "s", color: "#2f7d32", from: 1.6 },
+          { kind: "shape", shape: "rect", at: [890, 420], size: [420, 320], color: "#fff3df", outline: true, from: 3.4 },
+          { kind: "arrow", path: [[780, 350], [990, 350]], color: "#ff5a5f", text: "机械手晚半秒", from: 4 },
+          { kind: "sprite", icon: "😆", path: [[890, 230]], size: 84, wobble: true, from: 5 },
+          { kind: "text", at: [890, 480], text: "自己挠也变痒！", size: "s", color: "#ff5a5f", from: 5.5 }
+        ]
+      },
+      {
+        turn: 4,
+        title: "软弱地方要保护",
+        view: "body",
+        layers: [{ layer: "skin", opacity: 0.45 }, { layer: "skeleton", opacity: 0.5 }, { layer: "arteries", opacity: 0.7 }],
+        duration: 9,
+        cues: [
+          { kind: "label", at: "forearm", text: "有骨头顶着：不怕痒", side: "left", from: 0.4, to: 3.6, color: "#7a6a55" },
+          { kind: "highlight", at: "belly", color: "#ff5a5f", from: 2.2 },
+          { kind: "label", at: "belly", text: "没骨头挡：怕痒", side: "right", from: 2.6, color: "#ff5a5f" },
+          { kind: "highlight", at: "foot", color: "#ff5a5f", from: 4 },
+          { kind: "label", at: "foot", text: "脚心防踩刺", side: "left", from: 4.4, color: "#ff5a5f" },
+          { kind: "text", at: [600, 140], text: "一碰就缩，保护要害", color: "#2f7d32", from: 5.8 }
+        ]
+      },
+      {
+        turn: 5,
+        title: "像假装打架游戏",
+        view: "blank",
+        duration: 8.5,
+        cues: [
+          { kind: "text", at: [600, 140], text: "科学家还在研究", size: "s", color: "#7a6a55", from: 0.3 },
+          { kind: "sprite", icon: "🤣", path: [[380, 420]], size: 130, wobble: true, from: 1 },
+          { kind: "shape", shape: "pill", at: [790, 420], size: [420, 110], color: "#ffe08a", text: "在逗我玩", from: 1.8 },
+          { kind: "sprite", icon: "✋", path: [[600, 640]], size: 96, from: 4.4 },
+          { kind: "text", at: [600, 790], text: "有人喊停，马上停手", color: "#2f7d32", from: 5 }
+        ]
+      }
+    ]
+  },
+  {
+    question: "funny-bone",
+    scenes: [
+      {
+        turn: 0,
+        title: "撞到了尺神经麻筋",
+        view: "arm",
+        layers: [{ layer: "skin", opacity: 0.35 }, "skeleton", "nerves"],
+        camera: [{ t: 0, at: "medianNerve", zoom: 1.5 }],
+        duration: 8,
+        cues: [
+          { kind: "pulse", at: [500, 490], color: "#ffcf3f", radius: 65, from: 0.4 },
+          { kind: "label", at: [500, 490], text: "尺神经：手肘麻筋", side: "left", color: "#d48806", from: 1 },
+          { kind: "flow", path: [[500, 490], "wrist"], color: "#ffcf3f", count: 7, speed: 240, from: 2.2 },
+          { kind: "text", at: [600, 810], text: "不是骨头带电，是撞了神经", color: "#7a4fd6", from: 4.2 }
+        ]
+      },
+      {
+        turn: 1,
+        title: "贴骨浅沟没肉挡",
+        view: "arm",
+        layers: [{ layer: "skin", opacity: 0.3 }, { layer: "muscles", opacity: 0.5 }, "skeleton", "nerves"],
+        camera: [{ t: 0, at: [500, 480], zoom: 1.85 }],
+        duration: 8.5,
+        cues: [
+          { kind: "highlight", at: "biceps", color: "#2f7d32", from: 0.3, to: 3.4 },
+          { kind: "label", at: "biceps", text: "别的神经有肌肉垫", side: "left", color: "#2f7d32", from: 0.8, to: 3.4 },
+          { kind: "pulse", at: [495, 495], color: "#ff5a5f", radius: 55, from: 3.6 },
+          { kind: "label", at: [495, 495], text: "贴着骨沟只包薄皮", side: "left", color: "#e5484d", from: 4 },
+          { kind: "text", at: [600, 810], text: "一磕桌角直接被夹住", color: "#e5484d", from: 5.2 }
+        ]
+      },
+      {
+        turn: 2,
+        title: "半路被撞小指背锅",
+        view: "blank",
+        duration: 8.5,
+        cues: [
+          { kind: "shape", shape: "pill", at: [240, 460], size: [200, 96], color: "#ffe08a", text: "小拇指", from: 0.3 },
+          { kind: "shape", shape: "pill", at: [960, 460], size: [200, 96], color: "#efe6ff", text: "🧠 大脑", from: 0.5 },
+          { kind: "flow", path: [[340, 460], [600, 460], [860, 460]], color: "#ffcf3f", count: 8, speed: 260, from: 1.2 },
+          { kind: "sprite", icon: "💥", path: [[600, 350]], size: 88, wobble: true, from: 2.2 },
+          { kind: "label", at: [600, 460], text: "手肘半路被撞", side: "bottom", color: "#e5484d", from: 2.8 },
+          { kind: "text", at: [600, 770], text: "大脑以为小指那头出事了", color: "#7a4fd6", from: 4.6 }
+        ]
+      },
+      {
+        turn: 3,
+        title: "手掌神经各有分工",
+        view: "hand",
+        layers: ["skeleton", "nerves"],
+        camera: [{ t: 0, at: [600, 480], zoom: 1.15 }],
+        duration: 8,
+        cues: [
+          { kind: "pulse", at: [700, 560], color: "#ffcf3f", radius: 65, from: 0.4 },
+          { kind: "label", at: [700, 560], text: "尺神经管小指这边", side: "right", color: "#d48806", from: 1 },
+          { kind: "highlight", at: "fingerMiddle", color: "#4fb6ff", from: 2.6 },
+          { kind: "label", at: "fingerMiddle", text: "正中神经管拇指食指", side: "left", color: "#2b7bbf", from: 3.2 },
+          { kind: "text", at: [600, 810], text: "没撞着它，所以大拇指不麻", color: "#2f7d32", from: 4.8 }
+        ]
+      },
+      {
+        turn: 4,
+        title: "甩手轻揉很快恢复",
+        view: "blank",
+        duration: 8,
+        cues: [
+          { kind: "sprite", icon: "🖐️", path: [[360, 380]], size: 115, wobble: true, from: 0.4 },
+          { kind: "text", at: [360, 540], text: "甩一甩，揉一揉", size: "s", color: "#2f7d32", from: 1 },
+          { kind: "sprite", icon: "🪑", path: [[840, 380]], size: 110, from: 2.2 },
+          { kind: "text", at: [840, 540], text: "手肘别总死顶硬桌面", size: "s", color: "#ff9f43", from: 2.8 },
+          { kind: "text", at: [600, 770], text: "一两分钟信号就恢复啦", color: "#2f7d32", from: 4.4 }
+        ]
+      }
+    ]
+  },
+  {
+    question: "brain-freeze",
+    scenes: [
+      {
+        turn: 0,
+        title: "大脑没冻是上颚凉",
+        view: "headSide",
+        layers: [{ layer: "skin", opacity: 0.35 }, { layer: "brain", opacity: 0.75 }, "mouth"],
+        camera: [{ t: 0, at: [460, 520], zoom: 1.5 }],
+        duration: 8,
+        cues: [
+          { kind: "highlight", at: "brain", color: "#2f7d32", from: 0.3, to: 3.6 },
+          { kind: "label", at: "brain", text: "大脑暖和得很", pos: [650, 320], color: "#2f7d32", from: 0.8, to: 3.6 },
+          { kind: "sprite", icon: "🍨", path: [[220, 680], "softPalate"], travel: 1.2, size: 58, from: 2.4 },
+          { kind: "highlight", at: "softPalate", color: "#4fb6ff", from: 3.6 },
+          { kind: "label", at: "softPalate", text: "冰沙贴住上颚", side: "right", color: "#2b7bbf", from: 4 },
+          { kind: "text", at: [600, 810], text: "源头在嘴巴顶上的上颚", color: "#7a4fd6", from: 5 }
+        ]
+      },
+      {
+        turn: 1,
+        title: "血管急缩又猛张",
+        view: "blank",
+        duration: 8.5,
+        cues: [
+          { kind: "sprite", icon: "🧊", path: [[600, 220]], size: 96, from: 0.3 },
+          { kind: "shape", shape: "pill", at: [600, 430], size: [660, 90], color: "#4fb6ff", text: "猛收紧", motion: "shrink", over: 1.2, from: 0.8, to: 3.6 },
+          { kind: "shape", shape: "pill", at: [600, 430], size: [660, 120], color: "#e5484d", text: "猛张开", motion: "grow", over: 1.2, from: 3.6 },
+          { kind: "pulse", at: [600, 430], color: "#ffcf3f", radius: 130, from: 4.4 },
+          { kind: "text", at: [600, 760], text: "一缩一张太猛，惊动神经", color: "#e5484d", from: 5 }
+        ]
+      },
+      {
+        turn: 2,
+        title: "三叉神经串线报信",
+        view: "headSide",
+        layers: [{ layer: "skin", opacity: 0.35 }, { layer: "brain", opacity: 0.7 }, "nerves"],
+        camera: [{ t: 0, at: [440, 480], zoom: 1.55 }],
+        duration: 8.5,
+        cues: [
+          { kind: "flow", path: ["softPalate", [500, 490], "thalamus"], color: "#ffcf3f", count: 7, speed: 220, from: 0.4 },
+          { kind: "flow", path: [[330, 310], [500, 490]], color: "#4fb6ff", count: 4, speed: 0, from: 1.4 },
+          { kind: "label", at: [500, 490], text: "三叉神经共用主干", side: "right", from: 2 },
+          { kind: "pulse", at: [330, 310], color: "#ff5a5f", radius: 60, from: 3.6 },
+          { kind: "label", at: [330, 310], text: "误判成脑门疼！", side: "right", color: "#e5484d", from: 4.2 },
+          { kind: "text", at: [600, 810], text: "紧急信号在大脑里串线了", color: "#7a4fd6", from: 5.2 }
+        ]
+      },
+      {
+        turn: 3,
+        title: "脑膜血管才有痛觉",
+        view: "headSide",
+        layers: [{ layer: "skin", opacity: 0.3 }, { layer: "brain", opacity: 0.8 }, "arteries"],
+        camera: [{ t: 0, at: "brain", zoom: 1.4 }],
+        duration: 8.5,
+        cues: [
+          { kind: "myth", wrong: "大脑肉里面自己冻疼了", right: "脑外面的保护膜和血管才有痛觉", from: 4.8 },
+          { kind: "highlight", at: "brain", color: "#b48cff", from: 0.4, to: 4.6 },
+          { kind: "label", at: "brain", text: "大脑里面没痛觉哨兵", pos: [760, 230], from: 1, to: 4.6 },
+          { kind: "flow", path: [[560, 680], "hypothalamus", "brain"], color: "#e5484d", count: 7, speed: 240, from: 2.2, to: 4.6 }
+        ]
+      },
+      {
+        turn: 4,
+        title: "舌头顶上颚马上暖",
+        view: "blank",
+        duration: 8,
+        cues: [
+          { kind: "sprite", icon: "👅", path: [[320, 420], [320, 300]], travel: 1, size: 115, from: 0.4 },
+          { kind: "shape", shape: "pill", at: [320, 240], size: [260, 64], color: "#ffb3ba", text: "上颚回暖", from: 1.2 },
+          { kind: "text", at: [320, 560], text: "舌头顶住上颚捂热", size: "s", color: "#2f7d32", from: 1.8 },
+          { kind: "sprite", icon: "🍵", path: [[860, 360]], size: 110, from: 2.8 },
+          { kind: "text", at: [860, 560], text: "小口温水或哈热气", size: "s", color: "#ff9f43", from: 3.4 },
+          { kind: "text", at: [600, 770], text: "几十秒内刺痛就消失啦", color: "#2f7d32", from: 4.8 }
+        ]
+      }
+    ]
   }
 ];

@@ -495,5 +495,329 @@ export const films: readonly Film[] = [
         ]
       }
     ]
+  },
+  {
+    question: "mosquito-bite",
+    scenes: [
+      {
+        turn: 0,
+        title: "蚊子先吐一点口水",
+        view: "leg",
+        layers: ["skin"],
+        camera: [{ t: 0, at: "calf", zoom: 1.65 }],
+        duration: 8,
+        cues: [
+          { kind: "sprite", icon: "🦟", path: [[820, 420], "calf"], travel: 1.4, size: 64, from: 0.3 },
+          { kind: "pulse", at: "calf", color: "#ff5a5f", radius: 55, from: 2 },
+          { kind: "label", at: "calf", text: "吐一点防凝血口水", side: "left", color: "#e5484d", from: 2.6 },
+          { kind: "text", at: [600, 810], text: "红包是身体立起的临时工事", color: "#7a6a55", from: 4.6 }
+        ]
+      },
+      {
+        turn: 1,
+        title: "卫兵放组胺调救兵",
+        view: "blank",
+        duration: 8.5,
+        cues: [
+          { kind: "shape", shape: "circle", at: [320, 360], size: [170, 170], color: "#ffe08a", text: "卫兵", from: 0.4 },
+          { kind: "flow", path: [[410, 360], [600, 520]], color: "#ff9f43", count: 7, speed: 200, from: 1.2 },
+          { kind: "label", at: [505, 440], text: "放出组胺报警", side: "top", from: 1.6, to: 5 },
+          { kind: "shape", shape: "pill", at: [600, 600], size: [760, 100], color: "#ffb3ba", text: "血管放大", motion: "grow", over: 1.4, from: 2.6 },
+          { kind: "shape", shape: "circle", at: [600, 410], size: [260, 130], color: "#ff8a8a", text: "鼓起红包", from: 4.2 },
+          { kind: "text", at: [600, 790], text: "白细胞和液体涌出来围剿", color: "#e5484d", from: 5 }
+        ]
+      },
+      {
+        turn: 2,
+        title: "顺手碰响报痒神经",
+        view: "leg",
+        layers: [{ layer: "skin", opacity: 0.4 }, "nerves"],
+        camera: [{ t: 0, at: "calf", zoom: 1.5 }],
+        duration: 8,
+        cues: [
+          { kind: "pulse", at: "calf", color: "#ff9f43", radius: 65, from: 0.4 },
+          { kind: "label", at: "calf", text: "组胺碰响报痒神经", side: "left", from: 1 },
+          { kind: "flow", path: ["calf", "knee", "sciatic"], color: "#ffcf3f", count: 7, speed: 240, from: 2.2 },
+          { kind: "text", at: [600, 810], text: "蚊子飞走了，警报还在响", color: "#ff9f43", from: 4.4 }
+        ]
+      },
+      {
+        turn: 3,
+        title: "越抓越痒的怪圈",
+        view: "blank",
+        duration: 8.5,
+        cues: [
+          { kind: "shape", shape: "pill", at: [300, 400], size: [250, 100], color: "#ffd6bf", text: "💅 抓两下", from: 0.4 },
+          { kind: "arrow", path: [[440, 360], [740, 300]], text: "轻疼盖住痒", from: 1.2 },
+          { kind: "shape", shape: "pill", at: [880, 300], size: [260, 96], color: "#ffe08a", text: "爽两秒钟", from: 2 },
+          { kind: "arrow", path: [[880, 360], [640, 580]], color: "#ff5a5f", text: "挤出更多组胺", from: 3.2 },
+          { kind: "shape", shape: "circle", at: [540, 620], size: [210, 130], color: "#ff8a8a", text: "更痒啦！", motion: "pulse", from: 4.2 },
+          { kind: "text", at: [600, 810], text: "掉进越抓越痒的怪圈", color: "#e5484d", from: 5.2 }
+        ]
+      },
+      {
+        turn: 4,
+        title: "掐十字也怕抓破皮",
+        view: "blank",
+        duration: 8.5,
+        cues: [
+          { kind: "shape", shape: "circle", at: [600, 340], size: [210, 210], color: "#ff9e9e", text: "➕", from: 0.4, to: 4.8 },
+          { kind: "sprite", icon: "🦠", path: [[760, 250]], size: 76, wobble: true, from: 1.8, to: 4.8 },
+          { kind: "myth", wrong: "掐个十字架就能彻底止痒", right: "只是疼几秒，抓破皮还会发炎", from: 5 }
+        ]
+      },
+      {
+        turn: 5,
+        title: "冷敷止痒最管用",
+        view: "blank",
+        duration: 8.5,
+        cues: [
+          { kind: "sprite", icon: "🧊", path: [[300, 360]], size: 105, from: 0.4 },
+          { kind: "text", at: [300, 510], text: "毛巾裹冰冷敷", size: "s", color: "#4fb6ff", from: 1 },
+          { kind: "sprite", icon: "🧴", path: [[620, 360]], size: 96, from: 2.2 },
+          { kind: "text", at: [620, 510], text: "涂炉甘石洗剂", size: "s", color: "#2f7d32", from: 2.8 },
+          { kind: "sprite", icon: "🏃", path: [[930, 360]], size: 96, from: 3.8 },
+          { kind: "text", at: [930, 510], text: "汗多气重招蚊子", size: "s", color: "#ff9f43", from: 4.4 },
+          { kind: "text", at: [600, 770], text: "让血管和报痒神经冷静下来", color: "#2f7d32", from: 5.6 }
+        ]
+      }
+    ]
+  },
+  {
+    question: "sore-throat",
+    scenes: [
+      {
+        turn: 0,
+        title: "咽喉边的边防哨所",
+        view: "head",
+        layers: [{ layer: "skin", opacity: 0.35 }, "mouth", "immune"],
+        camera: [{ t: 0, at: "tonsils", zoom: 1.85 }],
+        duration: 8,
+        cues: [
+          { kind: "highlight", at: "tonsils", color: "#ff9f43", from: 0.4 },
+          { kind: "label", at: "tonsils", text: "扁桃体：边防哨所", side: "right", from: 1 },
+          { kind: "flow", path: ["nose", "tonsils"], color: "#4fb6ff", count: 5, speed: 170, from: 2.2 },
+          { kind: "text", at: [600, 810], text: "守在空气和食物进门路口", color: "#2f7d32", from: 4.4 }
+        ]
+      },
+      {
+        turn: 1,
+        title: "张大嘴就能看见",
+        view: "blank",
+        duration: 8,
+        cues: [
+          { kind: "shape", shape: "circle", at: [600, 450], size: [540, 440], color: "#ffb3c1", outline: true, from: 0.3 },
+          { kind: "shape", shape: "pill", at: [600, 590], size: [300, 150], color: "#ff8fa3", text: "舌头", from: 0.8 },
+          { kind: "shape", shape: "circle", at: [410, 430], size: [96, 130], color: "#ff6b8b", text: "扁桃体", from: 1.5 },
+          { kind: "shape", shape: "circle", at: [790, 430], size: [96, 130], color: "#ff6b8b", text: "扁桃体", from: 1.8 },
+          { kind: "sprite", icon: "🛡️", path: [[410, 310]], size: 60, from: 3 },
+          { kind: "sprite", icon: "🛡️", path: [[790, 310]], size: 60, from: 3.3 },
+          { kind: "text", at: [600, 800], text: "住满白细胞卫兵盘查病菌", color: "#2f7d32", from: 4.4 }
+        ]
+      },
+      {
+        turn: 2,
+        title: "哨所扩军肿又疼",
+        view: "head",
+        layers: [{ layer: "skin", opacity: 0.3 }, "mouth", "arteries", "immune"],
+        camera: [{ t: 0, at: "tonsils", zoom: 1.85 }],
+        duration: 8.5,
+        cues: [
+          { kind: "sprite", icon: "🦠", path: [[600, 500], "tonsils"], travel: 1.2, size: 46, from: 0.4, to: 3.6 },
+          { kind: "pulse", at: "tonsils", color: "#e5484d", radius: 65, from: 1.6 },
+          { kind: "label", at: "tonsils", text: "充血胀大打大仗", side: "left", color: "#e5484d", from: 2.2 },
+          { kind: "text", at: [600, 810], text: "一咽口水挤到它就疼", color: "#e5484d", from: 4.6 }
+        ]
+      },
+      {
+        turn: 3,
+        title: "脖子里的二线军营",
+        view: "body",
+        layers: [{ layer: "skin", opacity: 0.35 }, "immune"],
+        camera: [{ t: 0, at: "lymphNeck", zoom: 2.1 }],
+        duration: 8.5,
+        cues: [
+          { kind: "flow", path: ["tonsils", "lymphNeck"], color: "#b48cff", count: 5, speed: 150, from: 0.4 },
+          { kind: "highlight", at: "lymphNeck", color: "#7a4fd6", from: 1.4 },
+          { kind: "label", at: "lymphNeck", text: "淋巴结：训练造抗体", side: "left", color: "#7a4fd6", from: 2 },
+          { kind: "text", at: [600, 810], text: "军营忙起来鼓成小豆包", color: "#7a4fd6", from: 4.6 }
+        ]
+      },
+      {
+        turn: 4,
+        title: "打赢仗慢慢缩回去",
+        view: "blank",
+        duration: 8,
+        cues: [
+          { kind: "shape", shape: "circle", at: [380, 420], size: [200, 200], color: "#ff8fa3", text: "打仗肿大", from: 0.4 },
+          { kind: "arrow", path: [[510, 420], [690, 420]], text: "打跑病菌", from: 1.8 },
+          { kind: "shape", shape: "circle", at: [820, 420], size: [120, 120], color: "#b7e4a8", text: "恢复原样", motion: "shrink", over: 1.5, from: 2.8 },
+          { kind: "text", at: [600, 760], text: "是卫兵认真干活的标志", color: "#2f7d32", from: 4.6 }
+        ]
+      },
+      {
+        turn: 5,
+        title: "分清病毒还是细菌",
+        view: "blank",
+        duration: 9,
+        cues: [
+          { kind: "sprite", icon: "🔦", path: [[340, 320]], size: 96, from: 0.4, to: 5 },
+          { kind: "sprite", icon: "🧪", path: [[600, 320]], size: 96, from: 1.2, to: 5 },
+          { kind: "sprite", icon: "🍵", path: [[860, 320]], size: 96, from: 2, to: 5 },
+          { kind: "text", at: [600, 470], text: "看清敌人再出手，温水润嗓", size: "s", color: "#2f7d32", from: 2.6, to: 5 },
+          { kind: "myth", wrong: "一嗓子疼就自己吃抗生素", right: "多数是病毒，抗生素对病毒没用", from: 5.2 }
+        ]
+      }
+    ]
+  },
+  {
+    question: "earwax",
+    scenes: [
+      {
+        turn: 0,
+        title: "耳屎是天然保护膏",
+        view: "headSide",
+        layers: [{ layer: "skin", opacity: 0.35 }, "ears"],
+        camera: [{ t: 0, at: "ear", zoom: 2.1 }],
+        duration: 8,
+        cues: [
+          { kind: "highlight", at: "ear", color: "#ff9f43", from: 0.4 },
+          { kind: "label", at: "ear", text: "耵聍：耳道保护膏", side: "right", from: 1 },
+          { kind: "text", at: [600, 810], text: "不是脏东西，是耳道自己调配的", color: "#2f7d32", from: 4.2 }
+        ]
+      },
+      {
+        turn: 1,
+        title: "粘灰尘还能赶小虫",
+        view: "blank",
+        duration: 8,
+        cues: [
+          { kind: "shape", shape: "rect", at: [600, 440], size: [760, 180], color: "#ffe8b3", outline: true, text: "保护膏管壁", from: 0.3 },
+          { kind: "sprite", icon: "🌫️", path: [[180, 420], [440, 420]], travel: 1.2, size: 70, from: 0.9 },
+          { kind: "sprite", icon: "🦟", path: [[180, 480], [360, 480], [180, 320]], travel: 1.6, size: 68, from: 2 },
+          { kind: "text", at: [600, 760], text: "粘灰尘、挡飞虫，还能抑菌！", color: "#2f7d32", from: 4.2 }
+        ]
+      },
+      {
+        turn: 2,
+        title: "耳道自带自动传送带",
+        view: "headSide",
+        layers: [{ layer: "skin", opacity: 0.35 }, "skeleton", "ears"],
+        camera: [{ t: 0, at: "ear", zoom: 1.9 }],
+        duration: 8.5,
+        cues: [
+          { kind: "flow", path: ["eardrum", [520, 535]], color: "#ff9f43", count: 5, speed: 120, from: 0.5 },
+          { kind: "label", at: "eardrum", text: "表皮从里往外长", side: "right", from: 1.2 },
+          { kind: "pulse", at: [480, 650], color: "#4fb6ff", radius: 50, from: 2.6 },
+          { kind: "text", at: [600, 810], text: "说话咀嚼推着旧耳屎自己掉出来", color: "#2f7d32", from: 4.4 }
+        ]
+      },
+      {
+        turn: 3,
+        title: "棉签反而往深处怼",
+        view: "blank",
+        duration: 8.5,
+        cues: [
+          { kind: "shape", shape: "rect", at: [880, 340], size: [40, 220], color: "#ffb3ba", text: "鼓膜", from: 0.3, to: 4.8 },
+          { kind: "arrow", path: [[320, 340], [780, 340]], color: "#e5484d", text: "推土棍往里怼", from: 1, to: 4.8 },
+          { kind: "shape", shape: "circle", at: [815, 340], size: [90, 150], color: "#b58338", text: "堵严", from: 2.2, to: 4.8 },
+          { kind: "myth", wrong: "洗完澡拿棉签伸进耳道掏干净", right: "棉签会把耳屎怼向鼓膜，还易戳伤", from: 5 }
+        ]
+      },
+      {
+        turn: 4,
+        title: "干耳屎油耳屎都正常",
+        view: "blank",
+        duration: 8,
+        cues: [
+          { kind: "shape", shape: "pill", at: [340, 400], size: [320, 120], color: "#f5ebd6", outline: true, text: "干薄片型", from: 0.4 },
+          { kind: "shape", shape: "pill", at: [860, 400], size: [320, 120], color: "#ffd36b", text: "湿润油型", from: 1.4 },
+          { kind: "sprite", icon: "🧬", path: [[600, 230]], size: 84, from: 2.4 },
+          { kind: "text", at: [600, 750], text: "基因决定，只擦耳朵外圈就行", color: "#2f7d32", from: 4.2 }
+        ]
+      }
+    ]
+  },
+  {
+    question: "good-bacteria",
+    scenes: [
+      {
+        turn: 0,
+        title: "绝大多数细菌是朋友",
+        view: "blank",
+        duration: 8,
+        cues: [
+          { kind: "shape", shape: "circle", at: [280, 420], size: [140, 140], color: "#ffb3ba", text: "少数坏菌", from: 0.4 },
+          { kind: "shape", shape: "circle", at: [760, 420], size: [380, 340], color: "#dcedc8", text: "友好细菌", from: 1.4 },
+          { kind: "sprite", icon: "🤝", path: [[760, 240]], size: 88, from: 2.4 },
+          { kind: "text", at: [600, 770], text: "上万亿好细菌是我们的好搭档", color: "#2f7d32", from: 4.2 }
+        ]
+      },
+      {
+        turn: 1,
+        title: "大肠住着几十万亿个",
+        view: "belly",
+        layers: [{ layer: "skin", opacity: 0.35 }, "smallIntestine", "largeIntestine"],
+        camera: [{ t: 0, at: "largeIntestine", zoom: 1.4 }],
+        duration: 8,
+        cues: [
+          { kind: "highlight", at: "largeIntestine", color: "#2f7d32", from: 0.4 },
+          { kind: "label", at: "largeIntestine", text: "大肠：微生物大本营", side: "left", color: "#2f7d32", from: 1 },
+          { kind: "flow", path: [[450, 580], [450, 380], [740, 380], [740, 620]], color: "#6bcb77", count: 12, speed: 90, from: 2 },
+          { kind: "text", at: [600, 820], text: "数量跟全身细胞差不多多！", color: "#2f7d32", from: 4.4 }
+        ]
+      },
+      {
+        turn: 2,
+        title: "拆纤维造维K还占座",
+        view: "blank",
+        duration: 8.5,
+        cues: [
+          { kind: "shape", shape: "pill", at: [250, 360], size: [260, 96], color: "#e8f5e9", text: "🥦 拆纤维", from: 0.4 },
+          { kind: "shape", shape: "pill", at: [600, 360], size: [260, 96], color: "#fff3df", text: "💊 造维生素", from: 1.2 },
+          { kind: "shape", shape: "pill", at: [950, 360], size: [260, 96], color: "#bfe3ff", text: "🪑 坐满座位", from: 2 },
+          { kind: "sprite", icon: "🦠", path: [[600, 620], [980, 620]], travel: 1.4, size: 70, from: 3.2 },
+          { kind: "text", at: [600, 790], text: "坏病菌连落脚抢粮的座都没了", color: "#2f7d32", from: 4.6 }
+        ]
+      },
+      {
+        turn: 3,
+        title: "隔着黏液线认识友军",
+        view: "belly",
+        layers: [{ layer: "skin", opacity: 0.3 }, "largeIntestine", "immune"],
+        camera: [{ t: 0, at: "largeIntestine", zoom: 1.5 }],
+        duration: 8,
+        cues: [
+          { kind: "highlight", at: "largeIntestine", color: "#4fb6ff", from: 0.4 },
+          { kind: "label", at: "largeIntestine", text: "黏液安全线外干活", side: "left", from: 1 },
+          { kind: "sprite", icon: "🛡️", path: [[760, 520]], size: 72, from: 2.4 },
+          { kind: "text", at: [600, 810], text: "免疫卫兵认友军，练出好眼力", color: "#7a4fd6", from: 4.2 }
+        ]
+      },
+      {
+        turn: 4,
+        title: "多吃蔬果喂饱好邻居",
+        view: "blank",
+        duration: 8,
+        cues: [
+          { kind: "sprite", icon: "👶", path: [[280, 400]], size: 115, from: 0.4 },
+          { kind: "arrow", path: [[380, 400], [560, 400]], text: "出生后入住", from: 1.2 },
+          { kind: "sprite", icon: "🥗", path: [[720, 400]], size: 115, from: 2.2 },
+          { kind: "sprite", icon: "🍎", path: [[900, 400]], size: 100, from: 2.8 },
+          { kind: "text", at: [600, 750], text: "蔬果粗粮是好细菌最爱的口粮", color: "#2f7d32", from: 4.2 }
+        ]
+      },
+      {
+        turn: 5,
+        title: "乱吃抗生素误伤友军",
+        view: "blank",
+        duration: 8.5,
+        cues: [
+          { kind: "sprite", icon: "💣", path: [[600, 290]], size: 110, wobble: true, from: 0.4, to: 4.8 },
+          { kind: "text", at: [600, 450], text: "抗生素不分敌我，也误伤好菌", size: "s", color: "#e5484d", from: 1.2, to: 4.8 },
+          { kind: "myth", wrong: "普通感冒发烧先吃两颗抗生素好得快", right: "病毒感冒没用，还会误伤肠道好细菌", from: 5 }
+        ]
+      }
+    ]
   }
 ];

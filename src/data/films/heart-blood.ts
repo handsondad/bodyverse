@@ -570,5 +570,231 @@ export const films: readonly Film[] = [
         ]
       }
     ]
+  },
+  {
+    question: "nosebleed",
+    scenes: [
+      {
+        turn: 0,
+        title: "鼻前浅浅小血管",
+        view: "headSide",
+        layers: [{ layer: "skin", opacity: 0.35 }, "airway", "arteries"],
+        camera: [{ t: 0, at: "nose", zoom: 2 }],
+        duration: 8,
+        cues: [
+          { kind: "highlight", at: "nose", color: "#e5484d", from: 0.4 },
+          { kind: "pulse", at: { a: "nose", dx: -35, dy: 20 }, color: "#e5484d", radius: 55, from: 1 },
+          { kind: "label", at: { a: "nose", dx: -35, dy: 20 }, text: "小血管又密又浅", side: "right", from: 1.6, color: "#e5484d" },
+          { kind: "text", at: [600, 810], text: "黏膜薄，一蹭就破小口", color: "#7a6a55", from: 4.2 }
+        ]
+      },
+      {
+        turn: 1,
+        title: "给冷空气当暖气",
+        view: "headSide",
+        layers: [{ layer: "skin", opacity: 0.35 }, "airway", "arteries"],
+        camera: [{ t: 0, at: [400, 580], zoom: 1.6 }],
+        duration: 8.5,
+        cues: [
+          { kind: "flow", path: [[150, 560], "nose"], color: "#4fb6ff", count: 5, speed: 180, from: 0.4 },
+          { kind: "label", at: "nose", text: "像一排排暖气片", side: "top", from: 1.4, color: "#e5484d" },
+          { kind: "flow", path: ["nose", "nasopharynx", "throat"], color: "#ff9f43", count: 6, speed: 180, from: 2.6 },
+          { kind: "text", at: [600, 810], text: "烘暖、加湿再进肺", color: "#2f7d32", from: 4.6 }
+        ]
+      },
+      {
+        turn: 2,
+        title: "太干抠鼻容易破",
+        view: "blank",
+        duration: 8,
+        cues: [
+          { kind: "shape", shape: "rect", at: [600, 500], size: [760, 140], color: "#ffd6d6", text: "薄薄的鼻黏膜", from: 0.3 },
+          { kind: "sprite", icon: "🏜️", path: [[280, 260]], size: 92, from: 0.9 },
+          { kind: "text", at: [280, 380], text: "空气太干结鼻痂", size: "s", from: 1.4 },
+          { kind: "sprite", icon: "☝️", path: [[600, 260]], size: 92, wobble: true, from: 2.4 },
+          { kind: "sprite", icon: "🤧", path: [[920, 260]], size: 92, from: 3.4 },
+          { kind: "pulse", at: [600, 440], color: "#e5484d", radius: 90, from: 4.4 },
+          { kind: "text", at: [600, 770], text: "抠鼻或猛擤，扯破小血管", color: "#e5484d", from: 5 }
+        ]
+      },
+      {
+        turn: 3,
+        title: "仰头血往喉咙流",
+        view: "headSide",
+        layers: [{ layer: "skin", opacity: 0.35 }, "airway", "esophagus"],
+        camera: [{ t: 0, at: [440, 650], zoom: 1.5 }],
+        duration: 9,
+        cues: [
+          { kind: "flow", path: ["nose", "nasopharynx", "throat", "larynx"], color: "#e5484d", count: 8, speed: 200, from: 0.5 },
+          { kind: "label", at: "nasopharynx", text: "顺着后面流进喉咙", side: "right", color: "#e5484d", from: 1.2, to: 4.8 },
+          { kind: "text", at: [600, 800], text: "咽下去恶心，呛气管危险", size: "s", color: "#e5484d", from: 2.4, to: 4.8 },
+          { kind: "myth", wrong: "流鼻血要把头高高仰起", right: "仰头没止血，只是倒流进喉咙", from: 5 }
+        ]
+      },
+      {
+        turn: 4,
+        title: "前倾捏软处十分钟",
+        view: "blank",
+        duration: 9,
+        cues: [
+          { kind: "sprite", icon: "🙇", path: [[260, 380]], size: 130, from: 0.3 },
+          { kind: "text", at: [260, 540], text: "坐直微微前倾", size: "s", color: "#2f7d32", from: 0.9 },
+          { kind: "sprite", icon: "🤏", path: [[580, 380]], size: 120, from: 1.8 },
+          { kind: "text", at: [580, 540], text: "捏住鼻翼软处", size: "s", color: "#2f7d32", from: 2.4 },
+          { kind: "count", at: [930, 420], label: "安静捏满", start: 0, end: 10, unit: "分钟", over: 3.5, from: 3.2 },
+          { kind: "text", at: [600, 780], text: "张嘴呼吸，中间别松手偷看", color: "#2f7d32", from: 5.6 }
+        ]
+      },
+      {
+        turn: 5,
+        title: "血小板搭网堵门",
+        view: "blank",
+        duration: 9,
+        cues: [
+          { kind: "shape", shape: "rect", at: [600, 360], size: [680, 90], color: "#ffb3ba", text: "血管小破口", from: 0.3 },
+          { kind: "flow", path: [[260, 220], [560, 330], [640, 330]], color: "#ff9f43", count: 9, speed: 180, from: 1, to: 5 },
+          { kind: "shape", shape: "pill", at: [600, 325], size: [180, 54], color: "#e5484d", text: "血小板堵门", from: 2.2, to: 5 },
+          { kind: "myth", wrong: "往鼻孔塞一团卫生纸止血", right: "拔纸团会把刚结的血块撕下来", from: 5.2 }
+        ]
+      }
+    ]
+  },
+  {
+    question: "stand-dizzy",
+    scenes: [
+      {
+        turn: 0,
+        title: "血一时没爬上头顶",
+        view: "body",
+        layers: [{ layer: "skin", opacity: 0.4 }, "heart", "arteries", "brain"],
+        duration: 8,
+        cues: [
+          { kind: "highlight", at: "brain", color: "#7a4fd6", from: 0.4 },
+          { kind: "label", at: "brain", text: "最高处一时少血", side: "right", from: 1 },
+          { kind: "flow", path: ["heart", "carotid", "brain"], color: "#e5484d", count: 4, speed: 120, from: 2 },
+          { kind: "text", at: [600, 810], text: "站起太猛，血液慢了半拍", color: "#e5484d", from: 4.2 }
+        ]
+      },
+      {
+        turn: 1,
+        title: "重力把血拉向双腿",
+        view: "body",
+        layers: [{ layer: "skin", opacity: 0.35 }, "heart", "arteries", "veins"],
+        duration: 8.5,
+        cues: [
+          { kind: "arrow", path: [[720, 260], [720, 680]], color: "#ff9f43", text: "重力往下拽", from: 0.4 },
+          { kind: "flow", path: ["heart", "femoralArtery", "foot"], color: "#e5484d", count: 9, speed: 280, from: 1.2 },
+          { kind: "label", at: "femoralArtery", text: "好多血涌进腿里", side: "left", from: 2.4 },
+          { kind: "text", at: [600, 140], text: "回心脏泵上头的血少了一截", color: "#e5484d", from: 4.6 }
+        ]
+      },
+      {
+        turn: 2,
+        title: "视网膜耗氧最挑剔",
+        view: "headSide",
+        layers: [{ layer: "skin", opacity: 0.35 }, "eyes", "arteries", { layer: "brain", opacity: 0.6 }],
+        camera: [{ t: 0, at: "eye", zoom: 2 }],
+        duration: 8,
+        cues: [
+          { kind: "highlight", at: "retina", color: "#ffcf3f", from: 0.4 },
+          { kind: "label", at: "retina", text: "视网膜超级耗氧", side: "right", from: 1 },
+          { kind: "sprite", icon: "✨", path: [{ a: "eye", dx: -55, dy: -20 }], size: 54, wobble: true, from: 2.6 },
+          { kind: "text", at: [600, 810], text: "缺血一两秒就发黑冒金星", color: "#7a4fd6", from: 4.2 }
+        ]
+      },
+      {
+        turn: 3,
+        title: "压力探头一秒追赶",
+        view: "chest",
+        layers: [{ layer: "skin", opacity: 0.3 }, { layer: "heart", motion: "beat", rate: 1.7 }, "arteries", "nerves"],
+        duration: 8.5,
+        cues: [
+          { kind: "pulse", at: "carotid", color: "#ffcf3f", radius: 55, from: 0.4 },
+          { kind: "label", at: "carotid", text: "颈动脉压力探头", pos: [410, 130], from: 1 },
+          { kind: "highlight", at: "heart", color: "#e5484d", from: 2.4 },
+          { kind: "flow", path: ["heart", "aorta", "carotid"], color: "#e5484d", count: 9, speed: 320, from: 3 },
+          { kind: "text", at: [600, 810], text: "心跳加快＋血管收紧托血上头！", color: "#2f7d32", from: 4.6 }
+        ]
+      },
+      {
+        turn: 4,
+        title: "不等同于缺铁贫血",
+        view: "blank",
+        duration: 8.5,
+        cues: [
+          { kind: "sprite", icon: "🧎", path: [[360, 320]], size: 105, from: 0.4, to: 4.8 },
+          { kind: "sprite", icon: "🥤", path: [[840, 320]], size: 100, from: 1.2, to: 4.8 },
+          { kind: "text", at: [600, 460], text: "起身缓两秒，平时喝足水", size: "s", color: "#2f7d32", from: 2, to: 4.8 },
+          { kind: "myth", wrong: "猛站头晕就一定是贫血要吃红枣", right: "多是血压慢半拍；补铁靠瘦肉", from: 5 }
+        ]
+      }
+    ]
+  },
+  {
+    question: "blood-types",
+    scenes: [
+      {
+        turn: 0,
+        title: "红细胞插着小旗子",
+        view: "arm",
+        layers: [{ layer: "skin", opacity: 0.35 }, "arteries", "veins"],
+        duration: 8,
+        cues: [
+          { kind: "flow", path: ["humerus", "forearm", "radialArtery"], color: "#e5484d", count: 8, speed: 220, from: 0.4 },
+          { kind: "shape", shape: "circle", at: [240, 440], size: [210, 210], color: "#e5484d", text: "红细胞", from: 1.4 },
+          { kind: "sprite", icon: "🚩", path: [[240, 310]], size: 68, from: 2.2 },
+          { kind: "text", at: [600, 810], text: "显微镜下看表面的身份小旗子", color: "#e5484d", from: 4.2 }
+        ]
+      },
+      {
+        turn: 1,
+        title: "四种ABO小旗组合",
+        view: "blank",
+        duration: 8.5,
+        cues: [
+          { kind: "shape", shape: "circle", at: [220, 420], size: [180, 180], color: "#ff8a8a", text: "A型：A旗", from: 0.3 },
+          { kind: "shape", shape: "circle", at: [470, 420], size: [180, 180], color: "#ffd36b", text: "B型：B旗", from: 1 },
+          { kind: "shape", shape: "circle", at: [730, 420], size: [180, 180], color: "#d6c2ff", text: "AB：两旗", from: 1.7 },
+          { kind: "shape", shape: "circle", at: [980, 420], size: [180, 180], color: "#bfe3ff", text: "O型：没旗", from: 2.4 },
+          { kind: "text", at: [600, 740], text: "按插什么旗子分成四种血型", color: "#7a6a55", from: 4.2 }
+        ]
+      },
+      {
+        turn: 2,
+        title: "输错血卫兵粘成团",
+        view: "blank",
+        duration: 8.5,
+        cues: [
+          { kind: "shape", shape: "circle", at: [300, 420], size: [160, 160], color: "#ffd36b", text: "陌生B旗", from: 0.4, to: 4.2 },
+          { kind: "sprite", icon: "🛡️", path: [[540, 420]], size: 96, wobble: true, from: 1.2 },
+          { kind: "arrow", path: [[620, 420], [760, 420]], color: "#e5484d", text: "扑上去粘住", from: 2.2 },
+          { kind: "shape", shape: "rect", at: [910, 420], size: [250, 160], color: "#b81d24", text: "凝成死团", motion: "pulse", from: 3.2 },
+          { kind: "text", at: [600, 770], text: "卡住小血管很危险，严禁输错！", color: "#e5484d", from: 4.6 }
+        ]
+      },
+      {
+        turn: 3,
+        title: "玻璃片混血大发现",
+        view: "blank",
+        duration: 8,
+        cues: [
+          { kind: "shape", shape: "rect", at: [340, 420], size: [360, 220], color: "#e8f5e9", outline: true, text: "配对：平安", from: 0.4 },
+          { kind: "shape", shape: "rect", at: [860, 420], size: [360, 220], color: "#ffe4e6", outline: true, text: "不合：结块", from: 1.6 },
+          { kind: "sprite", icon: "🏅", path: [[600, 220]], size: 92, from: 3 },
+          { kind: "text", at: [600, 760], text: "兰德施泰纳揭开血型救人无数", color: "#2f7d32", from: 4.2 }
+        ]
+      },
+      {
+        turn: 4,
+        title: "血型不管性格和蚊子",
+        view: "blank",
+        duration: 8.5,
+        cues: [
+          { kind: "sprite", icon: "🦟", path: [[380, 310]], size: 96, from: 0.4, to: 4.8 },
+          { kind: "text", at: [720, 310], text: "蚊子看汗味体温二氧化碳", size: "s", from: 1.2, to: 4.8 },
+          { kind: "myth", wrong: "血型决定性格，O型血最招蚊子", right: "都没可靠证据，输血配对才看它", from: 5 }
+        ]
+      }
+    ]
   }
 ];

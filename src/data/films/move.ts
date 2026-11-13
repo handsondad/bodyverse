@@ -514,5 +514,319 @@ export const films: readonly Film[] = [
         ]
       }
     ]
+  },
+  {
+    question: "knuckle-crack",
+    scenes: [
+      {
+        turn: 0,
+        title: "关节囊里有润滑液",
+        view: "hand",
+        layers: ["skeleton"],
+        camera: [{ t: 0, at: "fingerMiddle", zoom: 1.9 }],
+        duration: 8,
+        cues: [
+          { kind: "highlight", at: "fingerMiddle", color: "#4fb6ff", from: 0.4 },
+          { kind: "label", at: "fingerMiddle", text: "关节囊包着接缝", side: "right", from: 1 },
+          { kind: "pulse", at: "fingerBase", color: "#4fb6ff", radius: 45, from: 2.6 },
+          { kind: "label", at: "fingerBase", text: "里面有润滑关节液", side: "right", color: "#2b7bbf", from: 3.2 },
+          { kind: "text", at: [600, 810], text: "不疼不肿，不是骨头硬磨", color: "#2f7d32", from: 4.8 }
+        ]
+      },
+      {
+        turn: 1,
+        title: "拉开瞬间冒小气泡",
+        view: "blank",
+        duration: 8.5,
+        cues: [
+          { kind: "shape", shape: "pill", at: [380, 440], size: [280, 120], color: "#f4ecd8", outline: true, text: "指骨", from: 0.3 },
+          { kind: "shape", shape: "pill", at: [820, 440], size: [280, 120], color: "#f4ecd8", outline: true, text: "指骨", from: 0.3 },
+          { kind: "arrow", path: [[300, 310], [180, 310]], text: "拉开", from: 1.2 },
+          { kind: "arrow", path: [[900, 310], [1020, 310]], from: 1.2 },
+          { kind: "shape", shape: "circle", at: [600, 440], size: [110, 110], color: "#bfe3ff", text: "气泡", motion: "grow", over: 0.8, from: 2.2 },
+          { kind: "pulse", at: [600, 440], color: "#ff9f43", radius: 130, from: 2.8 },
+          { kind: "text", at: [600, 760], text: "压力变小，啵地冒出小气泡！", color: "#ff9f43", from: 3.6 }
+        ]
+      },
+      {
+        turn: 2,
+        title: "气体溶回才能再响",
+        view: "blank",
+        duration: 8,
+        cues: [
+          { kind: "shape", shape: "circle", at: [600, 400], size: [150, 150], color: "#bfe3ff", text: "小气泡", motion: "shrink", over: 4.5, from: 0.4 },
+          { kind: "count", at: [930, 380], label: "慢慢溶回", start: 0, end: 20, unit: "分钟左右", over: 4, from: 1.2 },
+          { kind: "text", at: [600, 740], text: "没溶回关节液前，再掰也不响", color: "#2b7bbf", from: 4.2 }
+        ]
+      },
+      {
+        turn: 3,
+        title: "膝盖响还有弹筋",
+        view: "leg",
+        layers: [{ layer: "skin", opacity: 0.3 }, "skeleton", "muscles"],
+        camera: [{ t: 0, at: "knee", zoom: 1.85 }],
+        duration: 8,
+        cues: [
+          { kind: "highlight", at: "knee", color: "#ff9f43", from: 0.4 },
+          { kind: "label", at: "knee", text: "紧绷的筋滑过骨头", side: "left", from: 1 },
+          { kind: "sprite", icon: "🎸", path: [{ a: "knee", dx: 110, dy: -20 }], size: 64, wobble: true, from: 2.6 },
+          { kind: "text", at: [600, 810], text: "像拨吉他弦，不疼就正常", color: "#2f7d32", from: 4.2 }
+        ]
+      },
+      {
+        turn: 4,
+        title: "五十年对照实验",
+        view: "blank",
+        duration: 9,
+        cues: [
+          { kind: "sprite", icon: "🤚", path: [[350, 320]], size: 110, wobble: true, from: 0.3, to: 5 },
+          { kind: "text", at: [350, 460], text: "左手：天天掰", size: "s", from: 0.9, to: 5 },
+          { kind: "sprite", icon: "✋", path: [[850, 320]], size: 110, from: 1.5, to: 5 },
+          { kind: "text", at: [850, 460], text: "右手：从不掰", size: "s", from: 2, to: 5 },
+          { kind: "text", at: [600, 170], text: "五十年后两手关节一样", color: "#2f7d32", from: 3, to: 5 },
+          { kind: "myth", wrong: "掰手指老了一定得关节炎", right: "不会得关节炎，但别使劲硬掰", from: 5.2 }
+        ]
+      }
+    ]
+  },
+  {
+    question: "leg-cramp",
+    scenes: [
+      {
+        turn: 0,
+        title: "小腿缩成硬疙瘩",
+        view: "leg",
+        layers: [{ layer: "skin", opacity: 0.3 }, "skeleton", "muscles", "nerves"],
+        camera: [{ t: 0, at: "calf", zoom: 1.55 }],
+        duration: 8.5,
+        cues: [
+          { kind: "flow", path: ["sciatic", "knee", "calf"], color: "#ffcf3f", count: 10, speed: 340, from: 0.4 },
+          { kind: "highlight", at: "calf", color: "#ff5a5f", from: 1.2 },
+          { kind: "pulse", at: "calf", color: "#ff5a5f", radius: 75, rate: 2, from: 1.6 },
+          { kind: "label", at: "calf", text: "死死缩成一团！", side: "left", color: "#e5484d", from: 2.2 },
+          { kind: "text", at: [600, 810], text: "收紧信号停不下来", color: "#e5484d", from: 4.6 }
+        ]
+      },
+      {
+        turn: 1,
+        title: "疲劳让开关卡住了",
+        view: "blank",
+        duration: 8.5,
+        cues: [
+          { kind: "shape", shape: "pill", at: [340, 380], size: [300, 110], color: "#ffd6d6", text: "喊收紧！", motion: "pulse", from: 0.4 },
+          { kind: "shape", shape: "pill", at: [860, 380], size: [300, 110], color: "#d9e2ec", text: "放松刹车", motion: "shrink", over: 1.5, from: 1.4 },
+          { kind: "sprite", icon: "⚽", path: [[340, 210]], size: 78, from: 2.2 },
+          { kind: "sprite", icon: "🔒", path: [[600, 560]], size: 88, from: 3.4 },
+          { kind: "text", at: [600, 760], text: "肌肉太累，开关卡在收紧档", color: "#e5484d", from: 4.4 }
+        ]
+      },
+      {
+        turn: 2,
+        title: "主因不是缺钙",
+        view: "blank",
+        duration: 9,
+        cues: [
+          { kind: "shape", shape: "pill", at: [300, 330], size: [250, 96], color: "#ffe08a", text: "🏃 肌肉累", from: 0.4, to: 5 },
+          { kind: "shape", shape: "pill", at: [600, 330], size: [250, 96], color: "#bfe3ff", text: "💦 流汗多", from: 1.1, to: 5 },
+          { kind: "shape", shape: "pill", at: [900, 330], size: [250, 96], color: "#efe6ff", text: "❄️ 着了凉", from: 1.8, to: 5 },
+          { kind: "myth", wrong: "腿一抽筋就是缺钙", right: "大多是疲劳让神经控制一时失灵", from: 5.2 }
+        ]
+      },
+      {
+        turn: 3,
+        title: "勾脚尖踩下刹车",
+        view: "leg",
+        layers: [{ layer: "skin", opacity: 0.3 }, "skeleton", "muscles", "nerves"],
+        camera: [{ t: 0, at: [600, 680], zoom: 1.55 }],
+        duration: 8.5,
+        cues: [
+          { kind: "arrow", path: [[530, 860], [530, 720]], color: "#2f7d32", text: "脚尖往回勾", from: 0.5 },
+          { kind: "label", at: "calf", text: "把小腿肚轻轻拉长", side: "left", color: "#2f7d32", from: 1.8 },
+          { kind: "flow", path: ["calf", "knee", [630, 380]], color: "#4fb6ff", count: 6, speed: 220, from: 3 },
+          { kind: "text", at: [600, 820], text: "触发放松刹车，肌肉松开啦", color: "#2f7d32", from: 4.6 }
+        ]
+      },
+      {
+        turn: 4,
+        title: "千万别拿拳头猛捶",
+        view: "blank",
+        duration: 8.5,
+        cues: [
+          { kind: "shape", shape: "pill", at: [600, 340], size: [620, 76], color: "#f19a8a", text: "绷紧的肌肉丝", from: 0.4, to: 4.8 },
+          { kind: "sprite", icon: "👊", path: [[600, 190]], size: 86, wobble: true, from: 1.4, to: 4.8 },
+          { kind: "myth", wrong: "狠狠捶打能把筋捶松", right: "猛捶易伤肌肉，慢拉轻抚才安全", from: 5 }
+        ]
+      },
+      {
+        turn: 5,
+        title: "热身补水防抽筋",
+        view: "blank",
+        duration: 8.5,
+        cues: [
+          { kind: "sprite", icon: "🤸", path: [[260, 360]], size: 96, from: 0.4 },
+          { kind: "text", at: [260, 510], text: "运动前热身拉伸", size: "s", color: "#2f7d32", from: 1 },
+          { kind: "sprite", icon: "🥤", path: [[600, 360]], size: 96, from: 2 },
+          { kind: "text", at: [600, 510], text: "出汗分次补水", size: "s", color: "#4fb6ff", from: 2.6 },
+          { kind: "sprite", icon: "🦶", path: [[940, 360]], size: 96, from: 3.6 },
+          { kind: "text", at: [940, 510], text: "伸懒腰勾脚后跟", size: "s", color: "#ff9f43", from: 4.2 },
+          { kind: "text", at: [600, 770], text: "不给开关卡住的机会", color: "#2f7d32", from: 5.4 }
+        ]
+      }
+    ]
+  },
+  {
+    question: "baby-bones",
+    scenes: [
+      {
+        turn: 0,
+        title: "小宝宝近300块骨头",
+        view: "blank",
+        duration: 8.5,
+        cues: [
+          { kind: "sprite", icon: "👶", path: [[330, 320]], size: 115, from: 0.3 },
+          { kind: "count", at: [330, 540], label: "刚出生大约", start: 0, end: 300, unit: "块", over: 1.8, from: 0.8 },
+          { kind: "arrow", path: [[510, 440], [690, 440]], text: "合体变整块", from: 2.4 },
+          { kind: "sprite", icon: "🧑", path: [[870, 320]], size: 130, from: 3 },
+          { kind: "count", at: [870, 540], label: "长大合成", start: 300, end: 206, unit: "块", over: 1.8, from: 3.4 },
+          { kind: "text", at: [600, 780], text: "没丢！是几小块合成一大块", color: "#2f7d32", from: 5.2 }
+        ]
+      },
+      {
+        turn: 1,
+        title: "头骨留软缝好出生",
+        view: "headSide",
+        layers: [{ layer: "skin", opacity: 0.3 }, "skeleton"],
+        camera: [{ t: 0, at: "skull", zoom: 1.35 }],
+        duration: 8,
+        cues: [
+          { kind: "highlight", at: "skull", color: "#ff9f43", from: 0.4 },
+          { kind: "label", at: [560, 150], text: "几大片中间留软缝", pos: [760, 220], from: 1 },
+          { kind: "text", at: [600, 810], text: "出生时微微挤拢，顺溜通过产道", color: "#2f7d32", from: 4 }
+        ]
+      },
+      {
+        turn: 2,
+        title: "囟门给大脑留长个空间",
+        view: "head",
+        layers: [{ layer: "skin", opacity: 0.3 }, "skeleton", { layer: "brain", opacity: 0.75 }],
+        camera: [{ t: 0, at: "brain", zoom: 1.5 }],
+        duration: 8.5,
+        cues: [
+          { kind: "pulse", at: [600, 155], color: "#4fb6ff", radius: 55, from: 0.4 },
+          { kind: "label", at: [600, 155], text: "囟门：头顶软窗户", pos: [770, 220], color: "#2b7bbf", from: 1 },
+          { kind: "highlight", at: "brain", color: "#b48cff", from: 2.4 },
+          { kind: "text", at: [600, 810], text: "给大脑留足空间，一岁半闭合", color: "#2f7d32", from: 4.4 }
+        ]
+      },
+      {
+        turn: 3,
+        title: "手腕骨盆多是弹软骨",
+        view: "body",
+        layers: [{ layer: "skin", opacity: 0.35 }, "skeleton"],
+        duration: 8,
+        cues: [
+          { kind: "highlight", at: "wrist", color: "#4fb6ff", from: 0.4 },
+          { kind: "label", at: "wrist", text: "手腕分好多块软骨", side: "left", from: 1 },
+          { kind: "highlight", at: "pelvis", color: "#ff9f43", from: 2.4 },
+          { kind: "label", at: "pelvis", text: "有弹性耐摔不易折", side: "right", from: 3 },
+          { kind: "text", at: [600, 820], text: "学爬学走摔屁股墩儿也不怕", color: "#2f7d32", from: 4.6 }
+        ]
+      },
+      {
+        turn: 4,
+        title: "吸收钙磷融合成硬骨",
+        view: "blank",
+        duration: 8,
+        cues: [
+          { kind: "shape", shape: "circle", at: [280, 420], size: [95, 95], color: "#bfe3ff", text: "软骨", from: 0.3, to: 4.4 },
+          { kind: "shape", shape: "circle", at: [400, 420], size: [95, 95], color: "#bfe3ff", text: "软骨", from: 0.6, to: 4.4 },
+          { kind: "arrow", path: [[490, 420], [670, 420]], color: "#ff9f43", text: "钙磷硬化合体", from: 1.6 },
+          { kind: "shape", shape: "pill", at: [860, 420], size: [280, 130], color: "#f4ecd8", outline: true, text: "整块硬骨", from: 2.8 },
+          { kind: "text", at: [600, 760], text: "5块骶椎长大合成1块骶骨！", color: "#2f7d32", from: 4.4 }
+        ]
+      }
+    ]
+  },
+  {
+    question: "broken-bone",
+    scenes: [
+      {
+        turn: 0,
+        title: "骨头是活生生的器官",
+        view: "arm",
+        layers: [{ layer: "skin", opacity: 0.3 }, "skeleton", "arteries"],
+        camera: [{ t: 0, at: "forearm", zoom: 1.6 }],
+        duration: 8,
+        cues: [
+          { kind: "highlight", at: "forearm", color: "#ff9f43", from: 0.4 },
+          { kind: "flow", path: ["humerus", "forearm"], color: "#e5484d", count: 7, speed: 200, from: 1 },
+          { kind: "label", at: "forearm", text: "里面通血管住施工队", side: "left", from: 1.8 },
+          { kind: "text", at: [600, 810], text: "木棍是死的，骨头却是活器官！", color: "#2f7d32", from: 4.2 }
+        ]
+      },
+      {
+        turn: 1,
+        title: "血块先搭起施工帐篷",
+        view: "blank",
+        duration: 8,
+        cues: [
+          { kind: "shape", shape: "rect", at: [380, 440], size: [300, 100], color: "#f4ecd8", outline: true, text: "断骨左", from: 0.3 },
+          { kind: "shape", shape: "rect", at: [820, 440], size: [300, 100], color: "#f4ecd8", outline: true, text: "断骨右", from: 0.3 },
+          { kind: "shape", shape: "circle", at: [600, 440], size: [220, 170], color: "#e5484d", text: "血块帐篷", from: 1.2 },
+          { kind: "pulse", at: [600, 440], color: "#ffcf3f", radius: 130, from: 2.2 },
+          { kind: "text", at: [600, 760], text: "清扫碎骨渣，把修补细胞全喊来", color: "#e5484d", from: 3.8 }
+        ]
+      },
+      {
+        turn: 2,
+        title: "软骨胶泥换成硬骨头",
+        view: "blank",
+        duration: 8.5,
+        cues: [
+          { kind: "shape", shape: "rect", at: [600, 440], size: [740, 100], color: "#f4ecd8", outline: true, from: 0.3 },
+          { kind: "shape", shape: "circle", at: [600, 440], size: [260, 180], color: "#8fd3ff", text: "软骨痂", from: 0.8, to: 4 },
+          { kind: "shape", shape: "circle", at: [600, 440], size: [270, 185], color: "#e8dcc2", outline: true, text: "硬骨痂", from: 4 },
+          { kind: "sprite", icon: "🧱", path: [[600, 250]], size: 84, from: 2.6 },
+          { kind: "text", at: [600, 760], text: "成骨细胞填钙磷，包厚一圈加固", color: "#2f7d32", from: 4.6 }
+        ]
+      },
+      {
+        turn: 3,
+        title: "石膏负责对齐扶稳",
+        view: "arm",
+        layers: [{ layer: "skin", opacity: 0.35 }, "skeleton"],
+        camera: [{ t: 0, at: "forearm", zoom: 1.6 }],
+        duration: 8,
+        cues: [
+          { kind: "shape", shape: "rect", at: "forearm", size: [120, 260], color: "rgba(240,244,248,0.85)", outline: true, text: "石膏", from: 0.5 },
+          { kind: "label", at: "forearm", text: "扶稳对齐不乱晃", side: "left", color: "#2b7bbf", from: 1.4 },
+          { kind: "text", at: [600, 810], text: "不扯断新骨丝，也不长歪", color: "#2f7d32", from: 4 }
+        ]
+      },
+      {
+        turn: 4,
+        title: "雕刻打磨平整不留疤",
+        view: "blank",
+        duration: 8,
+        cues: [
+          { kind: "shape", shape: "circle", at: [340, 430], size: [240, 170], color: "#e8dcc2", outline: true, text: "鼓鼓骨痂", from: 0.4 },
+          { kind: "arrow", path: [[490, 430], [690, 430]], text: "破骨细胞打磨", from: 1.6 },
+          { kind: "shape", shape: "rect", at: [860, 430], size: [300, 100], color: "#f4ecd8", outline: true, text: "光滑如初", from: 2.8 },
+          { kind: "text", at: [600, 760], text: "削平多余鼓包，长好不留疤！", color: "#2f7d32", from: 4.2 }
+        ]
+      },
+      {
+        turn: 5,
+        title: "牛奶豆腐比骨头汤强",
+        view: "blank",
+        duration: 8.5,
+        cues: [
+          { kind: "sprite", icon: "🥛", path: [[340, 310]], size: 105, from: 0.4, to: 4.8 },
+          { kind: "sprite", icon: "☀️", path: [[860, 310]], size: 105, from: 1.2, to: 4.8 },
+          { kind: "text", at: [600, 460], text: "牛奶豆腐鱼虾＋晒太阳最补钙", size: "s", color: "#2f7d32", from: 2, to: 4.8 },
+          { kind: "myth", wrong: "喝浓白骨头汤最补钙长骨头", right: "白汤主要是脂肪，溶出的钙极少", from: 5 }
+        ]
+      }
+    ]
   }
 ];

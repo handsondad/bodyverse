@@ -739,5 +739,253 @@ export const films: readonly Film[] = [
         ]
       }
     ]
+  },
+  {
+    question: "motion-sickness",
+    scenes: [
+      {
+        turn: 0,
+        title: "两份相反的报告",
+        view: "headSide",
+        layers: [{ layer: "skin", opacity: 0.35 }, { layer: "brain", opacity: 0.8 }, "eyes", "ears"],
+        camera: [{ t: 0, at: [520, 460], zoom: 1.45 }],
+        duration: 8.5,
+        cues: [
+          { kind: "highlight", at: "eye", color: "#4fb6ff", from: 0.4 },
+          { kind: "flow", path: ["eye", "thalamus"], color: "#4fb6ff", count: 6, speed: 200, from: 1 },
+          { kind: "highlight", at: "vestibule", color: "#ff9f43", from: 1.8 },
+          { kind: "flow", path: ["vestibule", "thalamus"], color: "#ff9f43", count: 6, speed: 200, from: 2.2 },
+          { kind: "pulse", at: "thalamus", color: "#ff5a5f", radius: 80, from: 3.4 },
+          { kind: "label", at: "brain", text: "两份报告相反！", pos: [760, 210], color: "#ff5a5f", from: 4 },
+          { kind: "text", at: [600, 810], text: "把大脑弄糊涂了", color: "#7a4fd6", from: 5.4 }
+        ]
+      },
+      {
+        turn: 1,
+        title: "前庭报告车在晃",
+        view: "headSide",
+        layers: [{ layer: "skin", opacity: 0.3 }, { layer: "skeleton", opacity: 0.35 }, "ears", { layer: "brain", opacity: 0.6 }],
+        camera: [{ t: 0, at: "vestibule", zoom: 2.1 }],
+        duration: 8.5,
+        cues: [
+          { kind: "label", at: "cochlea", text: "耳蜗：听声音", side: "bottom", from: 0.4, to: 3.4 },
+          { kind: "highlight", at: "vestibule", color: "#ff9f43", from: 1.8 },
+          { kind: "label", at: "vestibule", text: "前庭：管平衡", side: "right", from: 2.2 },
+          { kind: "sprite", icon: "🌊", path: [{ a: "vestibule", dx: -45, dy: -45 }], size: 42, wobble: true, from: 3.6 },
+          { kind: "pulse", at: "vestibule", color: "#ffcf3f", radius: 60, from: 4.2 },
+          { kind: "text", at: [600, 810], text: "前庭：正在摇晃前进！", color: "#ff9f43", from: 5 }
+        ]
+      },
+      {
+        turn: 2,
+        title: "眼睛却说没动",
+        view: "blank",
+        duration: 8.5,
+        cues: [
+          { kind: "shape", shape: "rect", at: [320, 430], size: [380, 260], color: "#ffe08a", text: "👂 车在晃", motion: "wiggle", from: 0.4 },
+          { kind: "shape", shape: "rect", at: [880, 430], size: [380, 260], color: "#bfe3ff", text: "📖 没动呀", from: 1.4 },
+          { kind: "arrow", path: [[520, 430], [585, 430]], color: "#ff9f43", from: 2.6 },
+          { kind: "arrow", path: [[680, 430], [615, 430]], color: "#4fb6ff", from: 2.8 },
+          { kind: "sprite", icon: "⚡", path: [[600, 430]], size: 96, wobble: true, from: 3.4 },
+          { kind: "text", at: [600, 760], text: "在大脑里打起架来", color: "#ff5a5f", from: 4.6 }
+        ]
+      },
+      {
+        turn: 3,
+        title: "误以为吃坏中毒",
+        view: "belly",
+        layers: [{ layer: "skin", opacity: 0.35 }, "esophagus", { layer: "stomach", motion: "churn", rate: 0.8 }],
+        camera: [{ t: 0, at: "stomach", zoom: 1.6 }],
+        duration: 9,
+        cues: [
+          { kind: "sprite", icon: "🍄", path: [[430, 180]], size: 72, from: 0.4, to: 4.6 },
+          { kind: "text", at: [650, 95], text: "猜想：误以为中毒眼花", size: "s", color: "#7a4fd6", from: 1, to: 5 },
+          { kind: "flow", path: [[610, 40], "stomach"], color: "#ffcf3f", count: 6, speed: 220, from: 2.6 },
+          { kind: "highlight", at: "stomach", color: "#ff5a5f", from: 3.4 },
+          { kind: "label", at: "stomach", text: "快吐出来保命！", side: "right", color: "#ff5a5f", from: 4 },
+          { kind: "text", at: [600, 810], text: "胃跟着翻腾起来", color: "#ff5a5f", from: 5.6 }
+        ]
+      },
+      {
+        turn: 4,
+        title: "司机为什么不晕",
+        view: "blank",
+        duration: 8.5,
+        cues: [
+          { kind: "shape", shape: "rect", at: [320, 440], size: [420, 320], color: "#e8f5e9", from: 0.3 },
+          { kind: "sprite", icon: "🛞", path: [[320, 350]], size: 92, from: 0.7 },
+          { kind: "text", at: [320, 510], text: "看远路＋自己转弯", size: "s", color: "#2f7d32", from: 1.4 },
+          { kind: "shape", shape: "rect", at: [880, 440], size: [420, 320], color: "#fff3df", outline: true, from: 3 },
+          { kind: "sprite", icon: "🪑", path: [[880, 350]], size: 92, from: 3.4 },
+          { kind: "text", at: [880, 510], text: "后排挡视线，猜不到", size: "s", color: "#ff5a5f", from: 4.2 },
+          { kind: "text", at: [600, 780], text: "两边对上号就不晕", color: "#2f7d32", from: 5.6 }
+        ]
+      },
+      {
+        turn: 5,
+        title: "坐车防晕三招",
+        view: "blank",
+        duration: 8.5,
+        cues: [
+          { kind: "sprite", icon: "📵", path: [[250, 360]], size: 100, from: 0.4 },
+          { kind: "text", at: [250, 510], text: "不看书和屏幕", size: "s", color: "#ff5a5f", from: 0.9 },
+          { kind: "sprite", icon: "🌲", path: [[600, 360]], size: 100, from: 2 },
+          { kind: "text", at: [600, 510], text: "看窗外远处", size: "s", color: "#2f7d32", from: 2.5 },
+          { kind: "sprite", icon: "🌬️", path: [[950, 360]], size: 100, from: 3.6 },
+          { kind: "text", at: [950, 510], text: "吹风或闭眼睡", size: "s", color: "#4fb6ff", from: 4.1 },
+          { kind: "text", at: [600, 770], text: "眼睛和前庭说同一句话", color: "#2f7d32", from: 5.4 }
+        ]
+      }
+    ]
+  },
+  {
+    question: "ears-pop",
+    scenes: [
+      {
+        turn: 0,
+        title: "小鼓皮被空气压弯",
+        view: "headSide",
+        layers: [{ layer: "skin", opacity: 0.35 }, { layer: "skeleton", opacity: 0.35 }, "ears"],
+        camera: [{ t: 0, at: "eardrum", zoom: 2.1 }],
+        duration: 8,
+        cues: [
+          { kind: "highlight", at: "eardrum", color: "#ff9f43", from: 0.4 },
+          { kind: "label", at: "eardrum", text: "鼓膜：薄薄小鼓皮", side: "right", from: 1 },
+          { kind: "pulse", at: "eardrum", color: "#4fb6ff", radius: 55, from: 2.6 },
+          { kind: "text", at: [600, 810], text: "内外气压一样才好震动", color: "#2f7d32", from: 4.2 }
+        ]
+      },
+      {
+        turn: 1,
+        title: "下降时外压大于内压",
+        view: "blank",
+        duration: 8.5,
+        cues: [
+          { kind: "sprite", icon: "✈️", path: [[260, 200], [420, 280]], travel: 1.5, size: 84, from: 0.3 },
+          { kind: "shape", shape: "rect", at: [760, 460], size: [340, 260], color: "#eef6ff", outline: true, text: "中耳低气压", from: 0.8 },
+          { kind: "shape", shape: "pill", at: [570, 460], size: [36, 240], color: "#ffb36b", from: 1 },
+          { kind: "arrow", path: [[260, 460], [535, 460]], color: "#e5484d", text: "外压猛变大", from: 2 },
+          { kind: "label", at: [570, 340], text: "鼓膜被往里压弯", pos: [420, 200], color: "#e5484d", from: 3.2 },
+          { kind: "text", at: [600, 790], text: "耳朵立刻又闷又胀！", color: "#e5484d", from: 4.6 }
+        ]
+      },
+      {
+        turn: 2,
+        title: "咽鼓管开门放气进",
+        view: "headSide",
+        layers: [{ layer: "skin", opacity: 0.35 }, "airway", "ears"],
+        camera: [{ t: 0, at: [520, 540], zoom: 1.85 }],
+        duration: 8.5,
+        cues: [
+          { kind: "flow", path: ["nasopharynx", "eardrum"], color: "#4fb6ff", count: 6, speed: 180, from: 0.6 },
+          { kind: "label", at: "nasopharynx", text: "连着鼻子后面", side: "left", from: 1.2 },
+          { kind: "highlight", at: "eardrum", color: "#2f7d32", from: 2.8 },
+          { kind: "label", at: "eardrum", text: "咽鼓管啵地开门", side: "right", color: "#2f7d32", from: 3.4 },
+          { kind: "text", at: [600, 810], text: "吞咽哈欠放气进去顶平鼓膜", color: "#2f7d32", from: 4.8 }
+        ]
+      },
+      {
+        turn: 3,
+        title: "隧道高山全靠它调",
+        view: "blank",
+        duration: 8,
+        cues: [
+          { kind: "sprite", icon: "🚄", path: [[260, 380]], size: 105, from: 0.4 },
+          { kind: "text", at: [260, 530], text: "高铁冲进隧道", size: "s", from: 1 },
+          { kind: "sprite", icon: "⛰️", path: [[600, 380]], size: 105, from: 1.8 },
+          { kind: "text", at: [600, 530], text: "开车上下高山", size: "s", from: 2.4 },
+          { kind: "sprite", icon: "🛗", path: [[940, 380]], size: 105, from: 3.2 },
+          { kind: "text", at: [940, 530], text: "高速电梯升降", size: "s", from: 3.8 },
+          { kind: "text", at: [600, 760], text: "气压一变，咽鼓管就忙着调平", color: "#2b7bbf", from: 5 }
+        ]
+      },
+      {
+        turn: 4,
+        title: "感冒鼻塞堵住管口",
+        view: "headSide",
+        layers: [{ layer: "skin", opacity: 0.35 }, "airway", "ears"],
+        camera: [{ t: 0, at: [510, 550], zoom: 1.85 }],
+        duration: 8.5,
+        cues: [
+          { kind: "pulse", at: "nasopharynx", color: "#e5484d", radius: 55, from: 0.4 },
+          { kind: "label", at: "nasopharynx", text: "鼻塞黏膜肿大堵门", side: "left", color: "#e5484d", from: 1 },
+          { kind: "flow", path: ["nasopharynx", "eardrum"], color: "#b48cff", count: 4, speed: 120, from: 2.6 },
+          { kind: "label", at: "eardrum", text: "小心病菌爬进中耳", side: "right", color: "#7a4fd6", from: 3.2 },
+          { kind: "text", at: [600, 810], text: "感冒后耳朵疼要看医生", color: "#e5484d", from: 4.8 }
+        ]
+      }
+    ]
+  },
+  {
+    question: "myopia",
+    scenes: [
+      {
+        turn: 0,
+        title: "眼球像自动对焦相机",
+        view: "headSide",
+        layers: [{ layer: "skin", opacity: 0.35 }, "eyes", { layer: "brain", opacity: 0.6 }],
+        camera: [{ t: 0, at: "eye", zoom: 2.2 }],
+        duration: 8.5,
+        cues: [
+          { kind: "flow", path: [[190, 485], "lens", "retina"], color: "#ffcf3f", count: 6, speed: 200, from: 0.4 },
+          { kind: "highlight", at: "lens", color: "#4fb6ff", from: 1.2 },
+          { kind: "label", at: "lens", text: "晶状体：小放大镜", side: "bottom", from: 1.6 },
+          { kind: "highlight", at: "retina", color: "#ff9f43", from: 3 },
+          { kind: "label", at: "retina", text: "视网膜：感光幕布", side: "right", from: 3.4 },
+          { kind: "text", at: [600, 810], text: "光聚在视网膜上才看得清", color: "#2f7d32", from: 4.8 }
+        ]
+      },
+      {
+        turn: 1,
+        title: "眼球被拉长聚不到底",
+        view: "blank",
+        duration: 9,
+        cues: [
+          { kind: "shape", shape: "circle", at: [330, 420], size: [240, 240], color: "#e8f5e9", outline: true, text: "正常圆球", from: 0.3 },
+          { kind: "text", at: [330, 600], text: "焦点正好落在底上", size: "s", color: "#2f7d32", from: 1 },
+          { kind: "shape", shape: "circle", at: [850, 420], size: [330, 230], color: "#ffe4e6", outline: true, from: 2.4 },
+          { kind: "flow", path: [[620, 420], [910, 420]], color: "#ffcf3f", count: 6, speed: 180, from: 3 },
+          { kind: "pulse", at: [910, 420], color: "#e5484d", radius: 45, from: 3.6 },
+          { kind: "label", at: [1015, 420], text: "幕布退到后面了", side: "top", color: "#e5484d", from: 4.2 },
+          { kind: "text", at: [600, 780], text: "老凑近看，眼球前后被拉长！", color: "#e5484d", from: 5.2 }
+        ]
+      },
+      {
+        turn: 2,
+        title: "拉长了没法缩回去",
+        view: "blank",
+        duration: 8,
+        cues: [
+          { kind: "shape", shape: "circle", at: [600, 380], size: [340, 230], color: "#ffd6d6", outline: true, text: "真性近视", from: 0.4 },
+          { kind: "arrow", path: [[840, 380], [740, 380]], color: "#9b8b76", text: "缩不回去", from: 1.8 },
+          { kind: "sprite", icon: "🛡️", path: [[600, 600]], size: 88, from: 3.2 },
+          { kind: "text", at: [600, 760], text: "要在被拉长之前护住它！", color: "#2f7d32", from: 4.2 }
+        ]
+      },
+      {
+        turn: 3,
+        title: "户外阳光踩下刹车",
+        view: "blank",
+        duration: 8.5,
+        cues: [
+          { kind: "sprite", icon: "☀️", path: [[260, 250]], size: 115, from: 0.3 },
+          { kind: "flow", path: [[330, 290], [580, 440]], color: "#ffcf3f", count: 8, speed: 240, from: 0.9 },
+          { kind: "shape", shape: "circle", at: [640, 460], size: [220, 220], color: "#e8f5e9", text: "多巴胺", motion: "pulse", from: 2 },
+          { kind: "count", at: [960, 260], label: "每天白天户外", start: 0, end: 2, unit: "小时", over: 2.2, from: 3 },
+          { kind: "text", at: [600, 780], text: "充足自然光帮眼球踩刹车！", color: "#2f7d32", from: 4.8 }
+        ]
+      },
+      {
+        turn: 4,
+        title: "真近视硬撑长得更快",
+        view: "blank",
+        duration: 8.5,
+        cues: [
+          { kind: "sprite", icon: "👓", path: [[600, 310]], size: 135, from: 0.4, to: 4.8 },
+          { kind: "text", at: [600, 460], text: "合适眼镜把焦点推回视网膜", size: "s", color: "#2f7d32", from: 1.2, to: 4.8 },
+          { kind: "myth", wrong: "戴眼镜会让近视越戴越深", right: "硬撑眯眼凑更近，眼球拉长更快", from: 5 }
+        ]
+      }
+    ]
   }
 ];

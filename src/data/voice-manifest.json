@@ -138,6 +138,54 @@
    "hash": "04a8ee63d7ec",
    "seconds": 13.92
   },
+  "baby-bones/0-dad": {
+   "hash": "3cd72e06f6d4",
+   "seconds": 15.62
+  },
+  "baby-bones/0-nian": {
+   "hash": "57bf10b46545",
+   "seconds": 12.07
+  },
+  "baby-bones/1-dad": {
+   "hash": "d05454e3b3f2",
+   "seconds": 20.33
+  },
+  "baby-bones/1-nian": {
+   "hash": "a04377e5559d",
+   "seconds": 7.54
+  },
+  "baby-bones/2-dad": {
+   "hash": "f36067754df1",
+   "seconds": 20.11
+  },
+  "baby-bones/2-nian": {
+   "hash": "74d354b6f44d",
+   "seconds": 8.11
+  },
+  "baby-bones/3-dad": {
+   "hash": "d4ed805fa8e2",
+   "seconds": 20.52
+  },
+  "baby-bones/3-nian": {
+   "hash": "8e2b0667e49e",
+   "seconds": 5.95
+  },
+  "baby-bones/4-dad": {
+   "hash": "69d5859d3a4a",
+   "seconds": 20.78
+  },
+  "baby-bones/4-nian": {
+   "hash": "cd0c8003484c",
+   "seconds": 5.4
+  },
+  "baby-bones/5-dad": {
+   "hash": "14cbb6f76fa9",
+   "seconds": 10.42
+  },
+  "baby-bones/5-nian": {
+   "hash": "79cf841f3884",
+   "seconds": 15.19
+  },
   "belly-button/0-dad": {
    "hash": "5c1f815fdd10",
    "seconds": 13.92
@@ -250,6 +298,54 @@
    "hash": "4035ba97756c",
    "seconds": 16.68
   },
+  "blood-types/0-dad": {
+   "hash": "52811fe54c8c",
+   "seconds": 13.82
+  },
+  "blood-types/0-nian": {
+   "hash": "5682711fd257",
+   "seconds": 10.61
+  },
+  "blood-types/1-dad": {
+   "hash": "3f7ca13a4e2b",
+   "seconds": 16.87
+  },
+  "blood-types/1-nian": {
+   "hash": "14f6ad311a2a",
+   "seconds": 4.18
+  },
+  "blood-types/2-dad": {
+   "hash": "86155e8f8a14",
+   "seconds": 23.59
+  },
+  "blood-types/2-nian": {
+   "hash": "e6c51782f5d9",
+   "seconds": 8.3
+  },
+  "blood-types/3-dad": {
+   "hash": "4a943470edbc",
+   "seconds": 19.87
+  },
+  "blood-types/3-nian": {
+   "hash": "4a4196438915",
+   "seconds": 7.25
+  },
+  "blood-types/4-dad": {
+   "hash": "11e0cf4b8297",
+   "seconds": 19.49
+  },
+  "blood-types/4-nian": {
+   "hash": "6407e6d61408",
+   "seconds": 7.54
+  },
+  "blood-types/5-dad": {
+   "hash": "673de42509f0",
+   "seconds": 16.42
+  },
+  "blood-types/5-nian": {
+   "hash": "d45c7cfb41f3",
+   "seconds": 15.53
+  },
   "blush/0-dad": {
    "hash": "600bd2652748",
    "seconds": 17.69
@@ -313,6 +409,110 @@
   "blush/7-nian": {
    "hash": "6b8690db1a4c",
    "seconds": 12.94
+  },
+  "brain-freeze/0-dad": {
+   "hash": "03e1d8c00729",
+   "seconds": 12
+  },
+  "brain-freeze/0-nian": {
+   "hash": "fb0dbc196fa6",
+   "seconds": 10.1
+  },
+  "brain-freeze/1-dad": {
+   "hash": "bd286deb652d",
+   "seconds": 18.22
+  },
+  "brain-freeze/1-nian": {
+   "hash": "c475e1010a37",
+   "seconds": 6.1
+  },
+  "brain-freeze/2-dad": {
+   "hash": "73fb02981a97",
+   "seconds": 20.76
+  },
+  "brain-freeze/2-nian": {
+   "hash": "ed5c6f21b492",
+   "seconds": 5.81
+  },
+  "brain-freeze/3-dad": {
+   "hash": "6f759c9ce8f4",
+   "seconds": 20.78
+  },
+  "brain-freeze/3-nian": {
+   "hash": "0d1aa9543980",
+   "seconds": 6.7
+  },
+  "brain-freeze/4-dad": {
+   "hash": "e81e511faa86",
+   "seconds": 20.5
+  },
+  "brain-freeze/4-nian": {
+   "hash": "723f6d5bd704",
+   "seconds": 6.5
+  },
+  "brain-freeze/5-dad": {
+   "hash": "fe9ea2f5b59d",
+   "seconds": 10.27
+  },
+  "brain-freeze/5-nian": {
+   "hash": "b374e2276d0b",
+   "seconds": 15.38
+  },
+  "broken-bone/0-dad": {
+   "hash": "8eddab5f3ec3",
+   "seconds": 13.63
+  },
+  "broken-bone/0-nian": {
+   "hash": "ee8d563cf70d",
+   "seconds": 11.47
+  },
+  "broken-bone/1-dad": {
+   "hash": "38194d2e2dc4",
+   "seconds": 18.6
+  },
+  "broken-bone/1-nian": {
+   "hash": "5cef5cf7747d",
+   "seconds": 5.95
+  },
+  "broken-bone/2-dad": {
+   "hash": "15276cd5fbac",
+   "seconds": 22.9
+  },
+  "broken-bone/2-nian": {
+   "hash": "c4d67199a2f1",
+   "seconds": 5.06
+  },
+  "broken-bone/3-dad": {
+   "hash": "121824f73709",
+   "seconds": 23.18
+  },
+  "broken-bone/3-nian": {
+   "hash": "ffa2ffea1d73",
+   "seconds": 6.46
+  },
+  "broken-bone/4-dad": {
+   "hash": "1fcf69001b3e",
+   "seconds": 26.04
+  },
+  "broken-bone/4-nian": {
+   "hash": "5bc63a5f612b",
+   "seconds": 8.09
+  },
+  "broken-bone/5-dad": {
+   "hash": "2d84933b3cba",
+   "seconds": 20.78
+  },
+  "broken-bone/5-nian": {
+   "hash": "84d876704171",
+   "seconds": 7.1
+  },
+  "broken-bone/6-dad": {
+   "hash": "8f3c5fa25c4d",
+   "seconds": 11.47
+  },
+  "broken-bone/6-nian": {
+   "hash": "aba3a9520669",
+   "seconds": 15.34
   },
   "bruise/0-dad": {
    "hash": "6fc1babec574",
@@ -505,6 +705,62 @@
   "chew-sweet/7-nian": {
    "hash": "c3c0a77c854a",
    "seconds": 17.62
+  },
+  "choke-cough/0-dad": {
+   "hash": "07271426c16d",
+   "seconds": 15.17
+  },
+  "choke-cough/0-nian": {
+   "hash": "19e45c79eb06",
+   "seconds": 7.06
+  },
+  "choke-cough/1-dad": {
+   "hash": "77f7764e11d1",
+   "seconds": 17.74
+  },
+  "choke-cough/1-nian": {
+   "hash": "b0bcd639836f",
+   "seconds": 6.38
+  },
+  "choke-cough/2-dad": {
+   "hash": "23674de4cfb5",
+   "seconds": 17.66
+  },
+  "choke-cough/2-nian": {
+   "hash": "894568f786ad",
+   "seconds": 6.17
+  },
+  "choke-cough/3-dad": {
+   "hash": "f1be80fa580e",
+   "seconds": 19.42
+  },
+  "choke-cough/3-nian": {
+   "hash": "5ce17fc745ea",
+   "seconds": 5.78
+  },
+  "choke-cough/4-dad": {
+   "hash": "0e8cefe17ee0",
+   "seconds": 17.74
+  },
+  "choke-cough/4-nian": {
+   "hash": "f45526b53dc8",
+   "seconds": 5.3
+  },
+  "choke-cough/5-dad": {
+   "hash": "6a430bfb9341",
+   "seconds": 25.51
+  },
+  "choke-cough/5-nian": {
+   "hash": "ad85eeb5ccd5",
+   "seconds": 6.65
+  },
+  "choke-cough/6-dad": {
+   "hash": "236039e70da5",
+   "seconds": 12.67
+  },
+  "choke-cough/6-nian": {
+   "hash": "d6b14a84807b",
+   "seconds": 16.03
   },
   "dark-see/0-dad": {
    "hash": "ab0f53757eb5",
@@ -738,6 +994,102 @@
    "hash": "1a54816cccef",
    "seconds": 13.32
   },
+  "ears-pop/0-dad": {
+   "hash": "7f764ce337a8",
+   "seconds": 15.22
+  },
+  "ears-pop/0-nian": {
+   "hash": "4fad322ef5ae",
+   "seconds": 10.01
+  },
+  "ears-pop/1-dad": {
+   "hash": "972c5aeba8ba",
+   "seconds": 22.61
+  },
+  "ears-pop/1-nian": {
+   "hash": "a97e5b5deef7",
+   "seconds": 6.31
+  },
+  "ears-pop/2-dad": {
+   "hash": "1512e3ad5738",
+   "seconds": 23.28
+  },
+  "ears-pop/2-nian": {
+   "hash": "814da3835085",
+   "seconds": 6.55
+  },
+  "ears-pop/3-dad": {
+   "hash": "b1679e75be73",
+   "seconds": 18.5
+  },
+  "ears-pop/3-nian": {
+   "hash": "8e80deb6b60d",
+   "seconds": 8.26
+  },
+  "ears-pop/4-dad": {
+   "hash": "3b86aa7d1d43",
+   "seconds": 24.12
+  },
+  "ears-pop/4-nian": {
+   "hash": "86b4dd82863e",
+   "seconds": 7.8
+  },
+  "ears-pop/5-dad": {
+   "hash": "3f40b51c1e31",
+   "seconds": 11.04
+  },
+  "ears-pop/5-nian": {
+   "hash": "e042ba7831f2",
+   "seconds": 15.72
+  },
+  "earwax/0-dad": {
+   "hash": "a4b74ecf8fb9",
+   "seconds": 9.34
+  },
+  "earwax/0-nian": {
+   "hash": "20f00c9b158b",
+   "seconds": 8.14
+  },
+  "earwax/1-dad": {
+   "hash": "dd2d8cb11063",
+   "seconds": 20.98
+  },
+  "earwax/1-nian": {
+   "hash": "d99830baaee3",
+   "seconds": 5.35
+  },
+  "earwax/2-dad": {
+   "hash": "ba4e4317c739",
+   "seconds": 21.12
+  },
+  "earwax/2-nian": {
+   "hash": "80a34997bae8",
+   "seconds": 7.82
+  },
+  "earwax/3-dad": {
+   "hash": "3f60adf881dd",
+   "seconds": 21.5
+  },
+  "earwax/3-nian": {
+   "hash": "981f6f5684ac",
+   "seconds": 7.06
+  },
+  "earwax/4-dad": {
+   "hash": "89e7020478f3",
+   "seconds": 19.34
+  },
+  "earwax/4-nian": {
+   "hash": "c6c6d1b2ff31",
+   "seconds": 8.28
+  },
+  "earwax/5-dad": {
+   "hash": "7657c08d299f",
+   "seconds": 14.74
+  },
+  "earwax/5-nian": {
+   "hash": "c75ef150edd8",
+   "seconds": 15.34
+  },
   "eyes-closed-walk/0-dad": {
    "hash": "021a61bb91b6",
    "seconds": 15.53
@@ -970,6 +1322,54 @@
    "hash": "741dd7702387",
    "seconds": 13.82
   },
+  "fingerprints/0-dad": {
+   "hash": "00f869f4d642",
+   "seconds": 18.72
+  },
+  "fingerprints/0-nian": {
+   "hash": "e813b487f112",
+   "seconds": 10.97
+  },
+  "fingerprints/1-dad": {
+   "hash": "f9d0212bea65",
+   "seconds": 23.02
+  },
+  "fingerprints/1-nian": {
+   "hash": "6b50b3fd0c37",
+   "seconds": 7.78
+  },
+  "fingerprints/2-dad": {
+   "hash": "8bc05905f6dd",
+   "seconds": 20.86
+  },
+  "fingerprints/2-nian": {
+   "hash": "eefb43a4b13b",
+   "seconds": 8.74
+  },
+  "fingerprints/3-dad": {
+   "hash": "60aa69e21820",
+   "seconds": 20.88
+  },
+  "fingerprints/3-nian": {
+   "hash": "ce9b86b6c3b7",
+   "seconds": 8.76
+  },
+  "fingerprints/4-dad": {
+   "hash": "a991f93e7327",
+   "seconds": 18.5
+  },
+  "fingerprints/4-nian": {
+   "hash": "d96fef1e4a3d",
+   "seconds": 8.98
+  },
+  "fingerprints/5-dad": {
+   "hash": "34a158a6430f",
+   "seconds": 12.22
+  },
+  "fingerprints/5-nian": {
+   "hash": "4945399347e7",
+   "seconds": 13.44
+  },
   "foot-asleep/0-dad": {
    "hash": "a7a704eb7656",
    "seconds": 12.98
@@ -1089,6 +1489,110 @@
   "full-run/7-nian": {
    "hash": "7b5642695823",
    "seconds": 15.46
+  },
+  "funny-bone/0-dad": {
+   "hash": "e892e0c88242",
+   "seconds": 11.09
+  },
+  "funny-bone/0-nian": {
+   "hash": "0aa630b4dce2",
+   "seconds": 9.84
+  },
+  "funny-bone/1-dad": {
+   "hash": "d88079f2a2fd",
+   "seconds": 15.94
+  },
+  "funny-bone/1-nian": {
+   "hash": "e4b9de6cef9a",
+   "seconds": 5.71
+  },
+  "funny-bone/2-dad": {
+   "hash": "e5436a6caa61",
+   "seconds": 17.18
+  },
+  "funny-bone/2-nian": {
+   "hash": "79af86df20ab",
+   "seconds": 6.55
+  },
+  "funny-bone/3-dad": {
+   "hash": "498097245b2f",
+   "seconds": 18.12
+  },
+  "funny-bone/3-nian": {
+   "hash": "9a620ee47ee1",
+   "seconds": 5.57
+  },
+  "funny-bone/4-dad": {
+   "hash": "3fff5a44c582",
+   "seconds": 18.22
+  },
+  "funny-bone/4-nian": {
+   "hash": "96582a53b21b",
+   "seconds": 5.57
+  },
+  "funny-bone/5-dad": {
+   "hash": "ece3bc636634",
+   "seconds": 12.62
+  },
+  "funny-bone/5-nian": {
+   "hash": "5b87c1d847d6",
+   "seconds": 14.4
+  },
+  "good-bacteria/0-dad": {
+   "hash": "da376baf343e",
+   "seconds": 15.1
+  },
+  "good-bacteria/0-nian": {
+   "hash": "8441263e790b",
+   "seconds": 9.36
+  },
+  "good-bacteria/1-dad": {
+   "hash": "c0ab68affc05",
+   "seconds": 17.78
+  },
+  "good-bacteria/1-nian": {
+   "hash": "13a6294e7354",
+   "seconds": 5.81
+  },
+  "good-bacteria/2-dad": {
+   "hash": "6d9da8e3547b",
+   "seconds": 25.97
+  },
+  "good-bacteria/2-nian": {
+   "hash": "af01bd8c3bf3",
+   "seconds": 5.5
+  },
+  "good-bacteria/3-dad": {
+   "hash": "c3f4ec549a56",
+   "seconds": 21.86
+  },
+  "good-bacteria/3-nian": {
+   "hash": "5a38da8b38de",
+   "seconds": 7.18
+  },
+  "good-bacteria/4-dad": {
+   "hash": "d9716127e83b",
+   "seconds": 18.7
+  },
+  "good-bacteria/4-nian": {
+   "hash": "53c740ac6498",
+   "seconds": 6.31
+  },
+  "good-bacteria/5-dad": {
+   "hash": "ab056566e634",
+   "seconds": 21.14
+  },
+  "good-bacteria/5-nian": {
+   "hash": "5ef969a16dca",
+   "seconds": 7.18
+  },
+  "good-bacteria/6-dad": {
+   "hash": "4413a5ff46c3",
+   "seconds": 12.55
+  },
+  "good-bacteria/6-nian": {
+   "hash": "8f4fced9b6fd",
+   "seconds": 15.29
   },
   "goosebumps/0-dad": {
    "hash": "a1e4b291919c",
@@ -1394,6 +1898,158 @@
    "hash": "f05db2cf4d13",
    "seconds": 14.81
   },
+  "hold-breath/0-dad": {
+   "hash": "02bba1acc698",
+   "seconds": 14.98
+  },
+  "hold-breath/0-nian": {
+   "hash": "395ff7259aa0",
+   "seconds": 10.63
+  },
+  "hold-breath/1-dad": {
+   "hash": "3a9f214841f0",
+   "seconds": 22.75
+  },
+  "hold-breath/1-nian": {
+   "hash": "ba46ba6353bc",
+   "seconds": 7.39
+  },
+  "hold-breath/2-dad": {
+   "hash": "fb9b23c9efcf",
+   "seconds": 24.31
+  },
+  "hold-breath/2-nian": {
+   "hash": "f3a7ed811edf",
+   "seconds": 8.23
+  },
+  "hold-breath/3-dad": {
+   "hash": "27e64d353a03",
+   "seconds": 23.06
+  },
+  "hold-breath/3-nian": {
+   "hash": "66bcae46a7db",
+   "seconds": 11.23
+  },
+  "hold-breath/4-dad": {
+   "hash": "7f633c85d89c",
+   "seconds": 17.16
+  },
+  "hold-breath/4-nian": {
+   "hash": "2fba165a7b63",
+   "seconds": 7.92
+  },
+  "hold-breath/5-dad": {
+   "hash": "c9650c10ab85",
+   "seconds": 10.99
+  },
+  "hold-breath/5-nian": {
+   "hash": "c5d626a902a8",
+   "seconds": 15.82
+  },
+  "knuckle-crack/0-dad": {
+   "hash": "19f13e6ac1c7",
+   "seconds": 15.55
+  },
+  "knuckle-crack/0-nian": {
+   "hash": "6a09ebc9a58a",
+   "seconds": 8.74
+  },
+  "knuckle-crack/1-dad": {
+   "hash": "41f9c911e23f",
+   "seconds": 16.56
+  },
+  "knuckle-crack/1-nian": {
+   "hash": "4eb41166598d",
+   "seconds": 6.05
+  },
+  "knuckle-crack/2-dad": {
+   "hash": "92b948454f5e",
+   "seconds": 18.36
+  },
+  "knuckle-crack/2-nian": {
+   "hash": "556b26d29f0f",
+   "seconds": 7.78
+  },
+  "knuckle-crack/3-dad": {
+   "hash": "13d5940fe518",
+   "seconds": 18.14
+  },
+  "knuckle-crack/3-nian": {
+   "hash": "08c5427d64e1",
+   "seconds": 4.49
+  },
+  "knuckle-crack/4-dad": {
+   "hash": "ad2dc51b3f31",
+   "seconds": 21.48
+  },
+  "knuckle-crack/4-nian": {
+   "hash": "20690081efaf",
+   "seconds": 6.58
+  },
+  "knuckle-crack/5-dad": {
+   "hash": "4c13b1a26c40",
+   "seconds": 12.65
+  },
+  "knuckle-crack/5-nian": {
+   "hash": "a9bfaf274117",
+   "seconds": 15.26
+  },
+  "leg-cramp/0-dad": {
+   "hash": "fa404b22d0c4",
+   "seconds": 18.98
+  },
+  "leg-cramp/0-nian": {
+   "hash": "7c1b7b3fcf08",
+   "seconds": 8.93
+  },
+  "leg-cramp/1-dad": {
+   "hash": "9fbb348a61aa",
+   "seconds": 20.83
+  },
+  "leg-cramp/1-nian": {
+   "hash": "bb6a5e048dbc",
+   "seconds": 5.4
+  },
+  "leg-cramp/2-dad": {
+   "hash": "7b5d1d18b21b",
+   "seconds": 22.85
+  },
+  "leg-cramp/2-nian": {
+   "hash": "9b2cecfc72a2",
+   "seconds": 7.7
+  },
+  "leg-cramp/3-dad": {
+   "hash": "b8c50f1e344a",
+   "seconds": 20.42
+  },
+  "leg-cramp/3-nian": {
+   "hash": "223945d45326",
+   "seconds": 7.87
+  },
+  "leg-cramp/4-dad": {
+   "hash": "1a2c0bd7aa09",
+   "seconds": 19.75
+  },
+  "leg-cramp/4-nian": {
+   "hash": "522b16c5950d",
+   "seconds": 5.18
+  },
+  "leg-cramp/5-dad": {
+   "hash": "8fd117388b0a",
+   "seconds": 20.11
+  },
+  "leg-cramp/5-nian": {
+   "hash": "dee4814e9597",
+   "seconds": 7.2
+  },
+  "leg-cramp/6-dad": {
+   "hash": "ed8426c2f611",
+   "seconds": 10.61
+  },
+  "leg-cramp/6-nian": {
+   "hash": "1aeea572f2bf",
+   "seconds": 15.38
+  },
   "look-like/0-dad": {
    "hash": "4deec2587bec",
    "seconds": 13.08
@@ -1562,6 +2218,118 @@
    "hash": "a81db933abcd",
    "seconds": 14.78
   },
+  "mosquito-bite/0-dad": {
+   "hash": "e04d253812a6",
+   "seconds": 16.49
+  },
+  "mosquito-bite/0-nian": {
+   "hash": "f348fbac956f",
+   "seconds": 7.39
+  },
+  "mosquito-bite/1-dad": {
+   "hash": "c1093bce2590",
+   "seconds": 21
+  },
+  "mosquito-bite/1-nian": {
+   "hash": "4224add46f63",
+   "seconds": 4.44
+  },
+  "mosquito-bite/2-dad": {
+   "hash": "1dfc79da1296",
+   "seconds": 17.74
+  },
+  "mosquito-bite/2-nian": {
+   "hash": "757c0f24c1e4",
+   "seconds": 5.64
+  },
+  "mosquito-bite/3-dad": {
+   "hash": "2d5ef4edd479",
+   "seconds": 20.47
+  },
+  "mosquito-bite/3-nian": {
+   "hash": "648dc596b24e",
+   "seconds": 7.27
+  },
+  "mosquito-bite/4-dad": {
+   "hash": "21459bad6e31",
+   "seconds": 14.42
+  },
+  "mosquito-bite/4-nian": {
+   "hash": "1a3cad9a64ab",
+   "seconds": 6.94
+  },
+  "mosquito-bite/5-dad": {
+   "hash": "38390972d266",
+   "seconds": 20.74
+  },
+  "mosquito-bite/5-nian": {
+   "hash": "1dddebba92b8",
+   "seconds": 7.44
+  },
+  "mosquito-bite/6-dad": {
+   "hash": "e003d881a9e8",
+   "seconds": 10.92
+  },
+  "mosquito-bite/6-nian": {
+   "hash": "9ed013199f11",
+   "seconds": 12.89
+  },
+  "motion-sickness/0-dad": {
+   "hash": "9811ad7a5a00",
+   "seconds": 7.68
+  },
+  "motion-sickness/0-nian": {
+   "hash": "08a408a7390c",
+   "seconds": 8.78
+  },
+  "motion-sickness/1-dad": {
+   "hash": "12fcae64aa2d",
+   "seconds": 18.05
+  },
+  "motion-sickness/1-nian": {
+   "hash": "65f60eb80af6",
+   "seconds": 5.5
+  },
+  "motion-sickness/2-dad": {
+   "hash": "3c8e6333b626",
+   "seconds": 18.5
+  },
+  "motion-sickness/2-nian": {
+   "hash": "07bd0518c4b1",
+   "seconds": 4.34
+  },
+  "motion-sickness/3-dad": {
+   "hash": "5dc7e85658ae",
+   "seconds": 21.5
+  },
+  "motion-sickness/3-nian": {
+   "hash": "e3797078a73a",
+   "seconds": 6.22
+  },
+  "motion-sickness/4-dad": {
+   "hash": "feda63498642",
+   "seconds": 19.66
+  },
+  "motion-sickness/4-nian": {
+   "hash": "062cee1a06b8",
+   "seconds": 8.21
+  },
+  "motion-sickness/5-dad": {
+   "hash": "fc283c29d3b4",
+   "seconds": 17.64
+  },
+  "motion-sickness/5-nian": {
+   "hash": "9e17b1d17380",
+   "seconds": 3.98
+  },
+  "motion-sickness/6-dad": {
+   "hash": "8cfa35b1d51b",
+   "seconds": 12.6
+  },
+  "motion-sickness/6-nian": {
+   "hash": "5a2a60e9b31b",
+   "seconds": 16.06
+  },
   "muscle-sore/0-dad": {
    "hash": "ff8fc5492847",
    "seconds": 15.98
@@ -1626,6 +2394,54 @@
    "hash": "48743be12d60",
    "seconds": 15.48
   },
+  "myopia/0-dad": {
+   "hash": "c941052ac61b",
+   "seconds": 20.42
+  },
+  "myopia/0-nian": {
+   "hash": "5167bf0d4bd3",
+   "seconds": 11.02
+  },
+  "myopia/1-dad": {
+   "hash": "2b7b5929b80f",
+   "seconds": 24.14
+  },
+  "myopia/1-nian": {
+   "hash": "cb03b7be5748",
+   "seconds": 6.38
+  },
+  "myopia/2-dad": {
+   "hash": "da9e009e4eff",
+   "seconds": 17.47
+  },
+  "myopia/2-nian": {
+   "hash": "e9f2e1203d05",
+   "seconds": 4.06
+  },
+  "myopia/3-dad": {
+   "hash": "f660e8ed43c2",
+   "seconds": 25.2
+  },
+  "myopia/3-nian": {
+   "hash": "108e35f7526b",
+   "seconds": 9.84
+  },
+  "myopia/4-dad": {
+   "hash": "885dcee62c9e",
+   "seconds": 20.71
+  },
+  "myopia/4-nian": {
+   "hash": "20f8f6e0442f",
+   "seconds": 8.06
+  },
+  "myopia/5-dad": {
+   "hash": "f16abb22555f",
+   "seconds": 13.32
+  },
+  "myopia/5-nian": {
+   "hash": "6088e1404fa2",
+   "seconds": 15.36
+  },
   "nails/0-dad": {
    "hash": "d4bade57343d",
    "seconds": 18.26
@@ -1689,6 +2505,62 @@
   "nails/7-nian": {
    "hash": "987190558e19",
    "seconds": 15.46
+  },
+  "nosebleed/0-dad": {
+   "hash": "7a88adcb36f1",
+   "seconds": 15.65
+  },
+  "nosebleed/0-nian": {
+   "hash": "9b6bf1129d7c",
+   "seconds": 7.46
+  },
+  "nosebleed/1-dad": {
+   "hash": "ab71802e22df",
+   "seconds": 18.38
+  },
+  "nosebleed/1-nian": {
+   "hash": "16d5cc576cfc",
+   "seconds": 5.23
+  },
+  "nosebleed/2-dad": {
+   "hash": "85dfe4a23a2c",
+   "seconds": 15.65
+  },
+  "nosebleed/2-nian": {
+   "hash": "a60a71bccad8",
+   "seconds": 5.38
+  },
+  "nosebleed/3-dad": {
+   "hash": "ee83160c7f44",
+   "seconds": 16.08
+  },
+  "nosebleed/3-nian": {
+   "hash": "139de231650e",
+   "seconds": 6.53
+  },
+  "nosebleed/4-dad": {
+   "hash": "fccb4d7a0846",
+   "seconds": 17.35
+  },
+  "nosebleed/4-nian": {
+   "hash": "1b84182e7c30",
+   "seconds": 4.94
+  },
+  "nosebleed/5-dad": {
+   "hash": "ecb4f995ddbe",
+   "seconds": 18.31
+  },
+  "nosebleed/5-nian": {
+   "hash": "de3d635f5b46",
+   "seconds": 6.86
+  },
+  "nosebleed/6-dad": {
+   "hash": "103caacb6730",
+   "seconds": 12.82
+  },
+  "nosebleed/6-nian": {
+   "hash": "8e0103846134",
+   "seconds": 15.43
   },
   "pain/0-dad": {
    "hash": "22e8798322b8",
@@ -1930,6 +2802,62 @@
    "hash": "04e891797793",
    "seconds": 14.52
   },
+  "poop-brown/0-dad": {
+   "hash": "6f1564056c5c",
+   "seconds": 17.45
+  },
+  "poop-brown/0-nian": {
+   "hash": "448a1bb62921",
+   "seconds": 9.65
+  },
+  "poop-brown/1-dad": {
+   "hash": "81806d3e052e",
+   "seconds": 18.29
+  },
+  "poop-brown/1-nian": {
+   "hash": "6b19a59ece57",
+   "seconds": 5.23
+  },
+  "poop-brown/2-dad": {
+   "hash": "a5ebd6394539",
+   "seconds": 18.62
+  },
+  "poop-brown/2-nian": {
+   "hash": "a62128506908",
+   "seconds": 5.21
+  },
+  "poop-brown/3-dad": {
+   "hash": "91ff6a1c8dc6",
+   "seconds": 18.86
+  },
+  "poop-brown/3-nian": {
+   "hash": "23c8adf90fb1",
+   "seconds": 6.14
+  },
+  "poop-brown/4-dad": {
+   "hash": "a7cd1639387d",
+   "seconds": 19.56
+  },
+  "poop-brown/4-nian": {
+   "hash": "cf74c6862d11",
+   "seconds": 5.52
+  },
+  "poop-brown/5-dad": {
+   "hash": "84a86991307c",
+   "seconds": 21.65
+  },
+  "poop-brown/5-nian": {
+   "hash": "b3c9379d76c9",
+   "seconds": 5.95
+  },
+  "poop-brown/6-dad": {
+   "hash": "e5542ab83741",
+   "seconds": 9.24
+  },
+  "poop-brown/6-nian": {
+   "hash": "9c008f7f1ea7",
+   "seconds": 14.28
+  },
   "pulse/0-dad": {
    "hash": "3bafbc05431b",
    "seconds": 13.9
@@ -1985,6 +2913,54 @@
   "pulse/6-nian": {
    "hash": "091b8ea6b9dd",
    "seconds": 14.4
+  },
+  "red-lips/0-dad": {
+   "hash": "31fb66535cfd",
+   "seconds": 9.29
+  },
+  "red-lips/0-nian": {
+   "hash": "e0778e3776a1",
+   "seconds": 10.51
+  },
+  "red-lips/1-dad": {
+   "hash": "0f2ef159125f",
+   "seconds": 9.12
+  },
+  "red-lips/1-nian": {
+   "hash": "645ab69b537f",
+   "seconds": 7.03
+  },
+  "red-lips/2-dad": {
+   "hash": "60efa38955ee",
+   "seconds": 24.38
+  },
+  "red-lips/2-nian": {
+   "hash": "bf4662a37d26",
+   "seconds": 8.02
+  },
+  "red-lips/3-dad": {
+   "hash": "c8ee7cc2b88f",
+   "seconds": 16.32
+  },
+  "red-lips/3-nian": {
+   "hash": "e2b018100847",
+   "seconds": 7.3
+  },
+  "red-lips/4-dad": {
+   "hash": "394898eda933",
+   "seconds": 25.97
+  },
+  "red-lips/4-nian": {
+   "hash": "a3e7f3d4b701",
+   "seconds": 7.42
+  },
+  "red-lips/5-dad": {
+   "hash": "46be1cfb3c93",
+   "seconds": 12.67
+  },
+  "red-lips/5-nian": {
+   "hash": "b4ec54442d8a",
+   "seconds": 14.59
   },
   "runny-nose/0-dad": {
    "hash": "c794c7f5cf68",
@@ -2106,6 +3082,54 @@
    "hash": "f9ea1c24f517",
    "seconds": 16.68
   },
+  "shiver-cold/0-dad": {
+   "hash": "4c8c5ad4943a",
+   "seconds": 15.26
+  },
+  "shiver-cold/0-nian": {
+   "hash": "2f9621950aaa",
+   "seconds": 9.7
+  },
+  "shiver-cold/1-dad": {
+   "hash": "a494c406692f",
+   "seconds": 24.65
+  },
+  "shiver-cold/1-nian": {
+   "hash": "525158e927e2",
+   "seconds": 5.06
+  },
+  "shiver-cold/2-dad": {
+   "hash": "640055b65d58",
+   "seconds": 16.37
+  },
+  "shiver-cold/2-nian": {
+   "hash": "53b2866ff9c4",
+   "seconds": 6.31
+  },
+  "shiver-cold/3-dad": {
+   "hash": "a58c6d4c1795",
+   "seconds": 20.21
+  },
+  "shiver-cold/3-nian": {
+   "hash": "862d0f9c224b",
+   "seconds": 8.64
+  },
+  "shiver-cold/4-dad": {
+   "hash": "e01a067dcbb0",
+   "seconds": 25.46
+  },
+  "shiver-cold/4-nian": {
+   "hash": "0121e8817ef4",
+   "seconds": 9.58
+  },
+  "shiver-cold/5-dad": {
+   "hash": "12789421d0f5",
+   "seconds": 10.44
+  },
+  "shiver-cold/5-nian": {
+   "hash": "40fc08d3c0c5",
+   "seconds": 14.93
+  },
   "sneeze/0-dad": {
    "hash": "cc5cd999e421",
    "seconds": 18.89
@@ -2161,6 +3185,62 @@
   "sneeze/6-nian": {
    "hash": "2f50c766993b",
    "seconds": 15.02
+  },
+  "sore-throat/0-dad": {
+   "hash": "f33337be924b",
+   "seconds": 17.4
+  },
+  "sore-throat/0-nian": {
+   "hash": "8be1d7fc05a5",
+   "seconds": 8.52
+  },
+  "sore-throat/1-dad": {
+   "hash": "d18be66d4d9d",
+   "seconds": 16.32
+  },
+  "sore-throat/1-nian": {
+   "hash": "93550e5329a2",
+   "seconds": 6.22
+  },
+  "sore-throat/2-dad": {
+   "hash": "3929648b011c",
+   "seconds": 21.79
+  },
+  "sore-throat/2-nian": {
+   "hash": "c87727ba7f3d",
+   "seconds": 7.92
+  },
+  "sore-throat/3-dad": {
+   "hash": "2e118395ccb6",
+   "seconds": 21.89
+  },
+  "sore-throat/3-nian": {
+   "hash": "e9096f2e0c72",
+   "seconds": 6.24
+  },
+  "sore-throat/4-dad": {
+   "hash": "5dfeeeb11ea5",
+   "seconds": 20.59
+  },
+  "sore-throat/4-nian": {
+   "hash": "96df370a3abe",
+   "seconds": 6.89
+  },
+  "sore-throat/5-dad": {
+   "hash": "a20192f93731",
+   "seconds": 24.55
+  },
+  "sore-throat/5-nian": {
+   "hash": "0639612d2e37",
+   "seconds": 5.93
+  },
+  "sore-throat/6-dad": {
+   "hash": "4813ea151fb5",
+   "seconds": 12.07
+  },
+  "sore-throat/6-nian": {
+   "hash": "c8afec712d93",
+   "seconds": 16.3
   },
   "sound-where/0-dad": {
    "hash": "d764a45c770b",
@@ -2225,6 +3305,150 @@
   "sound-where/7-nian": {
    "hash": "14e0b100ede1",
    "seconds": 13.37
+  },
+  "spicy-hot/0-dad": {
+   "hash": "a6377c864dde",
+   "seconds": 15.19
+  },
+  "spicy-hot/0-nian": {
+   "hash": "9feeb63083de",
+   "seconds": 10.1
+  },
+  "spicy-hot/1-dad": {
+   "hash": "d6b6da31b8fb",
+   "seconds": 22.03
+  },
+  "spicy-hot/1-nian": {
+   "hash": "ee445c4384ef",
+   "seconds": 4.99
+  },
+  "spicy-hot/2-dad": {
+   "hash": "f97d6b94d0b3",
+   "seconds": 21.38
+  },
+  "spicy-hot/2-nian": {
+   "hash": "f1d0ef3504d0",
+   "seconds": 9.7
+  },
+  "spicy-hot/3-dad": {
+   "hash": "c34dd1b43e33",
+   "seconds": 19.46
+  },
+  "spicy-hot/3-nian": {
+   "hash": "b873114753a2",
+   "seconds": 9.07
+  },
+  "spicy-hot/4-dad": {
+   "hash": "ab0d997b7209",
+   "seconds": 19.22
+  },
+  "spicy-hot/4-nian": {
+   "hash": "f5b7972803a2",
+   "seconds": 6.34
+  },
+  "spicy-hot/5-dad": {
+   "hash": "3c4146b655de",
+   "seconds": 11.38
+  },
+  "spicy-hot/5-nian": {
+   "hash": "682cf48c490b",
+   "seconds": 13.1
+  },
+  "stand-dizzy/0-dad": {
+   "hash": "f0313e0a3fdb",
+   "seconds": 10.58
+  },
+  "stand-dizzy/0-nian": {
+   "hash": "4a0c0663c5cd",
+   "seconds": 9.6
+  },
+  "stand-dizzy/1-dad": {
+   "hash": "0233c0d31cdb",
+   "seconds": 19.97
+  },
+  "stand-dizzy/1-nian": {
+   "hash": "450b68d363bf",
+   "seconds": 5.4
+  },
+  "stand-dizzy/2-dad": {
+   "hash": "293c2a59d4ee",
+   "seconds": 16.34
+  },
+  "stand-dizzy/2-nian": {
+   "hash": "d4a011796e46",
+   "seconds": 7.08
+  },
+  "stand-dizzy/3-dad": {
+   "hash": "03c39f734a37",
+   "seconds": 22.42
+  },
+  "stand-dizzy/3-nian": {
+   "hash": "14fd595a5007",
+   "seconds": 4.7
+  },
+  "stand-dizzy/4-dad": {
+   "hash": "3b48499c805c",
+   "seconds": 22.58
+  },
+  "stand-dizzy/4-nian": {
+   "hash": "387c9c7021f9",
+   "seconds": 8.78
+  },
+  "stand-dizzy/5-dad": {
+   "hash": "f154bc8bc9f7",
+   "seconds": 15.29
+  },
+  "stand-dizzy/5-nian": {
+   "hash": "14033e402f66",
+   "seconds": 16.92
+  },
+  "stomach-acid/0-dad": {
+   "hash": "6e98f45a1d73",
+   "seconds": 14.98
+  },
+  "stomach-acid/0-nian": {
+   "hash": "4035faddcc06",
+   "seconds": 10.51
+  },
+  "stomach-acid/1-dad": {
+   "hash": "a923f16c9a90",
+   "seconds": 20.78
+  },
+  "stomach-acid/1-nian": {
+   "hash": "306aa990a27a",
+   "seconds": 7.37
+  },
+  "stomach-acid/2-dad": {
+   "hash": "a5b3992e0399",
+   "seconds": 19.97
+  },
+  "stomach-acid/2-nian": {
+   "hash": "7d36a0c60ed1",
+   "seconds": 5.57
+  },
+  "stomach-acid/3-dad": {
+   "hash": "176a8f81dfbf",
+   "seconds": 19.15
+  },
+  "stomach-acid/3-nian": {
+   "hash": "bea09e84c438",
+   "seconds": 7.46
+  },
+  "stomach-acid/4-dad": {
+   "hash": "9e050c0e18d9",
+   "seconds": 21.17
+  },
+  "stomach-acid/4-nian": {
+   "hash": "92adaf0701cd",
+   "seconds": 6.41
+  },
+  "stomach-acid/5-dad": {
+   "hash": "394bc95f1141",
+   "seconds": 15.1
+  },
+  "stomach-acid/5-nian": {
+   "hash": "a8acbe20be66",
+   "seconds": 14.5
   },
   "stomach-growl/0-dad": {
    "hash": "6ee79e418849",
@@ -2345,6 +3569,62 @@
   "stuffy-taste/7-nian": {
    "hash": "9a1617c62bf7",
    "seconds": 13.39
+  },
+  "sunburn-tan/0-dad": {
+   "hash": "dfda980ff52b",
+   "seconds": 13.99
+  },
+  "sunburn-tan/0-nian": {
+   "hash": "28024b51c54b",
+   "seconds": 8.57
+  },
+  "sunburn-tan/1-dad": {
+   "hash": "151a01a36501",
+   "seconds": 21.7
+  },
+  "sunburn-tan/1-nian": {
+   "hash": "0fd56e86afae",
+   "seconds": 4.61
+  },
+  "sunburn-tan/2-dad": {
+   "hash": "6267276e8407",
+   "seconds": 18.34
+  },
+  "sunburn-tan/2-nian": {
+   "hash": "6461715e7485",
+   "seconds": 7.18
+  },
+  "sunburn-tan/3-dad": {
+   "hash": "5d4946a004d6",
+   "seconds": 20.76
+  },
+  "sunburn-tan/3-nian": {
+   "hash": "ce01b5f99378",
+   "seconds": 5.66
+  },
+  "sunburn-tan/4-dad": {
+   "hash": "84113530d06b",
+   "seconds": 19.58
+  },
+  "sunburn-tan/4-nian": {
+   "hash": "906ce9076297",
+   "seconds": 5.95
+  },
+  "sunburn-tan/5-dad": {
+   "hash": "7154c894254e",
+   "seconds": 20.47
+  },
+  "sunburn-tan/5-nian": {
+   "hash": "a304629bea6c",
+   "seconds": 5.3
+  },
+  "sunburn-tan/6-dad": {
+   "hash": "9da3ddb947d0",
+   "seconds": 11.64
+  },
+  "sunburn-tan/6-nian": {
+   "hash": "958d222e5e05",
+   "seconds": 14.95
   },
   "sweat/0-dad": {
    "hash": "a7ba2ede2bac",
@@ -2473,6 +3753,158 @@
   "tears/7-nian": {
    "hash": "d415c6d54072",
    "seconds": 13.32
+  },
+  "tickle/0-dad": {
+   "hash": "8a7e0bc02c69",
+   "seconds": 14.04
+  },
+  "tickle/0-nian": {
+   "hash": "d90bda7f2ec7",
+   "seconds": 8.26
+  },
+  "tickle/1-dad": {
+   "hash": "9e2c80fe8b99",
+   "seconds": 18.26
+  },
+  "tickle/1-nian": {
+   "hash": "c7e38cc43c17",
+   "seconds": 4.68
+  },
+  "tickle/2-dad": {
+   "hash": "1894716e1a64",
+   "seconds": 20.04
+  },
+  "tickle/2-nian": {
+   "hash": "4234a994b374",
+   "seconds": 4.9
+  },
+  "tickle/3-dad": {
+   "hash": "ceffa8bdefe0",
+   "seconds": 21.91
+  },
+  "tickle/3-nian": {
+   "hash": "d826e0175227",
+   "seconds": 5.28
+  },
+  "tickle/4-dad": {
+   "hash": "4ce4f07de38d",
+   "seconds": 21.07
+  },
+  "tickle/4-nian": {
+   "hash": "07066b4cebf0",
+   "seconds": 9.26
+  },
+  "tickle/5-dad": {
+   "hash": "bfe28bdbaa96",
+   "seconds": 20.35
+  },
+  "tickle/5-nian": {
+   "hash": "1f17d79ba9b2",
+   "seconds": 6.1
+  },
+  "tickle/6-dad": {
+   "hash": "a25bb200741e",
+   "seconds": 11.28
+  },
+  "tickle/6-nian": {
+   "hash": "b7765345a083",
+   "seconds": 12.84
+  },
+  "tooth-cavity/0-dad": {
+   "hash": "8f09b05ccf20",
+   "seconds": 16.08
+  },
+  "tooth-cavity/0-nian": {
+   "hash": "6459075cccc4",
+   "seconds": 8.78
+  },
+  "tooth-cavity/1-dad": {
+   "hash": "c9f060c03c35",
+   "seconds": 22.46
+  },
+  "tooth-cavity/1-nian": {
+   "hash": "be87962ca27b",
+   "seconds": 7.01
+  },
+  "tooth-cavity/2-dad": {
+   "hash": "96f574fe239d",
+   "seconds": 19.75
+  },
+  "tooth-cavity/2-nian": {
+   "hash": "6955833900fe",
+   "seconds": 9.12
+  },
+  "tooth-cavity/3-dad": {
+   "hash": "1eb62138867f",
+   "seconds": 20.66
+  },
+  "tooth-cavity/3-nian": {
+   "hash": "5082fd326a3b",
+   "seconds": 9.12
+  },
+  "tooth-cavity/4-dad": {
+   "hash": "c23e0d8e4b40",
+   "seconds": 22.03
+  },
+  "tooth-cavity/4-nian": {
+   "hash": "6ba5877c6705",
+   "seconds": 7.08
+  },
+  "tooth-cavity/5-dad": {
+   "hash": "d8d9204e7705",
+   "seconds": 12
+  },
+  "tooth-cavity/5-nian": {
+   "hash": "e8e4ba50a426",
+   "seconds": 14.98
+  },
+  "twins/0-dad": {
+   "hash": "a002209ac8b7",
+   "seconds": 12
+  },
+  "twins/0-nian": {
+   "hash": "3f9400ce2b9c",
+   "seconds": 10.94
+  },
+  "twins/1-dad": {
+   "hash": "b4b6eef6ae48",
+   "seconds": 24.65
+  },
+  "twins/1-nian": {
+   "hash": "a0430aafe46f",
+   "seconds": 5.5
+  },
+  "twins/2-dad": {
+   "hash": "aa49327ff53a",
+   "seconds": 21.53
+  },
+  "twins/2-nian": {
+   "hash": "fb3e4355adac",
+   "seconds": 7.46
+  },
+  "twins/3-dad": {
+   "hash": "2ca061a9a5a3",
+   "seconds": 20.4
+  },
+  "twins/3-nian": {
+   "hash": "486b7d7cc6aa",
+   "seconds": 8.11
+  },
+  "twins/4-dad": {
+   "hash": "acff5dabb9d7",
+   "seconds": 17.4
+  },
+  "twins/4-nian": {
+   "hash": "9296440f9f6d",
+   "seconds": 9.62
+  },
+  "twins/5-dad": {
+   "hash": "22596b36239f",
+   "seconds": 14.09
+  },
+  "twins/5-nian": {
+   "hash": "1c38bd096fb1",
+   "seconds": 13.1
   },
   "vaccine/0-dad": {
    "hash": "6abe6342f755",
@@ -2657,6 +4089,54 @@
   "why-sleep/6-nian": {
    "hash": "f6eececff15a",
    "seconds": 15.07
+  },
+  "winter-breath/0-dad": {
+   "hash": "c51ca8ddac31",
+   "seconds": 11.02
+  },
+  "winter-breath/0-nian": {
+   "hash": "80117060a61e",
+   "seconds": 9.26
+  },
+  "winter-breath/1-dad": {
+   "hash": "441bb419ae37",
+   "seconds": 14.74
+  },
+  "winter-breath/1-nian": {
+   "hash": "00dcb2ee7aa0",
+   "seconds": 5.09
+  },
+  "winter-breath/2-dad": {
+   "hash": "d50b23d16d20",
+   "seconds": 23.57
+  },
+  "winter-breath/2-nian": {
+   "hash": "e4708ea6df08",
+   "seconds": 7.03
+  },
+  "winter-breath/3-dad": {
+   "hash": "9f8b9f7370f2",
+   "seconds": 19.78
+  },
+  "winter-breath/3-nian": {
+   "hash": "9a059d985c12",
+   "seconds": 6.48
+  },
+  "winter-breath/4-dad": {
+   "hash": "f0d954651c9b",
+   "seconds": 17.33
+  },
+  "winter-breath/4-nian": {
+   "hash": "befe2e2e173b",
+   "seconds": 8.86
+  },
+  "winter-breath/5-dad": {
+   "hash": "be22e4e54dc8",
+   "seconds": 8.93
+  },
+  "winter-breath/5-nian": {
+   "hash": "d95e1dcccdcd",
+   "seconds": 14.81
   },
   "wrinkly-water/0-dad": {
    "hash": "13d8c9b459ba",

@@ -594,5 +594,144 @@ export const films: readonly Film[] = [
         ]
       }
     ]
+  },
+  {
+    question: "fingerprints",
+    scenes: [
+      {
+        turn: 0,
+        title: "人人不同的小山脊",
+        view: "hand",
+        layers: ["skin"],
+        camera: [{ t: 0, at: "fingerTip", zoom: 2.1 }],
+        duration: 8,
+        cues: [
+          { kind: "highlight", at: "fingerTip", color: "#ff9f43", from: 0.4 },
+          { kind: "label", at: "fingerTip", text: "弯弯曲曲的小山脊", side: "right", from: 1 },
+          { kind: "pulse", at: "fingerMiddle", color: "#4fb6ff", radius: 42, from: 2.8 },
+          { kind: "text", at: [600, 810], text: "全世界几十亿人都不重样", color: "#2f7d32", from: 4.4 }
+        ]
+      },
+      {
+        turn: 1,
+        title: "妈妈肚子里压出来",
+        view: "blank",
+        duration: 8.5,
+        cues: [
+          { kind: "shape", shape: "pill", at: [300, 320], size: [260, 96], color: "#efe6ff", text: "🧬 定大花样", from: 0.4 },
+          { kind: "shape", shape: "circle", at: [760, 430], size: [420, 380], color: "#bfe3ff", outline: true, from: 1.2 },
+          { kind: "sprite", icon: "👶", path: [[760, 430]], size: 145, wobble: true, from: 1.8 },
+          { kind: "label", at: [760, 240], text: "羊水里每次摸压都不同", pos: [760, 140], from: 2.8 },
+          { kind: "text", at: [600, 790], text: "连双胞胎的纹路细节也不同", color: "#7a4fd6", from: 4.8 }
+        ]
+      },
+      {
+        turn: 2,
+        title: "底版刻在深皮肤层",
+        view: "blank",
+        duration: 8.5,
+        cues: [
+          { kind: "shape", shape: "circle", at: [340, 420], size: [220, 260], color: "#ffe08a", text: "等比放大", motion: "grow", over: 2.2, from: 0.4 },
+          { kind: "text", at: [340, 620], text: "手长大，分岔不变", size: "s", from: 1.4 },
+          { kind: "shape", shape: "rect", at: [840, 480], size: [360, 140], color: "#f4b89a", text: "深层底版", from: 2.8 },
+          { kind: "shape", shape: "rect", at: [840, 370], size: [360, 64], color: "#ffe4d0", outline: true, text: "表皮长回", from: 3.6 },
+          { kind: "text", at: [600, 790], text: "轻微擦破表皮，照原样印出来", color: "#2f7d32", from: 5 }
+        ]
+      },
+      {
+        turn: 3,
+        title: "抓得稳还摸得灵",
+        view: "blank",
+        duration: 8.5,
+        cues: [
+          { kind: "sprite", icon: "🥛", path: [[320, 380]], size: 115, from: 0.4 },
+          { kind: "text", at: [320, 540], text: "增大摩擦抓得稳", size: "s", color: "#2f7d32", from: 1 },
+          { kind: "flow", path: [[680, 430], [740, 400], [800, 430], [860, 400], [920, 430], [980, 400]], color: "#ff9f43", count: 12, speed: 60, from: 2.2 },
+          { kind: "pulse", at: [830, 415], color: "#ffcf3f", radius: 95, from: 3 },
+          { kind: "text", at: [830, 540], text: "细微震动放大触觉", size: "s", color: "#ff9f43", from: 3.6 },
+          { kind: "text", at: [600, 770], text: "闭着眼也能摸出一根头发丝", color: "#7a4fd6", from: 5.2 }
+        ]
+      },
+      {
+        turn: 4,
+        title: "斗和簸箕不看命运",
+        view: "blank",
+        duration: 8.5,
+        cues: [
+          { kind: "shape", shape: "circle", at: [400, 330], size: [180, 180], color: "#ffe08a", text: "🌀 斗", from: 0.4, to: 4.8 },
+          { kind: "shape", shape: "circle", at: [800, 330], size: [180, 180], color: "#bfe3ff", text: "〰️ 簸箕", from: 1.1, to: 4.8 },
+          { kind: "myth", wrong: "一斗穷二斗富能看出命运", right: "只和胎儿指肚小肉垫高低有关", from: 5 }
+        ]
+      }
+    ]
+  },
+  {
+    question: "twins",
+    scenes: [
+      {
+        turn: 0,
+        title: "双胞胎有两种来法",
+        view: "blank",
+        duration: 8,
+        cues: [
+          { kind: "shape", shape: "rect", at: [330, 420], size: [400, 280], color: "#efe6ff", text: "👦👦 同卵", from: 0.4 },
+          { kind: "text", at: [330, 610], text: "长得像照镜子一样", size: "s", color: "#7a4fd6", from: 1 },
+          { kind: "shape", shape: "rect", at: [870, 420], size: [400, 280], color: "#ffe8cc", outline: true, text: "👦👧 异卵", from: 2 },
+          { kind: "text", at: [870, 610], text: "可以一男一女不太像", size: "s", color: "#ff9f43", from: 2.6 },
+          { kind: "text", at: [600, 780], text: "同卵和异卵的起点完全不同！", color: "#2f7d32", from: 4.4 }
+        ]
+      },
+      {
+        turn: 1,
+        title: "同卵：一个细胞团分家",
+        view: "blank",
+        duration: 8.5,
+        cues: [
+          { kind: "shape", shape: "circle", at: [600, 340], size: [190, 190], color: "#ffc06a", text: "1个受精卵", from: 0.3, to: 2.8 },
+          { kind: "shape", shape: "circle", at: [400, 380], size: [170, 170], color: "#ffe08a", text: "宝宝A", from: 2.8 },
+          { kind: "shape", shape: "circle", at: [800, 380], size: [170, 170], color: "#ffe08a", text: "宝宝B", from: 2.8 },
+          { kind: "text", at: [600, 610], text: "共用同一套 DNA 说明书", size: "m", color: "#7a4fd6", from: 3.6 },
+          { kind: "text", at: [600, 770], text: "性别相同，长相像复制粘贴！", color: "#2f7d32", from: 4.8 }
+        ]
+      },
+      {
+        turn: 2,
+        title: "异卵：两颗卵子当室友",
+        view: "blank",
+        duration: 8.5,
+        cues: [
+          { kind: "shape", shape: "circle", at: [360, 360], size: [165, 165], color: "#8db6f0", text: "受精卵①", from: 0.4 },
+          { kind: "shape", shape: "circle", at: [840, 360], size: [165, 165], color: "#ff9fbf", text: "受精卵②", from: 1.2 },
+          { kind: "shape", shape: "rect", at: [600, 360], size: [860, 300], color: "rgba(255,225,236,0.3)", outline: true, from: 2 },
+          { kind: "count", at: [600, 640], label: "一起住子宫", start: 0, end: 9, unit: "个月", over: 2, from: 2.6 },
+          { kind: "text", at: [600, 810], text: "像同一天出生的普通哥哥妹妹", color: "#ff9f43", from: 4.8 }
+        ]
+      },
+      {
+        turn: 3,
+        title: "龙凤胎来自异卵双胞胎",
+        view: "blank",
+        duration: 8,
+        cues: [
+          { kind: "shape", shape: "pill", at: [340, 420], size: [340, 120], color: "#efe6ff", text: "同卵：同性别", from: 0.4 },
+          { kind: "shape", shape: "pill", at: [860, 420], size: [340, 120], color: "#ffe08a", text: "异卵：龙凤胎", from: 1.6 },
+          { kind: "sprite", icon: "🧬", path: [[600, 230]], size: 88, from: 2.6 },
+          { kind: "text", at: [600, 750], text: "受精那秒性别已写进DNA里", color: "#7a4fd6", from: 4.2 }
+        ]
+      },
+      {
+        turn: 4,
+        title: "默契来自了解连指纹不同",
+        view: "hand",
+        layers: ["skin"],
+        camera: [{ t: 0, at: "fingerTip", zoom: 2 }],
+        duration: 9,
+        cues: [
+          { kind: "highlight", at: "fingerTip", color: "#ff9f43", from: 0.4, to: 4.8 },
+          { kind: "label", at: "fingerTip", text: "同卵双胞胎指纹也不同", side: "right", from: 1, to: 4.8 },
+          { kind: "myth", wrong: "双胞胎有隔空传痛觉的超能力", right: "没超能力，默契是因为基因像又常相伴", from: 5 }
+        ]
+      }
+    ]
   }
 ];
