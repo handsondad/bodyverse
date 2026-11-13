@@ -32,7 +32,9 @@ npm run dev
 | `npm test` | 全部测试 |
 | `npm run build` | 生产构建，输出到 `dist/` |
 | `npm run preview` | 本地预览构建结果 |
+| `npm run new-question -- <系统> <问题id> [标题] [--write]` | 生成新问题的问答与动画模板 |
 | `npm run voice [-- <问题id>...]` | 给新的或改过的问答配音 |
+| `npm run film-shots -- <问题id>... [--mobile]` | 自动截出每场动画的关键画面供快速过目 |
 
 ## 部署
 
@@ -64,11 +66,9 @@ node tests/film-rules.mjs src/data/films/<系统>.ts
 | `src/components/journey/` | 3D 放大旅程 |
 | `public/anatomy/` | 解剖图集图层 |
 | `public/voice/` | 配音音频 |
-| `tools/atlas/`、`tools/voice/` | 生成图集和配音的工具 |
+| `tools/atlas/`、`tools/voice/` | 生成图集和配音的工具，外加 `new-question.mjs` 模板生成与 `film-shots.mjs` 自动截图 |
 | `tests/` | 测试和内容检查脚本 |
 | `skills/` | 内容和风格的 skill |
-
-`docs/` 下是早期版本（五个部位、四条主线、抽查周报）的流程文档，现在的网站不再按它们开发。
 
 ## 素材和许可
 

@@ -17,6 +17,7 @@ export function viewOf(scene: FilmScene): AtlasView | undefined {
 }
 
 const normalize = (use: LayerUse) => (typeof use === "string" ? { layer: use } : use);
+const charCount = (text: string) => [...text].filter((char) => char !== "\uFE0F").length;
 const ink = "#4a3b2a";
 
 /**
@@ -56,7 +57,7 @@ function Label({ cue, ctx }: { cue: Extract<Cue, { kind: "label" }>; ctx: Ctx })
   const side = cue.side ?? (ax < 600 ? "left" : "right");
   const offset: Record<string, Vec> = { left: [-170 * ui, -40 * ui], right: [170 * ui, -40 * ui], top: [0, -120 * ui], bottom: [0, 120 * ui] };
   const size = 30 * ui;
-  const width = cue.text.length * size + 28 * ui;
+  const width = charCount(cue.text) * size + 28 * ui;
   const height = size + 20 * ui;
   const [px, py] = keepInside(cue.pos ? resolvePoint(cue.pos, ctx.view) : [ax + offset[side][0], ay + offset[side][1]], width / 2, height / 2, ctx);
   const pop = ease.backOut((ctx.t - cue.from) / 0.45);
@@ -197,7 +198,7 @@ function Shape({ cue, ctx }: { cue: Extract<Cue, { kind: "shape" }>; ctx: Ctx })
   return (
     <g transform={`translate(${x} ${y}) rotate(${rotate}) scale(${scale})`} opacity={ctx.alpha}>
       {body}
-      {cue.text && <text className="film-text" fontSize={Math.min(30, h * 0.4, (w * 1.6) / cue.text.length)} textAnchor="middle" dominantBaseline="central" fill={ink}>{cue.text}</text>}
+      {cue.text && <text className="film-text" fontSize={Math.min(30, h * 0.4, (w * 1.6) / Math.max(charCount(cue.text), 1))} textAnchor="middle" dominantBaseline="central" fill={ink}>{cue.text}</text>}
     </g>
   );
 }
@@ -216,30 +217,32 @@ function BigText({ cue, ctx }: { cue: Extract<Cue, { kind: "text" }>; ctx: Ctx }
 }
 
 function Count({ cue, ctx }: { cue: Extract<Cue, { kind: "count" }>; ctx: Ctx }) {
-  const [x, y] = captionPoint(cue.at, ctx);
+  const s = captionScale(ctx);
+  const [x, y] = keepInside(captionPoint(cue.at, ctx), 150 * s, 70 * s, ctx);
   const value = cue.start + (cue.end - cue.start) * ease.inOut((ctx.t - cue.from) / (cue.over ?? 2));
   const { k } = ctx;
   return (
     <g opacity={ctx.alpha} transform={`translate(${x} ${y})`}>
-      <rect x={-150 * k} y={-70 * k} width={300 * k} height={140 * k} rx={28 * k} fill="#fff" stroke={ink} strokeWidth={3 * k} />
-      <text className="film-text" y={-34 * k} fontSize={Math.min(26 * captionScale(ctx), (270 * k) / [...cue.label].length)} textAnchor="middle" fill="#7a6a55">{cue.label}</text>
-      <text className="film-text film-big" y={22 * k} fontSize={58 * k} textAnchor="middle" fill={ink}>
-        {Math.round(value)}<tspan fontSize={24 * k}> {cue.unit ?? ""}</tspan>
+      <rect x={-150 * s} y={-70 * s} width={300 * s} height={140 * s} rx={28 * s} fill="#fff" stroke={ink} strokeWidth={3 * k} />
+      <text className="film-text" y={-34 * s} fontSize={Math.min(26 * s, (270 * s) / Math.max(charCount(cue.label), 1))} textAnchor="middle" fill="#7a6a55">{cue.label}</text>
+      <text className="film-text film-big" y={22 * s} fontSize={58 * s} textAnchor="middle" fill={ink}>
+        {Math.round(value)}<tspan fontSize={25 * s}> {cue.unit ?? ""}</tspan>
       </text>
     </g>
   );
 }
 
 function Meter({ cue, ctx }: { cue: Extract<Cue, { kind: "meter" }>; ctx: Ctx }) {
-  const [x, y] = captionPoint(cue.at, ctx);
+  const s = captionScale(ctx);
+  const width = 280 * s;
+  const [x, y] = keepInside(captionPoint(cue.at, ctx), width / 2, 34 * s, ctx);
   const { k } = ctx;
   const value = cue.start + (cue.end - cue.start) * ease.inOut((ctx.t - cue.from) / (cue.over ?? 2));
-  const width = 280 * k;
   return (
     <g opacity={ctx.alpha} transform={`translate(${x - width / 2} ${y})`}>
-      <text className="film-text" y={-14 * k} fontSize={Math.min(26 * captionScale(ctx), width / [...cue.label].length)} fill={ink}>{cue.label}</text>
-      <rect width={width} height={28 * k} rx={14 * k} fill="#fff" stroke={ink} strokeWidth={3 * k} />
-      <rect width={Math.max(width * Math.min(Math.max(value, 0), 1), 0)} height={28 * k} rx={14 * k} fill={cue.color ?? "#4fb6ff"} />
+      <text className="film-text" y={-14 * s} fontSize={Math.min(26 * s, width / Math.max(charCount(cue.label), 1))} fill={ink}>{cue.label}</text>
+      <rect width={width} height={28 * s} rx={14 * s} fill="#fff" stroke={ink} strokeWidth={3 * k} />
+      <rect width={Math.max(width * Math.min(Math.max(value, 0), 1), 0)} height={28 * s} rx={14 * s} fill={cue.color ?? "#4fb6ff"} />
     </g>
   );
 }
@@ -260,12 +263,12 @@ function renderCue(cue: Cue, ctx: Ctx): ReactNode {
   }
 }
 
-function Myth({ cue, t }: { cue: Extract<Cue, { kind: "myth" }>; t: number }) {
+function Myth({ cue, t, alpha }: { cue: Extract<Cue, { kind: "myth" }>; t: number; alpha: number }) {
   const local = t - cue.from;
   const strike = smooth((local - 0.9) / 0.5);
   const right = smooth((local - 1.6) / 0.4);
   return (
-    <div className="film-myth" style={{ opacity: envelope(t, cue.from, cue.to) }}>
+    <div className="film-myth" style={{ opacity: alpha }}>
       <span className="film-myth-wrong" style={{ "--strike": strike } as CSSProperties}>❌ {cue.wrong}</span>
       <span className="film-myth-right" style={{ opacity: right }}>✅ {cue.right}</span>
     </div>
@@ -323,7 +326,11 @@ export function FilmStage({ scene, t, previous, isLast, number }: Props) {
         })}
       </svg>
       <span className="film-title"><b>{number}</b>{scene.title}</span>
-      {scene.cues.map((cue, index) => (cue.kind === "myth" && t >= cue.from ? <Myth key={index} cue={cue} t={t} /> : null))}
+      {scene.cues.map((cue, index) => {
+        if (cue.kind !== "myth") return null;
+        const alpha = envelope(t, cue.from, cue.to) * sceneFade;
+        return alpha > 0.001 ? <Myth key={index} cue={cue} t={t} alpha={alpha} /> : null;
+      })}
     </div>
   );
 }

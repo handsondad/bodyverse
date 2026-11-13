@@ -241,17 +241,19 @@ export const films: readonly Film[] = [
       {
         turn: 1,
         title: "藏在细胞里",
-        view: "blank",
+        view: "body",
+        layers: [{ layer: "skin", opacity: 0.55 }, { layer: "skeleton", opacity: 0.35 }, { layer: "heart", opacity: 0.75 }, "eyes"],
         duration: 8.5,
         cues: [
-          { kind: "sprite", icon: "🧒", path: [[190, 450]], size: 200, from: 0.3 },
-          { kind: "arrow", path: [[300, 450], [430, 450]], text: "放大", from: 0.8, to: 2.8 },
-          { kind: "shape", shape: "circle", at: [740, 450], size: [520, 460], color: "#ffe08a", from: 1.4 },
-          { kind: "label", at: [740, 225], text: "细胞：小砖块", pos: [740, 110], from: 2, to: 4.6 },
-          { kind: "shape", shape: "circle", at: [740, 450], size: [220, 200], color: "#bfe3ff", from: 3.2 },
-          { kind: "label", at: [740, 352], text: "中间的小房间", pos: [1000, 160], from: 3.8, to: 6.2 },
-          { kind: "flow", path: [[660, 450], [680, 410], [700, 490], [720, 410], [740, 490], [760, 410], [780, 490], [800, 410], [820, 450]], color: "#b48cff", count: 28, speed: 30, size: 5, from: 5 },
-          { kind: "label", at: [780, 490], text: "DNA：细长的线", pos: [800, 760], from: 5.6 }
+          { kind: "pulse", at: "heart", color: "#ff9f43", radius: 55, from: 0.3, to: 3 },
+          { kind: "label", at: "palm", text: "全身都是细胞搭的", side: "left", from: 0.6, to: 3.2 },
+          { kind: "arrow", path: [[650, 340], [770, 420]], text: "放大看", from: 1.2, to: 3.4 },
+          { kind: "shape", shape: "circle", at: [950, 450], size: [360, 340], color: "#ffe08a", from: 1.6 },
+          { kind: "label", at: [950, 280], text: "细胞：小砖块", pos: [950, 160], from: 2.1, to: 4.4 },
+          { kind: "shape", shape: "circle", at: [950, 450], size: [170, 160], color: "#bfe3ff", from: 3.3 },
+          { kind: "label", at: [950, 370], text: "中间的小房间", pos: [950, 160], from: 3.8, to: 6 },
+          { kind: "flow", path: [[890, 450], [905, 420], [920, 480], [935, 420], [950, 480], [965, 420], [980, 480], [995, 420], [1010, 450]], color: "#b48cff", count: 24, speed: 30, size: 5, from: 5 },
+          { kind: "label", at: [950, 530], text: "DNA：细长的线", pos: [950, 730], from: 5.6 }
         ]
       },
       {
@@ -558,18 +560,20 @@ export const films: readonly Film[] = [
       {
         turn: 5,
         title: "修得越来越慢",
-        view: "blank",
+        view: "body",
+        layers: [{ layer: "skin", opacity: 0.45 }, { layer: "muscles", opacity: 0.7 }, { layer: "skeleton", opacity: 0.4 }],
         duration: 10.5,
         cues: [
-          { kind: "sprite", icon: "🩹", path: [[330, 320]], size: 110, from: 0.3, to: 3.6 },
-          { kind: "text", at: [330, 480], text: "伤口好得慢", size: "s", from: 0.8, to: 3.6 },
-          { kind: "sprite", icon: "🚶", path: [[870, 320]], size: 110, from: 1.6, to: 3.6 },
-          { kind: "text", at: [870, 480], text: "跑不快了", size: "s", from: 2, to: 3.6 },
-          { kind: "shape", shape: "circle", at: [600, 330], size: [220, 220], color: "#e6d8b0", text: "错太多", from: 3.8, to: 6.6 },
-          { kind: "sprite", icon: "🛑", path: [[730, 210]], size: 70, from: 4.4, to: 6.6 },
-          { kind: "text", at: [600, 560], text: "停工是在保护身体", from: 4.8, to: 6.6 },
-          { kind: "sprite", icon: "🐢", path: [[600, 330]], size: 120, from: 6.8 },
-          { kind: "meter", at: [600, 500], label: "几十年慢慢来", start: 0, end: 1, color: "#ff9fbf", over: 3, from: 7.2 }
+          { kind: "highlight", at: "forearm", color: "#ff9f43", from: 0.3, to: 3.8 },
+          { kind: "sprite", icon: "🩹", path: ["forearm"], size: 46, from: 0.5, to: 3.8 },
+          { kind: "label", at: "forearm", text: "伤口好得慢", side: "left", from: 0.8, to: 3.8 },
+          { kind: "highlight", at: "quads", color: "#ff9f43", from: 1.6, to: 3.8 },
+          { kind: "label", at: "quads", text: "跑也跑不快了", side: "left", from: 2, to: 3.8 },
+          { kind: "shape", shape: "circle", at: [950, 340], size: [210, 210], color: "#e6d8b0", text: "错太多", from: 4, to: 6.8 },
+          { kind: "sprite", icon: "🛑", path: [[1055, 240]], size: 64, from: 4.5, to: 6.8 },
+          { kind: "text", at: [950, 520], text: "停工是在保护身体", size: "s", color: "#2f7d32", from: 4.9, to: 6.8 },
+          { kind: "sprite", icon: "🐢", path: [[930, 420]], size: 110, from: 7 },
+          { kind: "meter", at: [930, 620], label: "几十年慢慢来", start: 0, end: 1, color: "#ff9fbf", over: 2.8, from: 7.4 }
         ]
       },
       {

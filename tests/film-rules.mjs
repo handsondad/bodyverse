@@ -21,7 +21,10 @@ const limits = {
 };
 
 const isTuple = (point) => Array.isArray(point);
-const chars = (text) => [...text].length;
+const chars = (text) => [...text].filter((char) => char !== "\uFE0F").length;
+
+/** 生殖起源题目只画示意图，不用解剖底图 */
+const blankOnlyQuestions = new Set(["where-from"]);
 
 function inBox([x, y], box, margin = 0) {
   return x >= box.x - margin && x <= box.x + box.width + margin && y >= box.y - margin && y <= box.y + box.height + margin;
@@ -70,6 +73,9 @@ export function filmProblems(film, question) {
   });
   const covered = new Set(turns).size;
   if (covered < question.dialogue.length - 1) say("全片", `只配了 ${covered} 轮问答，对话有 ${question.dialogue.length} 轮，最多只能空一轮`);
+  if (!blankOnlyQuestions.has(film.question) && film.scenes.every((scene) => scene.view === "blank")) {
+    say("全片", "至少要有一场解剖底图的戏，让孩子看见发生在身体哪里");
+  }
 
   film.scenes.forEach((scene, i) => {
     const where = `第${i + 1}场「${scene.title}」`;
@@ -137,10 +143,16 @@ export function filmProblems(film, question) {
         const corners = [[cx - box.width / 2, cy - box.height / 2], [cx + box.width / 2, cy + box.height / 2]];
         if (!corners.every((corner) => inBox(corner, camera, margin))) say(at, `标签「${cue.text}」有一部分在镜头外，换个 side 或写 pos`);
         if (!inBox(resolved[0], camera)) say(at, `标签指着的位置在镜头外`);
+        const sx = ((cx - camera.x) / camera.width) * 1200;
+        const sy = ((cy - camera.y) / camera.height) * 900;
+        if (sx < 380 && sy < 95) say(at, `标签「${cue.text}」会被左上角的场次标题挡住，换个 side 或写 pos`);
       } else if (cue.kind === "text" || cue.kind === "count" || cue.kind === "meter") {
         const [x, y] = captionAt(cue.at, view, camera);
         const halfWidth = cue.kind === "text" ? (chars(cue.text) * { s: 34, m: 48, l: 72 }[cue.size ?? "m"] * k) / 2 : 150 * k;
         if (!inBox([x - halfWidth, y], camera, margin) || !inBox([x + halfWidth, y], camera, margin)) say(at, `「${cue.text ?? cue.label}」有一部分在镜头外`);
+        const sx = ((x - camera.x) / camera.width) * 1200;
+        const sy = ((y - camera.y) / camera.height) * 900;
+        if (sx < 400 && sy < 100) say(at, `「${cue.text ?? cue.label}」会被左上角的场次标题挡住`);
       } else if (cue.kind === "highlight" || cue.kind === "pulse" || cue.kind === "shape" || (cue.kind === "sprite" && resolved.length === 1)) {
         if (!inBox(resolved[0], camera)) say(at, "这个元素在镜头外");
       } else if (cue.kind === "sprite" || cue.kind === "arrow") {
@@ -152,6 +164,39 @@ export function filmProblems(film, question) {
     for (let t = 0.5; t < scene.duration; t += 0.5) {
       const shown = scene.cues.filter((cue) => cue.from <= t && (cue.to === undefined || cue.to > t)).length;
       if (shown > limits.busy) { say(where, `第 ${t} 秒同时有 ${shown} 个元素，太挤了（最多 ${limits.busy} 个）`); break; }
+    }
+
+    // 标签之间不要互相盖住；误会卡出来时底部中间不要放字幕
+    const labels = scene.cues.filter((cue) => cue.kind === "label");
+    for (let a = 0; a < labels.length; a += 1) {
+      for (let b = a + 1; b < labels.length; b += 1) {
+        const t0 = Math.max(labels[a].from, labels[b].from) + 0.4;
+        const t1 = Math.min(labels[a].to ?? scene.duration, labels[b].to ?? scene.duration) - 0.2;
+        if (t1 <= t0) continue;
+        const k = 1 / cameraAt(scene.camera, (t0 + t1) / 2, view).zoom;
+        let boxA;
+        let boxB;
+        try {
+          boxA = labelBox(labels[a], view, k);
+          boxB = labelBox(labels[b], view, k);
+        } catch {
+          continue;
+        }
+        const ox = Math.min(boxA.at[0] + boxA.width / 2, boxB.at[0] + boxB.width / 2) - Math.max(boxA.at[0] - boxA.width / 2, boxB.at[0] - boxB.width / 2);
+        const oy = Math.min(boxA.at[1] + boxA.height / 2, boxB.at[1] + boxB.height / 2) - Math.max(boxA.at[1] - boxA.height / 2, boxB.at[1] - boxB.height / 2);
+        if (ox > 4 && oy > 4) say(where, `标签「${labels[a].text}」和「${labels[b].text}」叠在一起了`);
+      }
+    }
+    const myths = scene.cues.filter((cue) => cue.kind === "myth");
+    const captions = scene.cues.filter((cue) => cue.kind === "text" || cue.kind === "count" || cue.kind === "meter");
+    for (const myth of myths) {
+      for (const cap of captions) {
+        const t0 = Math.max(myth.from, cap.from) + 0.3;
+        const t1 = Math.min(myth.to ?? scene.duration, cap.to ?? scene.duration) - 0.2;
+        if (t1 > t0 && isTuple(cap.at) && cap.at[1] > 700 && cap.at[0] > 280 && cap.at[0] < 920) {
+          say(where, `误会卡会挡住底部的「${cap.text ?? cap.label}」，请加 to 收走或挪位置`);
+        }
+      }
     }
   });
   return problems;

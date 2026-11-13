@@ -61,6 +61,8 @@ export const FilmPlayer = forwardRef<FilmPlayerHandle, Props>(function FilmPlaye
   const autoStarted = useRef(false);
   const playerId = useId();
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  /** 提前把后面两句配音拉进浏览器缓存，换句时不卡顿 */
+  const preloadedRef = useRef<Set<string>>(new Set());
   /** 正在放的那句配音；放着的时候动画的时钟跟着声音走 */
   const clipRef = useRef<SpokenLine | null>(null);
   const { index, local } = sceneAt(active, time);
@@ -69,14 +71,28 @@ export const FilmPlayer = forwardRef<FilmPlayerHandle, Props>(function FilmPlaye
 
   const audio = () => (audioRef.current ??= Object.assign(new Audio(), { preload: "auto" }));
 
+  const preloadUpcoming = useCallback((source: readonly SpokenLine[], fromTime: number) => {
+    if (!voice) return;
+    const upcoming = source.filter((item) => item.start + item.seconds >= fromTime).slice(0, 3);
+    for (const item of upcoming) {
+      const url = voice.src(item.turn, item.who);
+      if (preloadedRef.current.has(url)) continue;
+      preloadedRef.current.add(url);
+      const warm = new Audio();
+      warm.preload = "auto";
+      warm.src = url;
+    }
+  }, [voice]);
+
   const stopVoice = useCallback(() => {
     clipRef.current = null;
     audioRef.current?.pause();
   }, []);
 
   /** 从 at 秒开始放那时该说的话；在点击里直接调用，手机浏览器才肯出声 */
-  const startVoice = useCallback((at: number) => {
-    const found = voice && lineAt(lines, at);
+  const startVoice = useCallback((at: number, source: readonly SpokenLine[] = lines) => {
+    preloadUpcoming(source, at);
+    const found = voice && lineAt(source, at);
     if (!voice || !found?.speaking) {
       stopVoice();
       return;
@@ -92,7 +108,7 @@ export const FilmPlayer = forwardRef<FilmPlayerHandle, Props>(function FilmPlaye
         setNeedsTap(true);
       }
     });
-  }, [voice, lines, stopVoice, playerId]);
+  }, [voice, lines, preloadUpcoming, stopVoice, playerId]);
 
   useEffect(() => {
     const quiet = () => {
@@ -129,10 +145,12 @@ export const FilmPlayer = forwardRef<FilmPlayerHandle, Props>(function FilmPlaye
     setTime(0);
     setPlaying(false);
     autoStarted.current = false;
+    preloadedRef.current.clear();
     stopVoice();
     const sources = new Set(film.scenes.flatMap((item) => item.view === "blank" ? [] : (item.layers ?? []).map((use) => layerSrc(item.view as ViewId, typeof use === "string" ? use : use.layer))));
     for (const src of sources) new Image().src = src;
-  }, [film, stopVoice]);
+    if (voiceOn && narrated) preloadUpcoming(narrated.lines, 0);
+  }, [film, voiceOn, narrated, preloadUpcoming, stopVoice]);
 
   useEffect(() => () => stopVoice(), [stopVoice]);
 
@@ -225,6 +243,7 @@ export const FilmPlayer = forwardRef<FilmPlayerHandle, Props>(function FilmPlaye
     setVoiceOn(next);
     setNeedsTap(false);
     setTime(at);
+    if (next && narrated && playing) startVoice(at, narrated.lines);
   };
 
   return (

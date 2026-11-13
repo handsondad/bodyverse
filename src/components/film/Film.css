@@ -42,6 +42,7 @@
   box-shadow: 0 2px 8px rgba(93, 78, 55, 0.15);
   font-weight: 800;
   font-size: 1rem;
+  pointer-events: none;
 }
 .film-title b {
   display: grid;
@@ -68,6 +69,7 @@
   box-shadow: 0 4px 14px rgba(93, 78, 55, 0.18);
   font-weight: 700;
   line-height: 1.45;
+  pointer-events: none;
 }
 .film-myth-wrong { position: relative; color: #9b8b76; justify-self: start; }
 .film-myth-wrong::after {

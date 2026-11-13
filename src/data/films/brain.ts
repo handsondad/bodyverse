@@ -358,18 +358,21 @@ export const films: readonly Film[] = [
       {
         turn: 1,
         title: "自动挡和要想的事",
-        view: "blank",
+        view: "headSide",
+        layers: [{ layer: "skin", opacity: 0.3 }, { layer: "skeleton", opacity: 0.35 }, { layer: "brain", opacity: 0.85 }],
+        camera: [{ t: 0, at: "brain", zoom: 1.25 }],
         duration: 8.5,
         cues: [
-          { kind: "sprite", icon: "🚶", path: [[460, 360]], from: 0.3, to: 2.8, size: 100 },
-          { kind: "sprite", icon: "😋", path: [[740, 360]], from: 0.8, to: 2.8, size: 100 },
-          { kind: "text", at: [600, 540], text: "练过上万次：自动挡", size: "m", color: "#2f7d32", from: 1.3, to: 2.8 },
-          { kind: "shape", shape: "circle", at: [600, 600], size: [220, 220], color: "#e4d4ff", text: "总指挥", from: 3 },
-          { kind: "sprite", icon: "⚽", path: [[330, 300]], from: 3.6, size: 90 },
-          { kind: "arrow", path: [[380, 350], [520, 520]], color: "#4fb6ff", from: 4, draw: 0.6 },
-          { kind: "sprite", icon: "🗣️", path: [[870, 300]], from: 4.6, size: 90 },
-          { kind: "arrow", path: [[820, 350], [680, 520]], color: "#ff9f43", from: 5, draw: 0.6 },
-          { kind: "text", at: [600, 150], text: "两件都要想一想", size: "m", color: "#7a4fd6", from: 5.8 }
+          { kind: "highlight", at: "cerebellum", from: 0.3, to: 3, color: "#2f7d32" },
+          { kind: "sprite", icon: "🚶", path: [[930, 520]], from: 0.6, to: 3, size: 76 },
+          { kind: "label", at: "cerebellum", text: "练熟的事：自动挡", side: "bottom", from: 1, to: 3, color: "#2f7d32" },
+          { kind: "shape", shape: "circle", at: [390, 270], size: [170, 140], color: "rgba(180, 140, 255, 0.45)", motion: "pulse", from: 3.2 },
+          { kind: "label", at: [390, 270], text: "大脑里的总指挥", pos: [620, 150], from: 3.5, color: "#7a4fd6" },
+          { kind: "sprite", icon: "⚽", path: [[190, 270]], from: 4.1, size: 72 },
+          { kind: "arrow", path: [[235, 270], [315, 270]], color: "#4fb6ff", from: 4.4, draw: 0.5 },
+          { kind: "sprite", icon: "🗣️", path: [[210, 430]], from: 4.9, size: 72 },
+          { kind: "arrow", path: [[255, 405], [330, 315]], color: "#ff9f43", from: 5.2, draw: 0.5 },
+          { kind: "text", at: [600, 810], text: "两件都要抢总指挥", size: "m", color: "#7a4fd6", from: 6 }
         ]
       },
       {

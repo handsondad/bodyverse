@@ -291,7 +291,7 @@ export const films: readonly Film[] = [
           { kind: "flow", path: [[720, 295], [660, 150]], color: "#b9c4cf", from: 1.8, count: 5, speed: 60, size: 9 },
           { kind: "text", at: [600, 830], text: "气比水轻", size: "s", from: 1, to: 4.4 },
           { kind: "label", at: [612, 142], text: "胃的入口在上面", side: "left", from: 3.2 },
-          { kind: "label", at: [609, 50], text: "食管：通到嘴巴", side: "left", from: 4.6 },
+          { kind: "label", at: [609, 50], text: "食管：通到嘴巴", side: "right", from: 4.6 },
           { kind: "arrow", path: [[625, 175], [612, 10]], color: "#8a96a3", text: "往上走", from: 5.6 }
         ]
       },
@@ -342,7 +342,7 @@ export const films: readonly Film[] = [
           { kind: "shape", shape: "circle", at: "stomach", size: [260, 240], color: "rgba(185,196,207,0.4)", motion: "grow", over: 2, from: 1 },
           { kind: "label", at: "stomach", text: "胃胀鼓鼓", side: "right", from: 1.6 },
           { kind: "arrow", path: [[700, 120], [700, 40]], color: "#ff5a5f", text: "往上顶", from: 3.2 },
-          { kind: "label", at: [560, 60], text: "膈肌", side: "left", color: "#c0392b", from: 3.6 },
+          { kind: "label", at: [560, 60], text: "膈肌", pos: [500, 130], color: "#c0392b", from: 3.6 },
           { kind: "pulse", at: [700, 45], color: "#ff5a5f", radius: 60, from: 4.2 },
           { kind: "text", at: [600, 820], text: "慢慢喝，少喝点", size: "s", color: "#2f7d32", from: 6 }
         ]

@@ -197,7 +197,7 @@ export const films: readonly Film[] = [
           { kind: "label", at: [485, 515], text: "手上的静脉", side: "right", from: 0.5, to: 5.4 },
           { kind: "sprite", icon: "💉", path: [[800, 380], [540, 490]], from: 1.2, travel: 1.2, size: 70 },
           { kind: "shape", shape: "pill", at: [720, 700], size: [220, 60], color: "#8e1b2b", motion: "grow", over: 1.2, from: 2.8 },
-          { kind: "text", at: [600, 820], text: "暗红色，一点也不蓝", from: 3.6 },
+          { kind: "text", at: [600, 820], text: "暗红色，一点也不蓝", from: 3.6, to: 5.4 },
           { kind: "myth", wrong: "静脉里流着蓝色的血", right: "画成蓝色只为和动脉好区分", from: 5.6 }
         ]
       },

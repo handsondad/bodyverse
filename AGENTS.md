@@ -17,11 +17,13 @@
 | `npm run dev` | 开发服务器 |
 | `npm run typecheck` | `tsc --noEmit` |
 | `npm test` | 全部测试（`node --test tests/*.test.mjs`） |
-| `npm run build` | 生产构建（main chunk 超过 500 kB 的警告是已知的） |
+| `npm run build` | 生产构建（按路由与 3D 引擎拆包输出到 `dist/`） |
+| `npm run new-question -- <系统> <问题id> [标题] [--write]` | 生成新问题的问答 + 动画空白模板 |
 | `node tests/dialogue-rules.mjs src/data/questions/<系统>.ts` | 检查问答写法 |
-| `node tests/film-rules.mjs [src/data/films/<系统>.ts]` | 检查动画 |
+| `node tests/film-rules.mjs [src/data/films/<系统>.ts]` | 检查动画（含解剖底图、越界、标题/误会卡遮挡、标签互叠） |
 | `node tools/atlas/anchors.mjs <视角>` | 列出某个视角的图层和器官锚点坐标 |
 | `npm run voice [-- <问题id>...]` | 给新的或改过的问答句子配音（见下文） |
+| `npm run film-shots -- <问题id>... [--mobile]` | 无头浏览器静音截出每场戏的关键画面 PNG |
 
 交付前四个都要过：`npm run typecheck`、`npm test`、`node tests/film-rules.mjs`、`npm run build`。
 
@@ -47,15 +49,15 @@
 - `tools/voice/`：配音生成工具。声音设置在 `voices.mjs`。
 - `src/components/journey/`、`src/components/RunLab*.tsx`：3D 旅程和"跑一跑"实验，独立于问答和动画。
 
-`AuditPage`、`StoryPage`、`SciencePage`、`OverviewPage`、`IllnessPage` 和对应的 `*Panel.tsx` 是早期版本留下的，现在没有路由引用。`docs/01`–`docs/16` 是早期的流程文档。除非用户提起，不要在这些上面继续开发。
-
 ## 加一个新问题
+
+可以先跑 `npm run new-question -- <系统> <问题id> "标题？" --write` 生成符合格式的空白骨架，再逐步填：
 
 1. **问答**：写进 `src/data/questions/<系统>.ts`，跑 `node tests/dialogue-rules.mjs` 直到通过。
 2. **动画**：写进 `src/data/films/<系统>.ts`，跑 `node tests/film-rules.mjs src/data/films/<系统>.ts` 直到通过。
 3. **配音**：跑 `npm run voice -- <问题id>`，会生成音频并更新 manifest。要联网，需要 `python -m pip install edge-tts`，PATH 里要有 ffmpeg / ffprobe。
 4. **测试**：`npm test`。`tests/films.test.mjs` 要求每个问题都有动画，`tests/voice.test.mjs` 要求每句话都有配音而且读的是现在的文字。改了问答里任何一个字，都要重新跑第 3 步。
-5. **浏览器里看一遍**：打开 `#/q/<问题id>`，至少看一场解剖底图的戏、一场空白画布的戏，再看一眼手机宽度（390px）。动画能拖进度条，可以直接跳到要看的那一秒。
+5. **过目画面**：跑 `npm run film-shots -- <问题id> --mobile` 截出宽屏和手机宽度（390px）下每场戏的关键画面检查排版，再在浏览器里打开 `#/q/<问题id>` 听一遍配音节奏。
 
 ## 硬性规矩
 

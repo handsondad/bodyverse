@@ -25,14 +25,14 @@ description: >-
 照这个清单走，每一步过了检查再走下一步：
 
 ```
-- [ ] 1. 选题：小念真会遇到的一件事，答案能落到一个身体部位或一个机制上
+- [ ] 1. 选题与骨架：小念真会遇到的一件事，可先跑 npm run new-question -- <系统> <问题id> "标题？" --write 生成模板
 - [ ] 2. 问答：写进 src/data/questions/<系统>.ts → node tests/dialogue-rules.mjs <文件> 通过
 - [ ] 3. 核对科学：每个说法都站得住；拿不准的写"科学家还不完全确定"；不编数字
-- [ ] 4. 分镜：每轮问答一场戏，先在纸面上列出每场的视角、出现顺序和那一句台词
+- [ ] 4. 分镜：每轮问答一场戏，先列出每场的视角、出现顺序和那一句台词
 - [ ] 5. 动画：写进 src/data/films/<系统>.ts → node tests/film-rules.mjs <文件> 通过
 - [ ] 6. 配音：npm run voice -- <问题id>
 - [ ] 7. npm run typecheck && npm test && npm run build
-- [ ] 8. 浏览器里看：#/q/<问题id>，开声音从头听一遍，再看手机宽度
+- [ ] 8. 画面与声音验收：npm run film-shots -- <问题id> --mobile 看宽屏和手机排版，再开 #/q/<问题id> 从头听一遍
 ```
 
 ## 讲法（问答）

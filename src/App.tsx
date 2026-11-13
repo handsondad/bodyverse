@@ -1,15 +1,16 @@
-import { useEffect, useRef, useState } from "react";
-import { JourneyPage } from "./components/journey/JourneyPage";
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { isJourneyId, journeys, type JourneyId } from "./data/journey-registry";
 import { questionById, systemById, type BodySystemId } from "./data/questions";
 import { useHeardQuestions } from "./hooks/useHeardQuestions";
 import { usePersistedViewState } from "./hooks/usePersistedViewState";
 import { HomePage } from "./pages/HomePage";
-import { PartPage } from "./pages/PartPage";
 import { QuestionListPage } from "./pages/QuestionListPage";
-import { QuestionPage } from "./pages/QuestionPage";
 import type { PartId } from "./types/content";
 import type { ScaleId } from "./types/exploration";
+
+const QuestionPage = lazy(() => import("./pages/QuestionPage").then((m) => ({ default: m.QuestionPage })));
+const JourneyPage = lazy(() => import("./components/journey/JourneyPage").then((m) => ({ default: m.JourneyPage })));
+const PartPage = lazy(() => import("./pages/PartPage").then((m) => ({ default: m.PartPage })));
 
 type Route =
   | { page: "home" }
@@ -38,7 +39,7 @@ function parseRoute(hash: string): Route {
 const listHash = (system: BodySystemId) => `#/topic/${system}`;
 
 function App() {
-  const { age, setAge, markPartVisited } = usePersistedViewState();
+  const { age, setAge } = usePersistedViewState();
   const { heard, markHeard } = useHeardQuestions();
   const [route, setRoute] = useState(() => parseRoute(window.location.hash));
   /** Where the child came from, so journeys and questions lead back instead of always jumping home. */
@@ -61,10 +62,8 @@ function App() {
       lastQuestion.current = null;
     }
     if (route.page === "question") lastQuestion.current = route.id;
-    if (route.page === "journey") markPartVisited(journeys[route.id].part);
-    if (route.page === "part") markPartVisited(route.part);
     window.scrollTo(0, 0);
-  }, [route, markPartVisited]);
+  }, [route]);
 
   const go = (hash: string) => { window.location.hash = hash; };
   const goHome = () => go("#/");
@@ -76,8 +75,10 @@ function App() {
     if (question) {
       const back = lastList.current ?? question.system;
       return (
-        <QuestionPage key={question.id} question={question} heard={heard} onHeard={markHeard}
-          onBack={() => go(listHash(back))} onOpen={openQuestion} onJourney={openJourney} />
+        <Suspense fallback={null}>
+          <QuestionPage key={question.id} question={question} heard={heard} onHeard={markHeard}
+            onBack={() => go(listHash(back))} onOpen={openQuestion} onJourney={openJourney} />
+        </Suspense>
       );
     }
   }
@@ -91,14 +92,20 @@ function App() {
     const journey = journeys[route.id];
     const fromQuestion = lastQuestion.current ? questionById(lastQuestion.current) : undefined;
     return (
-      <JourneyPage key={`${journey.id}-${route.stop ?? "body"}`} journey={journey} age={age} setAge={setAge} initialStop={route.stop}
-        onBack={fromQuestion ? () => openQuestion(fromQuestion.id) : goHome}
-        backLabel={fromQuestion ? "回到小念的问题" : "回到身体部位"}
-        onMore={() => go(`#/part/${journey.part}`)} />
+      <Suspense fallback={null}>
+        <JourneyPage key={`${journey.id}-${route.stop ?? "body"}`} journey={journey} age={age} setAge={setAge} initialStop={route.stop}
+          onBack={fromQuestion ? () => openQuestion(fromQuestion.id) : goHome}
+          backLabel={fromQuestion ? "回到小念的问题" : "回到身体部位"}
+          onMore={() => go(`#/part/${journey.part}`)} />
+      </Suspense>
     );
   }
   if (route.page === "part") {
-    return <PartPage part={route.part} age={age} setAge={setAge} onBack={goHome} onJourney={(id) => openJourney(id)} />;
+    return (
+      <Suspense fallback={null}>
+        <PartPage part={route.part} age={age} setAge={setAge} onBack={goHome} onJourney={(id) => openJourney(id)} />
+      </Suspense>
+    );
   }
   return <HomePage heard={heard} onSystem={(id) => go(listHash(id))} />;
 }
