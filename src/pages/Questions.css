@@ -12,7 +12,17 @@
 .qa .science { font-style: normal; }
 
 /* home additions */
-.home-planet .home-bubble { max-width: 46%; text-align: left; font-size: 0.92rem; line-height: 1.45; }
+.home-duo-poster {
+  position: absolute; top: 0; left: 50%; height: 100%; width: auto; max-width: none;
+  transform: translateX(-50%); pointer-events: none; user-select: none;
+  transition: opacity 0.28s ease 0.12s;
+}
+.home-planet { cursor: pointer; }
+.home-planet .run-lab-canvas { opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+.home-planet.is-3d { cursor: default; }
+.home-planet.is-3d .run-lab-canvas { opacity: 1; pointer-events: auto; }
+.home-planet.is-3d .home-duo-poster { opacity: 0; }
+.home-planet .home-bubble { z-index: 2; max-width: 46%; text-align: left; font-size: 0.92rem; line-height: 1.45; }
 .home-bubble b { display: block; font-size: 0.75rem; color: var(--text-secondary); }
 .home-bubble.is-dad { left: 14px; top: 14px; border-radius: 20px 20px 20px 4px; }
 .home-bubble.is-nian { left: auto; right: 14px; top: 92px; border-radius: 20px 20px 4px 20px; background: #fff7e6; animation-delay: 1.4s; }
@@ -200,4 +210,5 @@ svg.avatar { display: inline-block; width: 1.6em; height: 1.6em; vertical-align:
 }
 @media (prefers-reduced-motion: reduce) {
   .qa-line, .qa-steps li { animation: none; }
+  .home-duo-poster, .home-planet .run-lab-canvas { transition: none; }
 }
