@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { existsSync, readFileSync } from "node:fs";
 import test from "node:test";
 import { films } from "../src/data/films/index.ts";
-import { bodyQuestions } from "../src/data/questions/index.ts";
+import { bodyQuestions } from "../src/data/questions/all.ts";
 import { lineAt, narrateFilm, narrationGaps } from "../src/lib/narration.ts";
 import { clipHash, clipKey } from "../tools/voice/voices.mjs";
 

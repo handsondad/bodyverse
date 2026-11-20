@@ -1,6 +1,7 @@
-import { lazy, Suspense, useEffect, useRef, useState } from "react";
+﻿import { lazy, Suspense, useEffect, useRef, useState } from "react";
+import { loadFilm } from "./data/films/load";
 import { isJourneyId, journeys, type JourneyId } from "./data/journey-registry";
-import { questionById, systemById, type BodySystemId } from "./data/questions";
+import { loadQuestion, questionById, systemById, type BodySystemId } from "./data/questions";
 import { useHeardQuestions } from "./hooks/useHeardQuestions";
 import { usePersistedViewState } from "./hooks/usePersistedViewState";
 import { HomePage } from "./pages/HomePage";
@@ -38,6 +39,9 @@ function parseRoute(hash: string): Route {
 
 const listHash = (system: BodySystemId) => `#/topic/${system}`;
 
+/** 页面代码还在下载时先给一句话，免得慢网下一片空白 */
+const pageLoading = <p className="page-loading" role="status">正在打开…</p>;
+
 function App() {
   const { age, setAge } = usePersistedViewState();
   const { heard, markHeard } = useHeardQuestions();
@@ -61,7 +65,15 @@ function App() {
       lastList.current = route.system;
       lastQuestion.current = null;
     }
-    if (route.page === "question") lastQuestion.current = route.id;
+    if (route.page === "question") {
+      lastQuestion.current = route.id;
+      // 问答正文和动画跟页面代码一起开始下载，不等页面代码到了再排队；失败由问答页自己处理
+      const info = questionById(route.id);
+      if (info) {
+        loadQuestion(info).catch(() => undefined);
+        loadFilm(info).catch(() => undefined);
+      }
+    }
     window.scrollTo(0, 0);
   }, [route]);
 
@@ -75,7 +87,7 @@ function App() {
     if (question) {
       const back = lastList.current ?? question.system;
       return (
-        <Suspense fallback={null}>
+        <Suspense fallback={pageLoading}>
           <QuestionPage key={question.id} question={question} heard={heard} onHeard={markHeard}
             onBack={() => go(listHash(back))} onOpen={openQuestion} onJourney={openJourney} />
         </Suspense>
@@ -92,7 +104,7 @@ function App() {
     const journey = journeys[route.id];
     const fromQuestion = lastQuestion.current ? questionById(lastQuestion.current) : undefined;
     return (
-      <Suspense fallback={null}>
+      <Suspense fallback={pageLoading}>
         <JourneyPage key={`${journey.id}-${route.stop ?? "body"}`} journey={journey} age={age} setAge={setAge} initialStop={route.stop}
           onBack={fromQuestion ? () => openQuestion(fromQuestion.id) : goHome}
           backLabel={fromQuestion ? "回到小念的问题" : "回到身体部位"}
@@ -102,7 +114,7 @@ function App() {
   }
   if (route.page === "part") {
     return (
-      <Suspense fallback={null}>
+      <Suspense fallback={pageLoading}>
         <PartPage part={route.part} age={age} setAge={setAge} onBack={goHome} onJourney={(id) => openJourney(id)} />
       </Suspense>
     );

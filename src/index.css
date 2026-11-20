@@ -79,6 +79,25 @@ body::before {
   z-index: 0;
 }
 
+/* 页面或问答内容还在下载时的一句话；稍等一下再出现，网快的时候不闪 */
+.page-loading {
+  position: relative;
+  margin: 0;
+  padding: 56px 20px;
+  text-align: center;
+  font-weight: 700;
+  color: var(--text-secondary);
+  animation: page-loading-in 0.3s ease 0.25s both;
+}
+
+@keyframes page-loading-in {
+  from { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-loading { animation: none; }
+}
+
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;

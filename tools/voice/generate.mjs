@@ -8,7 +8,7 @@ import { existsSync, mkdirSync, readFileSync, renameSync, rmSync, writeFileSync 
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { bodyQuestions } from "../../src/data/questions/index.ts";
+import { bodyQuestions } from "../../src/data/questions/all.ts";
 import { clipHash, clipKey, voices } from "./voices.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "../..");

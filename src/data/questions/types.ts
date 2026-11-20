@@ -106,3 +106,11 @@ export type BodyQuestion = {
   /** 有这一项时，需要大人确认后再打开 */
   parentGate?: string;
 };
+
+/** 题目目录里的一条：首页、列表和搜索用，不带问答正文，所以首屏就能加载 */
+export type QuestionInfo = Omit<BodyQuestion, "dialogue" | "parentTip"> & {
+  /** 问答有几轮 */
+  turns: number;
+  /** 问答里有没有 3D 放大旅程 */
+  hasJourney: boolean;
+};

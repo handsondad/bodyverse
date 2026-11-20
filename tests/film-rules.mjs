@@ -203,7 +203,7 @@ export function filmProblems(film, question) {
 }
 
 async function main() {
-  const { bodyQuestions } = await import("../src/data/questions/index.ts");
+  const { bodyQuestions } = await import("../src/data/questions/all.ts");
   const files = process.argv.slice(2);
   const films = [];
   if (files.length) {

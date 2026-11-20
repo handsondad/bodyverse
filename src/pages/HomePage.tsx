@@ -2,8 +2,8 @@ import { lazy, Suspense, useCallback, useEffect, useMemo, useRef, useState, type
 import type { LensState, RunLabCue } from "../components/RunLab3D";
 import { WebGLBoundary } from "../components/WebGLBoundary";
 import {
-  bodyQuestions, bodySystems, difficultyLabel, pickRandomQuestion, questionsIn, searchQuestions, systemById,
-  type BodySystemId
+  bodySystems, difficultyLabel, loadSearchText, pickRandomQuestion, questionCatalog, questionsIn, searchQuestions, systemById,
+  type BodySystemId, type SearchText
 } from "../data/questions";
 import { useInView } from "../hooks/useInView";
 import { useReducedMotion } from "../hooks/useReducedMotion";
@@ -37,6 +37,9 @@ export function HomePage({ heard, onSystem, onOpen }: Props) {
   const [stageRef, inView] = useInView<HTMLDivElement>();
   const [chat, setChat] = useState(0);
   const [query, setQuery] = useState("");
+  /** 问答正文不在首屏里：第一次用搜索框时才取来，取到之前先只搜标题和场景 */
+  const [searchText, setSearchText] = useState<SearchText>();
+  const [searchTextState, setSearchTextState] = useState<"idle" | "loading" | "done">("idle");
   const bodyRef = useRef(createBodyState());
   const lensRef = useRef<LensState>({ on: false, follow: true, x: 0, y: 0, r: 80 });
   const cueRef = useRef<RunLabCue>({ id: 0, clip: "Jump" });
@@ -67,9 +70,20 @@ export function HomePage({ heard, onSystem, onOpen }: Props) {
     setChat((chat + 1) % chats.length);
   }
 
+  function prepareSearch() {
+    if (searchTextState !== "idle") return;
+    setSearchTextState("loading");
+    loadSearchText().then(setSearchText, (error: unknown) => {
+      console.error("问答正文加载失败，搜索只能匹配标题和场景", error);
+    }).finally(() => setSearchTextState("done"));
+  }
+
   const trimmed = query.trim();
-  const matches = useMemo(() => (trimmed ? searchQuestions(trimmed) : []), [trimmed]);
-  const totalHeard = useMemo(() => bodyQuestions.filter((item) => heard.includes(item.id)).length, [heard]);
+  const matches = useMemo(() => (trimmed ? searchQuestions(trimmed, searchText) : []), [trimmed, searchText]);
+  const totalHeard = useMemo(() => questionCatalog.filter((item) => heard.includes(item.id)).length, [heard]);
+  const noMatchLine = searchTextState === "loading"
+    ? "正在翻小念和爸爸聊过的话…"
+    : "小念还没问过这个词呢，换个词（比如 眼睛、肚子、睡觉、血）试试？";
 
   const [nianLine, dadLine] = chats[chat];
 
@@ -115,7 +129,11 @@ export function HomePage({ heard, onSystem, onOpen }: Props) {
             <input
               type="search"
               value={query}
-              onChange={(event) => setQuery(event.target.value)}
+              onFocus={prepareSearch}
+              onChange={(event) => {
+                prepareSearch();
+                setQuery(event.target.value);
+              }}
               placeholder="搜一搜小念的问题：比如 辣椒、近视、蛀牙、蚊子、冰激凌……"
               aria-label="搜索身体问题"
             />
@@ -131,7 +149,7 @@ export function HomePage({ heard, onSystem, onOpen }: Props) {
         {trimmed && (
           <div className="home-results" aria-live="polite">
             <p className="home-results-meta">
-              {matches.length > 0 ? `找到 ${matches.length} 个相关问题：` : "小念还没问过这个词呢，换个词（比如 眼睛、肚子、睡觉、血）试试？"}
+              {matches.length > 0 ? `找到 ${matches.length} 个相关问题：` : noMatchLine}
             </p>
             {matches.length > 0 && (
               <div className="qlist-grid">
@@ -165,7 +183,7 @@ export function HomePage({ heard, onSystem, onOpen }: Props) {
       <section aria-labelledby="home-parts-title">
         <div className="home-section-head">
           <h2 id="home-parts-title" className="home-section-title">身体部位</h2>
-          <span className="home-total">共 {bodyQuestions.length} 个问题{totalHeard > 0 && ` · ⭐ 已看过 ${totalHeard}`}</span>
+          <span className="home-total">共 {questionCatalog.length} 个问题{totalHeard > 0 && ` · ⭐ 已看过 ${totalHeard}`}</span>
         </div>
         <div className="home-systems">
           {bodySystems.map((system) => {

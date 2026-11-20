@@ -30,7 +30,7 @@ npm run dev
 | `npm run dev` | 开发服务器 |
 | `npm run typecheck` | 类型检查 |
 | `npm test` | 全部测试 |
-| `npm run build` | 生产构建，输出到 `dist/` |
+| `npm run build` | 生产构建，输出到 `dist/`，最后检查首屏没有带上 3D 引擎和问答正文 |
 | `npm run preview` | 本地预览构建结果 |
 | `npm run new-question -- <系统> <问题id> [标题] [--write]` | 生成新问题的问答与动画模板 |
 | `npm run voice [-- <问题id>...]` | 给新的或改过的问答配音 |
@@ -59,14 +59,14 @@ node tests/film-rules.mjs src/data/films/<系统>.ts
 | 位置 | 内容 |
 |---|---|
 | `src/pages/` | 首页、问题列表、问答页 |
-| `src/data/questions/` | 问答，一个身体部位一个文件 |
-| `src/data/films/` | 讲解动画，一个身体部位一个文件 |
+| `src/data/questions/` | 问答，一个身体部位一个文件；`catalog.ts` 是自动生成的题目目录 |
+| `src/data/films/` | 讲解动画，一个身体部位一个文件，打开问题时按部位加载 |
 | `src/lib/film.ts`、`src/components/film/` | 动画引擎和播放器 |
 | `src/lib/narration.ts`、`src/data/voice.ts` | 配音时间线 |
 | `src/components/journey/` | 3D 放大旅程 |
 | `public/anatomy/` | 解剖图集图层 |
 | `public/voice/` | 配音音频 |
-| `tools/atlas/`、`tools/voice/` | 生成图集和配音的工具，外加 `new-question.mjs` 模板生成与 `film-shots.mjs` 自动截图 |
+| `tools/atlas/`、`tools/voice/` | 生成图集和配音的工具，外加 `new-question.mjs` 模板生成、`film-shots.mjs` 自动截图、`catalog.mjs` 题目目录生成和 `check-bundle.mjs` 首屏检查 |
 | `tests/` | 测试和内容检查脚本 |
 | `skills/` | 内容和风格的 skill |
 

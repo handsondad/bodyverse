@@ -1,9 +1,11 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
+import { bodyQuestions } from "../src/data/questions/all.ts";
 import {
-  bodyQuestions, bodySystems, crossSystemPairs, linkedQuestions, nextQuestions, pickRandomQuestion,
-  questionById, questionsIn, searchQuestions
+  bodySystems, crossSystemPairs, linkedQuestions, loadQuestion, loadSearchText, nextQuestions, pickRandomQuestion,
+  questionById, questionCatalog, questionsIn, searchQuestions
 } from "../src/data/questions/index.ts";
+import { catalogRows } from "../tools/catalog.mjs";
 import { dialogueProblems, sharedWords, topicWords } from "./dialogue-rules.mjs";
 
 test("question ids are unique and every question belongs to a known system", () => {
@@ -11,6 +13,16 @@ test("question ids are unique and every question belongs to a known system", () 
   assert.equal(new Set(ids).size, ids.length);
   const systems = new Set(bodySystems.map((system) => system.id));
   for (const question of bodyQuestions) assert.ok(systems.has(question.system), question.id);
+});
+
+test("题目目录和问答数据一致：改了问答要重新生成（npm run catalog）", () => {
+  assert.deepEqual(questionCatalog, catalogRows(bodyQuestions));
+});
+
+test("每个问题的正文都能按所属部位加载到", async () => {
+  for (const question of bodyQuestions) {
+    assert.equal(await loadQuestion(question), question, `${question.id} 不在 src/data/questions/${question.system}.ts`);
+  }
 });
 
 test("every body part has at least four questions, listed from easy to hard", () => {
@@ -39,7 +51,7 @@ test("sensitive questions are gated for grown-ups", () => {
 });
 
 test("related questions stay in the same body part", () => {
-  for (const question of bodyQuestions) {
+  for (const question of questionCatalog) {
     const related = nextQuestions(question);
     assert.ok(related.length >= 1, question.id);
     assert.ok(related.every((item) => item.system === question.system && item.id !== question.id), question.id);
@@ -62,11 +74,16 @@ test("search ranks title matches first and random picker avoids parent-gated que
   assert.deepEqual(searchQuestions("   "), []);
   const spicy = searchQuestions("辣椒");
   assert.equal(spicy[0]?.id, "spicy-hot");
-  const hippocampus = searchQuestions("海马体");
-  assert.ok(hippocampus.some((item) => item.id === "why-sleep"));
   for (let i = 0; i < 30; i += 1) {
     const pick = pickRandomQuestion([], "sneeze");
     assert.ok(!pick.parentGate && pick.id !== "sneeze");
   }
 });
 
+test("search reaches into the dialogue text once it has been loaded", async () => {
+  assert.ok(!searchQuestions("海马体").some((item) => item.id === "why-sleep"), "海马体只出现在正文里");
+  const bodies = await loadSearchText();
+  assert.equal(bodies.size, bodyQuestions.length);
+  assert.ok(searchQuestions("海马体", bodies).some((item) => item.id === "why-sleep"));
+  assert.equal(searchQuestions("辣椒", bodies)[0]?.id, "spicy-hot");
+});

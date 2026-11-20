@@ -3,12 +3,17 @@
   "private": true,
   "version": "0.1.0",
   "type": "module",
+  "engines": {
+    "node": ">=22.18.0"
+  },
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build && node tools/check-bundle.mjs",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
+    "pretest": "node tools/catalog.mjs",
     "test": "node --test tests/*.test.mjs",
+    "catalog": "node tools/catalog.mjs",
     "voice": "node tools/voice/generate.mjs",
     "new-question": "node tools/new-question.mjs",
     "film-shots": "node tools/film-shots.mjs"

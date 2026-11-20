@@ -17,7 +17,8 @@
 | `npm run dev` | 开发服务器 |
 | `npm run typecheck` | `tsc --noEmit` |
 | `npm test` | 全部测试（`node --test tests/*.test.mjs`） |
-| `npm run build` | 生产构建（按路由与 3D 引擎拆包输出到 `dist/`） |
+| `npm run build` | 生产构建（按路由、身体部位和 3D 引擎拆包输出到 `dist/`），最后跑首屏检查 `tools/check-bundle.mjs` |
+| `npm run catalog` | 从问答数据重新生成题目目录；`dev`、`build`、`test` 会自动跑，一般不用手动 |
 | `npm run new-question -- <系统> <问题id> [标题] [--write]` | 生成新问题的问答 + 动画空白模板 |
 | `node tests/dialogue-rules.mjs src/data/questions/<系统>.ts` | 检查问答写法 |
 | `node tests/film-rules.mjs [src/data/films/<系统>.ts]` | 检查动画（含解剖底图、越界、标题/误会卡遮挡、标签互叠） |
@@ -40,7 +41,10 @@
 内容和引擎：
 
 - `src/data/questions/<系统>.ts`：问题和问答，类型在 `types.ts`。9 个系统：`brain` `senses` `heart-blood` `breathe` `digest` `skin` `move` `defend` `grow`。新问题加进对应文件就会出现在列表里。
-- `src/data/films/<系统>.ts`：每个问题一部动画，格式见 `types.ts`，汇总在 `index.ts`。
+  - `catalog.ts`：题目目录（标题、场景、难度、轮数，不带正文），由 `tools/catalog.mjs` 生成，不要手改。首屏只加载它。
+  - `index.ts`：页面用的入口，提供目录、列表、搜索和 `loadQuestion`；`load.ts` 按部位懒加载正文。
+  - `all.ts`：带正文的全部问题，只给测试和 `tools/` 用。
+- `src/data/films/<系统>.ts`：每个问题一部动画，格式见 `types.ts`，要写在问题所属部位的文件里。页面用 `load.ts` 的 `loadFilm` 按部位懒加载；`index.ts` 是全部动画的汇总，只给测试和 `tools/` 用。
 - `src/lib/film.ts`：时间线、镜头、锚点解析，全是纯函数；`src/components/film/FilmStage.tsx` 把某一时刻画成 SVG，`FilmPlayer.tsx` 管播放、拖动、分段和配音同步。
 - `src/lib/narration.ts`：配音版时间线。按每轮问答的配音长度把对应的戏等比例拉长。
 - `src/data/voice.ts` + `src/data/voice-manifest.json`：配音的时长和指纹；音频在 `public/voice/<问题id>/<轮次>-<nian|dad>.mp3`。
@@ -77,6 +81,10 @@
 ## 已知的坑
 
 - **`.ts` 扩展名**：Node 直接跑 `.ts`，所以 `src/data/` 和 `src/lib/` 里被测试导入的文件，相互导入时要写 `.ts` 扩展名（如 `./motion.ts`）。`tsconfig` 开了 `allowImportingTsExtensions`。
+- **首屏只放目录**：
+  - 页面代码（`src/pages/`、`src/components/`、`src/App.tsx`）不要引入 `questions/all.ts`、`films/index.ts` 或各部位的数据文件，否则问答正文和动画会被打进首屏。要正文用 `loadQuestion`，要动画用 `loadFilm`。
+  - `vite.config.ts` 里 React 单独分包，是为了不让首屏连带下载 three.js，不要删。
+  - 这两条 `npm run build` 最后的首屏检查会拦。
 - **`.webp` 读不了**：图像读取工具打不开 `.webp`。要看图集图片或动画，在浏览器里打开开发服务器上的页面或图片，再截图。
 - **手部视角**：皮肤模型比手指骨短，皮肤不能和骨骼、肌肉、血管同时出现，检查器会拦。
 - **配音会串**：

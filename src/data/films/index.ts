@@ -11,8 +11,8 @@ import type { Film } from "./types";
 
 export type { Film, FilmScene, Cue, LayerUse, Point, ViewId, LayerId } from "./types";
 
+/**
+ * 全部动画。只给测试和 tools/ 里的脚本用。
+ * 页面代码不要引入这个文件：所有动画会被打成一个大包。页面用 load.ts 按身体部位加载。
+ */
 export const films: readonly Film[] = [...brain, ...senses, ...heartBlood, ...breathe, ...digest, ...skin, ...move, ...defend, ...grow];
-
-const byQuestion = new Map(films.map((film) => [film.question, film]));
-
-export const filmFor = (questionId: string): Film | undefined => byQuestion.get(questionId);

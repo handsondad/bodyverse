@@ -2,10 +2,12 @@
 // 用法：
 //   npm run new-question -- <系统> <问题id> [标题]          打印模板到终端
 //   npm run new-question -- <系统> <问题id> [标题] --write  直接追加到对应数据文件末尾
+import { execFileSync } from "node:child_process";
 import { readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { bodyQuestions, bodySystems } from "../src/data/questions/index.ts";
+import { bodyQuestions } from "../src/data/questions/all.ts";
+import { bodySystems } from "../src/data/questions/types.ts";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -158,6 +160,8 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
     if (write) {
       appendToArrayFile(join(root, qFile), questionSnippet);
       appendToArrayFile(join(root, fFile), filmSnippet);
+      // 题目目录要跟着更新，新问题才会出现在列表里；另起进程是因为这里已经加载了旧的问答数据
+      execFileSync(process.execPath, [join(root, "tools/catalog.mjs")], { stdio: "inherit" });
       console.log(`已追加模板到 ${qFile} 和 ${fFile}`);
     } else {
       console.log(`// === 1. 问答模板（加进 ${qFile}）===\n${questionSnippet}\n`);

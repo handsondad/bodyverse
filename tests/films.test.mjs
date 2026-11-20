@@ -1,8 +1,9 @@
 import assert from "node:assert/strict";
 import { existsSync } from "node:fs";
 import test from "node:test";
-import { bodyQuestions } from "../src/data/questions/index.ts";
+import { bodyQuestions } from "../src/data/questions/all.ts";
 import { films } from "../src/data/films/index.ts";
+import { loadFilm } from "../src/data/films/load.ts";
 import { cameraAt, envelope, pointAlong, sceneAt, totalDuration } from "../src/lib/film.ts";
 import { buildTemplates } from "../tools/new-question.mjs";
 import { atlas, filmProblems } from "./film-rules.mjs";
@@ -21,6 +22,13 @@ test("每个问题都有讲解动画", () => {
 test("一个问题只有一部动画", () => {
   const ids = films.map((film) => film.question);
   assert.equal(new Set(ids).size, ids.length);
+});
+
+test("动画写在问题所属部位的文件里，页面按部位加载才找得到", async () => {
+  const byFilm = new Map(films.map((film) => [film.question, film]));
+  for (const question of bodyQuestions) {
+    assert.equal(await loadFilm(question), byFilm.get(question.id), `${question.id} 的动画不在 src/data/films/${question.system}.ts`);
+  }
 });
 
 test("动画用到的图集图片都在", () => {

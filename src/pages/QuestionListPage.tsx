@@ -1,7 +1,7 @@
 import type { CSSProperties } from "react";
 import { Avatar } from "../components/Avatar";
 import {
-  bodySystems, difficultyLabel, questionsIn, systemById, type BodyQuestion, type BodySystemId, type Difficulty
+  bodySystems, difficultyLabel, questionsIn, systemById, type BodySystemId, type Difficulty, type QuestionInfo
 } from "../data/questions";
 import "../components/journey/Journey.css";
 import "./Questions.css";
@@ -21,18 +21,17 @@ const difficultyHint: Record<Difficulty, string> = {
   3: "藏得更深的问题，大人也常常答不全"
 };
 
-function QuestionCard({ question, heard, onOpen }: { question: BodyQuestion; heard: boolean; onOpen: () => void }) {
+function QuestionCard({ question, heard, onOpen }: { question: QuestionInfo; heard: boolean; onOpen: () => void }) {
   const system = systemById(question.system);
-  const hasJourney = question.dialogue.some((turn) => turn.show?.kind === "journey");
   return (
     <button type="button" className={`qlist-card ${heard ? "is-heard" : ""}`} onClick={onOpen}
       style={{ "--bubble": system?.color ?? "#ff9f43" } as CSSProperties}>
       <strong>{question.parentGate && <span aria-label="需要大人一起看">🔒 </span>}{question.title}</strong>
       <small className="qlist-trigger">{question.trigger}</small>
       <span className="qlist-badges">
-        <em>💬 {question.dialogue.length} 问 {question.dialogue.length} 答</em>
+        <em>💬 {question.turns} 问 {question.turns} 答</em>
         {heard && <em className="is-star">⭐ 看过</em>}
-        {hasJourney && <em>🔍 有 3D 动画</em>}
+        {question.hasJourney && <em>🔍 有 3D 动画</em>}
         {question.parentGate && <em>👨‍👩‍👧 大人陪看</em>}
       </span>
     </button>
